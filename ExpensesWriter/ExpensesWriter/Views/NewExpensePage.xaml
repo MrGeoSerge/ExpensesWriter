@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="ExpensesWriter.Views.NewExpensePage"
+             Title="New Expense">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
+        <ToolbarItem Text="Save" Clicked="Save_Clicked" />
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <StackLayout Spacing="20" Padding="15">
+            <Label Text="Id" FontSize="Medium" />
+            <Entry Text="{Binding Expense.Id}" FontSize="Small" />
+            <Label Text="Money" FontSize="Medium" />
+            <Editor Text="{Binding Expense.Money}" FontSize="Small" Margin="0" />
+            <Label Text="Name" FontSize="Medium" />
+            <Editor Text="{Binding Expense.Name}" FontSize="Small" Margin="0" />
+            <Label Text="Category" FontSize="Medium" />
+            <Editor Text="{Binding Expense.Money}" FontSize="Small" Margin="0" />
+            <Label Text="Money" FontSize="Medium" />
+            <Editor Text="{Binding Expense.Money}" FontSize="Small" Margin="0" />
+          
+        </StackLayout>
+    </ContentPage.Content>
+    
+</ContentPage>

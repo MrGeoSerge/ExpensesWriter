@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="ExpensesWriter.Views.ExpenseEditPage"
+             Title="{Binding Title}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Clicked="Save_Clicked"/>
+    </ContentPage.ToolbarItems>
+
+    <StackLayout Spacing="20" Padding="15">
+        <Label Text="Money:" FontSize="Medium" />
+        <Editor Text="{Binding Expense.Money}" d:Text="Expense name" FontSize="Medium"/>
+        <Label Text="Name:" FontSize="Medium" />
+        <Editor Text="{Binding Expense.Name}" d:Text="Expense description" FontSize="Medium"/>
+        <Label Text="Category:" FontSize="Medium" />
+        <!--<Editor Text="{Binding Expense.Category}" d:Text="Expense description" FontSize="Medium"/>-->
+        <Picker x:Name="categoryPicker" ItemsSource="{Binding CategoriesString}" SelectedItem="{Binding Expense.Category}"/>
+        <Label Text="Created date and time:" FontSize="Medium" />
+        <Label Text="{Binding Expense.CreationDateTime}" d:Text="Expense description" FontSize="Medium"/>
+        <Label Text="Modified date and time:" FontSize="Medium" />
+        <Label Text="{Binding Expense.ModificationDateTime}" d:Text="Expense description" FontSize="Medium"/>
+    </StackLayout>
+    
+</ContentPage>

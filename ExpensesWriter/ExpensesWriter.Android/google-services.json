@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "30734325292",
+    "firebase_url": "https://sergiyxamandproject.firebaseio.com",
+    "project_id": "sergiyxamandproject",
+    "storage_bucket": "sergiyxamandproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:30734325292:android:f483c34908b84377",
+        "android_client_info": {
+          "package_name": "com.companyname.ExpensesWriter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "30734325292-ubso9tohq8eea0pjm1v0q42bh7o5clb0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhzorzRZo00LExhjWHoIofOmg0bOZedCY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "30734325292-ubso9tohq8eea0pjm1v0q42bh7o5clb0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

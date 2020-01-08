@@ -1,0 +1,53 @@
+﻿using Android.App;
+using Android.Content;
+using Android.Media;
+using Android.Support.V4.App;
+using Android.Support.V7.App;
+using Android.Util;
+using Firebase.Messaging;
+using System.Diagnostics;
+
+namespace ExpensesWriter.Droid
+{
+    //[Service]
+    //[IntentFilter(new[] { "com.google.firebase.MESSAGING_EVENT" })]
+    //public class FirebaseNotificationService : FirebaseMessagingService
+    //{
+    //    const string TAG = "FirebaseNotificationService";
+
+    //    public override void OnMessageReceived(RemoteMessage message)
+    //    {
+    //        Log.Debug(TAG, "From: " + message.From);
+    //        Debug.WriteLine(TAG + "From: " + message.From);
+
+    //        // Pull message body out of the template
+    //        var messageBody = message.Data["message"];
+    //        if (string.IsNullOrWhiteSpace(messageBody))
+    //            return;
+
+    //        Log.Debug(TAG, "Notification message body: " + messageBody);
+    //        Debug.WriteLine(TAG + "Notification message body: " + messageBody);
+
+
+    //        SendNotification(messageBody);
+    //    }
+
+    //    void SendNotification(string messageBody)
+    //    {
+    //        var intent = new Intent(this, typeof(MainActivity));
+    //        intent.AddFlags(ActivityFlags.ClearTop);
+    //        var pendingIntent = PendingIntent.GetActivity(this, 0, intent, PendingIntentFlags.OneShot);
+
+    //        var notificationBuilder = new NotificationCompat.Builder(this)
+    //            .SetSmallIcon(Resource.Drawable.xamarin_logo)
+    //            .SetContentTitle("New Expense Item")
+    //            .SetContentText(messageBody)
+    //            .SetContentIntent(pendingIntent)
+    //            .SetSound(RingtoneManager.GetDefaultUri(RingtoneType.Notification))
+    //            .SetAutoCancel(true);
+
+    //        var notificationManager = NotificationManager.FromContext(this);
+    //        notificationManager.Notify(0, notificationBuilder.Build());
+    //    }
+    //}
+}
