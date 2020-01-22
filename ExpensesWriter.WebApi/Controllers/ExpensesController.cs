@@ -69,6 +69,8 @@ namespace ExpensesWriter.WebApi.Controllers
             //}
 
             db.Entry(expense).State = EntityState.Modified;
+            string userId = User.Identity.GetUserId();
+            expense.UserId = userId;
 
             try
             {

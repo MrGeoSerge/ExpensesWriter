@@ -24,7 +24,7 @@ namespace ExpensesWriter.ViewModels
         public string Password
         {
             get { return password; }
-            set { password = "Password!1"; }
+            set { password = value; }
         }
 
         private string message;

@@ -20,25 +20,8 @@ namespace ExpensesWriter.Droid
         {
             var refreshedToken = FirebaseInstanceId.Instance.Token;
             Log.Debug(TAG, "FCM token: " + refreshedToken);
-
-
-            //SendRegistrationToServer(refreshedToken);
         }
 
-        void SendRegistrationToServer(string token)
-        {
-            // Register with Notification Hubs
-            hub = new NotificationHub(Constants.NotificationHubName,
-                                        Constants.ListenConnectionString, this);
-
-            string userName = Settings.Username;
-
-            var tags = new List<string>() { };
-            tags.Add(userName);
-            var regID = hub.Register(token, tags.ToArray()).RegistrationId;
-
-            Log.Debug(TAG, $"Successful registration of ID {regID}");
-        }
 
 
 

@@ -66,6 +66,8 @@ namespace ExpensesWriter.Services
             if (expense == null || expense.Id == null || !IsConnected)
                 return false;
 
+            expense.ModificationDateTime = DateTime.Now;
+
             var serializedExpense = JsonConvert.SerializeObject(expense);
             var response = await client.PutAsync($"api/expenses/put", new StringContent(serializedExpense, Encoding.UTF8, "application/json"));
 

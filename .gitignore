@@ -350,3 +350,4 @@ MigrationBackup/
 .ionide/
 *.cer
 *.p12
+/ExpensesWriter.WebApi/webConnectionStrings.config
