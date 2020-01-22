@@ -50,5 +50,10 @@ namespace ExpensesWriter.Services
             await database.UpdateAsync(expense);
             return await Task.FromResult(true);
         }
+
+        public Task<IEnumerable<Expense>> GetCurrentMonthItemsAsync(bool forceRefresh = false)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

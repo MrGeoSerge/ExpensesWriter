@@ -7,6 +7,7 @@ namespace ExpensesWriter.Models
     public enum MenuItemType
     {
         ExpenseWriter,
+        MonthResults,
         About,
         Logout
     }

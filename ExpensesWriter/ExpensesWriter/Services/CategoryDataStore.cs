@@ -51,5 +51,9 @@ namespace ExpensesWriter.Services
             return await Task.FromResult(true);
         }
 
+        public Task<IEnumerable<Category>> GetCurrentMonthItemsAsync(bool forceRefresh = false)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

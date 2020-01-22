@@ -39,10 +39,10 @@ namespace ExpensesWriter.iOS
 
 
             UILocalNotification notification = new UILocalNotification();
-            notification.FireDate = NSDate.FromTimeIntervalSinceNow(15);
+            notification.FireDate = NSDate.FromTimeIntervalSinceNow(3600);
             //notification.AlertTitle = "Alert Title"; // required for Apple Watch notifications
             notification.AlertAction = "View Alert";
-            notification.AlertBody = "Your 15 second alert has fired!";
+            notification.AlertBody = "Your 1 hour alert has fired!";
             UIApplication.SharedApplication.ScheduleLocalNotification(notification);
 
 

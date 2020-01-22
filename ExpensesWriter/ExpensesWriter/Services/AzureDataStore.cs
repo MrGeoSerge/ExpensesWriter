@@ -38,6 +38,19 @@ namespace ExpensesWriter.Services
             return expenses;
         }
 
+        public async Task<IEnumerable<Expense>> GetCurrentMonthItemsAsync(bool forceRefresh = false)
+        {
+            if (forceRefresh && IsConnected)
+            {
+                var json = await client.GetStringAsync($"api/Curmonthexpenses");
+                expenses = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Expense>>(json));
+            }
+
+            return expenses;
+        }
+
+
+
         public async Task<Expense> GetItemAsync(string id)
         {
             if (id != null && IsConnected)

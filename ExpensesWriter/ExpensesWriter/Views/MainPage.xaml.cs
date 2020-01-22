@@ -37,9 +37,11 @@ namespace ExpensesWriter.Views
                     case (int)MenuItemType.ExpenseWriter:
                         MenuPages.Add(id, new NavigationPage(new ExpensesPage()));
                         break;
+                    case (int)MenuItemType.MonthResults:
+                        MenuPages.Add(id, new NavigationPage(new MonthResults()));
+                        break;
                     case (int)MenuItemType.About:
-                        new NavigationPage(new AboutPage());
-                        //MenuPages.Add(id, new NavigationPage(new AboutPage()));
+                        MenuPages.Add(id, new NavigationPage(new AboutPage()));
                         break;
                     case (int)MenuItemType.Logout:
                         LogoutCommand.Execute(null);
