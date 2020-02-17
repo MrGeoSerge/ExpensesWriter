@@ -46,11 +46,24 @@ namespace ExpensesWriter
         {
             if (!string.IsNullOrEmpty(Settings.AccessToken))
             {
-                MainPage = new MainPage();
+                if (IsAccessTokenNotExpired())
+                {
+                    MainPage = new MainPage();
+                    return;
+                }
             }
-            else if (!string.IsNullOrEmpty(Settings.Username) && !string.IsNullOrEmpty(Settings.Password))
+
+
+            if (!string.IsNullOrEmpty(Settings.Username) && !string.IsNullOrEmpty(Settings.Password))
             {
-                MainPage = new NavigationPage(new LoginPage());
+                if (IsAccessTokenNotExpired())
+                {
+                    MainPage = new NavigationPage(new LoginPage());
+                }
+                else
+                {
+
+                }
             }
             else
             {
@@ -58,9 +71,14 @@ namespace ExpensesWriter
             }
         }
 
+        private bool IsAccessTokenNotExpired()
+        {
+            var tokenExpirationDate = Settings.AccessTokenExpirationDate;
 
-
-
+            if (tokenExpirationDate > DateTime.Now)
+                return true;
+            return false;
+        }
 
         protected override void OnStart()
         {

@@ -19,7 +19,7 @@
                 </OnPlatform>
             </NavigationPage.Icon>
             <x:Arguments>
-                <views:ExpensesPage />
+                <views:CurrentMonthExpensesPage />
             </x:Arguments>
         </NavigationPage>
     </MasterDetailPage.Detail>

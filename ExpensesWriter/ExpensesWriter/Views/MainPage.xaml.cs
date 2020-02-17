@@ -35,10 +35,13 @@ namespace ExpensesWriter.Views
                 switch (id)
                 {
                     case (int)MenuItemType.ExpenseWriter:
-                        MenuPages.Add(id, new NavigationPage(new ExpensesPage()));
+                        MenuPages.Add(id, new NavigationPage(new CurrentMonthExpensesPage()));
                         break;
                     case (int)MenuItemType.MonthResults:
                         MenuPages.Add(id, new NavigationPage(new MonthResults()));
+                        break;
+                    case (int)MenuItemType.AllExpenses:
+                        MenuPages.Add(id, new NavigationPage(new ExpensesPage()));
                         break;
                     case (int)MenuItemType.About:
                         MenuPages.Add(id, new NavigationPage(new AboutPage()));

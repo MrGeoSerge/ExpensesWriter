@@ -4,9 +4,9 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ExpensesWriter.Views.ExpensesPage"
+             x:Class="ExpensesWriter.Views.CurrentMonthExpensesPage"
              Title="{Binding Title}"
-             x:Name="BrowseExpensesPage">
+             x:Name="BrowseCurrentMonthExpensesPage">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Send" Command="{Binding EmailExpensesCommand}"/>
@@ -20,7 +20,7 @@
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <!--<Entry x:Name="expenseQntEntry" Text="" 
+            <Entry x:Name="expenseQntEntry" Text="" 
                        TextChanged="ExpenseQntEntry_TextChanged"  
                        Keyboard="Text"
                        MinimumWidthRequest="30"></Entry>
@@ -34,13 +34,13 @@
                         x:Name="expenseNameEntry" 
                        Unfocused="ExpenseNameEntry_Unfocused"
                        Text="" 
-                       Keyboard="Text"/>-->
+                       Keyboard="Text"/>
         </Grid>
         <ListView x:Name="ExpensesListView"
                 ItemsSource="{Binding Expenses}"
                 VerticalOptions="FillAndExpand"
                 HasUnevenRows="true"
-                RefreshCommand="{Binding LoadExpensesCommand}"
+                RefreshCommand="{Binding LoadCurrentMonthExpensesCommand}"
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                 CachingStrategy="RecycleElement"
@@ -78,5 +78,5 @@
         </ListView>
 
     </StackLayout>
-    
+
 </ContentPage>

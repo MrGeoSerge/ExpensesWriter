@@ -8,6 +8,7 @@ using Xamarin.Essentials;
 using ExpensesWriter.Models;
 using System.Net.Http.Headers;
 using ExpensesWriter.Helpers;
+using Xamarin.Forms;
 
 namespace ExpensesWriter.Services
 {
@@ -40,13 +41,24 @@ namespace ExpensesWriter.Services
 
         public async Task<IEnumerable<Expense>> GetCurrentMonthItemsAsync(bool forceRefresh = false)
         {
-            if (forceRefresh && IsConnected)
+            try
             {
-                var json = await client.GetStringAsync($"api/Curmonthexpenses");
-                expenses = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Expense>>(json));
-            }
+                if (forceRefresh && IsConnected)
+                {
+                    var json = await client.GetStringAsync($"api/Curmonthexpenses");
+                    expenses = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Expense>>(json));
+                }
 
-            return expenses;
+                return expenses;
+            }
+            catch(Exception ex)
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    Application.Current.MainPage.DisplayAlert("GetCurrentMonthItemsAsyncError", ex.ToString(), "Got it");
+                });
+                return null;
+            }
         }
 
 

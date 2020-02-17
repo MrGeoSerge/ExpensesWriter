@@ -54,17 +54,17 @@ namespace ExpensesWriter.Services
 
         private void SaveAccessTokenExpirationDate(Token token)
         {
-            //TODO: Make converter from int to DateTime
+            /////////////////TODO: Make converter from int to DateTime
 
-            //var expirationInt = token.ExpiresIn;
+            var expirationInt = token.ExpiresIn;
 
-            //DateTime dt;
-            //if (DateTime.TryParseExact(expirationInt.ToString(), "yyyyMMdd",
-            //                          CultureInfo.InvariantCulture,
-            //                          DateTimeStyles.None, out dt))
+            DateTime accessTokenExpirationDate;
+            if (DateTime.TryParseExact(expirationInt.ToString(), "yyyyMMdd",
+                                      CultureInfo.InvariantCulture,
+                                      DateTimeStyles.None, out accessTokenExpirationDate))
 
-            //    Settings.AccessTokenExpirationDate = accessTokenExpiration;
-            //Debug.WriteLine(accessTokenExpiration);
+                Settings.AccessTokenExpirationDate = accessTokenExpirationDate;
+                Debug.WriteLine(accessTokenExpirationDate);
 
         }
 

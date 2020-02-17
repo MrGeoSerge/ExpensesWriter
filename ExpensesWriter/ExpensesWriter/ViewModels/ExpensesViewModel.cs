@@ -56,6 +56,13 @@ namespace ExpensesWriter.ViewModels
                 Expenses.Insert(0, newExpense);
                 await DataStore.AddItemAsync(newExpense);
             });
+
+            MessagingCenter.Subscribe<CurrentMonthExpensesPage, Expense>(this, "AddExpense3", async (obj, expense) =>
+            {
+                var newExpense = expense as Expense;
+                Expenses.Insert(0, newExpense);
+                await DataStore.AddItemAsync(newExpense);
+            });
         }
 
         private async Task ExecuteLoadExpensesCommand()
