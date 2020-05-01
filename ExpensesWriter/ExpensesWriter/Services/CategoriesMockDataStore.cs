@@ -16,11 +16,11 @@ namespace ExpensesWriter.Services
             categories = new List<Category>
             {
                 new Category { Id = Guid.NewGuid().ToString(), Name ="default" },
-                new Category { Id = Guid.NewGuid().ToString(), Name ="food home" },
-                new Category { Id = Guid.NewGuid().ToString(), Name ="food work" },
-                new Category { Id = Guid.NewGuid().ToString(), Name ="bills" },
-                new Category { Id = Guid.NewGuid().ToString(), Name ="car" },
-                new Category { Id = Guid.NewGuid().ToString(), Name ="entertainment" },
+                new Category { Id = Guid.NewGuid().ToString(), Name ="food home" },//
+                new Category { Id = Guid.NewGuid().ToString(), Name ="food work" },//
+                new Category { Id = Guid.NewGuid().ToString(), Name ="bills" },//
+                new Category { Id = Guid.NewGuid().ToString(), Name ="car" },//
+                new Category { Id = Guid.NewGuid().ToString(), Name ="entertainment" },//
                 new Category { Id = Guid.NewGuid().ToString(), Name ="parents" },
                 new Category { Id = Guid.NewGuid().ToString(), Name ="work" },
                 new Category { Id = Guid.NewGuid().ToString(), Name ="education" },
@@ -29,7 +29,7 @@ namespace ExpensesWriter.Services
                 new Category { Id = Guid.NewGuid().ToString(), Name ="health" },
                 new Category { Id = Guid.NewGuid().ToString(), Name ="clothes" },
                 new Category { Id = Guid.NewGuid().ToString(), Name ="travels" },
-                new Category { Id = Guid.NewGuid().ToString(), Name ="gifts" },
+                new Category { Id = Guid.NewGuid().ToString(), Name ="gifts" },//
                 new Category { Id = Guid.NewGuid().ToString(), Name ="country house" },
                 new Category { Id = Guid.NewGuid().ToString(), Name ="other" },
                 new Category { Id = Guid.NewGuid().ToString(), Name ="currency put off" }

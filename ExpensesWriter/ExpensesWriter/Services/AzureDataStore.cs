@@ -61,6 +61,27 @@ namespace ExpensesWriter.Services
             }
         }
 
+        public async Task<IEnumerable<Expense>> GetPreviousMonthItemsAsync(bool forceRefresh = false)
+        {
+            try
+            {
+                if (forceRefresh && IsConnected)
+                {
+                    var json = await client.GetStringAsync($"api/PreviousMonthExpenses");
+                    expenses = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Expense>>(json));
+                }
+
+                return expenses;
+            }
+            catch (Exception ex)
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    Application.Current.MainPage.DisplayAlert("GetCurrentMonthItemsAsyncError", ex.ToString(), "Got it");
+                });
+                return null;
+            }
+        }
 
 
         public async Task<Expense> GetItemAsync(string id)
@@ -91,7 +112,7 @@ namespace ExpensesWriter.Services
             if (expense == null || expense.Id == null || !IsConnected)
                 return false;
 
-            expense.ModificationDateTime = DateTime.Now;
+            expense.ModificationDateTime = DateTime.UtcNow;
 
             var serializedExpense = JsonConvert.SerializeObject(expense);
             var response = await client.PutAsync($"api/expenses/put", new StringContent(serializedExpense, Encoding.UTF8, "application/json"));
@@ -108,5 +129,6 @@ namespace ExpensesWriter.Services
 
             return response.IsSuccessStatusCode;
         }
+
     }
 }

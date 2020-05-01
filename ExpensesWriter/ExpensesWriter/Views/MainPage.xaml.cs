@@ -38,10 +38,16 @@ namespace ExpensesWriter.Views
                         MenuPages.Add(id, new NavigationPage(new CurrentMonthExpensesPage()));
                         break;
                     case (int)MenuItemType.MonthResults:
-                        MenuPages.Add(id, new NavigationPage(new MonthResults()));
+                        MenuPages.Add(id, new NavigationPage(new MonthResultsPage()));
+                        break;
+                    case (int)MenuItemType.PreviousMonthResults:
+                        MenuPages.Add(id, new NavigationPage(new PreviousMonthResultsPage()));
+                        break;
+                    case (int)MenuItemType.PreviousMonthExpenses:
+                        MenuPages.Add(id, new NavigationPage(new PreviousMonthExpensesPage()));
                         break;
                     case (int)MenuItemType.AllExpenses:
-                        MenuPages.Add(id, new NavigationPage(new ExpensesPage()));
+                        MenuPages.Add(id, new NavigationPage(new AllExpensesPage()));
                         break;
                     case (int)MenuItemType.About:
                         MenuPages.Add(id, new NavigationPage(new AboutPage()));
@@ -76,6 +82,7 @@ namespace ExpensesWriter.Views
                     await new RegisterDeviceService().UnregisterDeviceAsync();
 
                     Settings.AccessToken = string.Empty;
+                    Settings.AccessTokenExpirationDate = DateTime.Today;
                     Debug.WriteLine(Settings.Username);
                     Settings.Username = string.Empty;
                     Debug.WriteLine(Settings.Password);

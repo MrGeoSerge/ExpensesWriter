@@ -50,7 +50,7 @@ namespace ExpensesWriter.ViewModels
             LoadMonthResultsCommand.Execute(null);
         }
 
-        private async Task ExecuteLoadMonthResultsCommand()
+        protected virtual async Task ExecuteLoadMonthResultsCommand()
         {
             if (IsBusy)
                 return;

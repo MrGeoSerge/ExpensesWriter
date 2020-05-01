@@ -60,6 +60,8 @@ namespace ExpensesWriter.ViewModels
                 {
                     var accesstoken = await loginService.LoginAsync(Username, Password);
 
+                    Settings.Username = Username;
+                    Settings.Password = Password;
                     Settings.AccessToken = accesstoken;
 
                     if (!string.IsNullOrEmpty(accesstoken))

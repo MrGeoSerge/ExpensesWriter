@@ -50,7 +50,7 @@ namespace ExpensesWriter.ViewModels
                 await DataStore.AddItemAsync(newExpense);
             });
 
-            MessagingCenter.Subscribe<ExpensesPage, Expense>(this, "AddExpense2", async (obj, expense) =>
+            MessagingCenter.Subscribe<AllExpensesPage, Expense>(this, "AddExpense2", async (obj, expense) =>
             {
                 var newExpense = expense as Expense;
                 Expenses.Insert(0, newExpense);

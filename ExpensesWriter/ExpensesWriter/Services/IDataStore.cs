@@ -12,5 +12,6 @@ namespace ExpensesWriter.Services
         Task<T> GetItemAsync(string id);
         Task<IEnumerable<T>> GetItemsAsync(bool forceRefresh = false);
         Task<IEnumerable<T>> GetCurrentMonthItemsAsync(bool forceRefresh = false);
+        Task<IEnumerable<T>> GetPreviousMonthItemsAsync(bool forceRefresh = false);
     }
 }

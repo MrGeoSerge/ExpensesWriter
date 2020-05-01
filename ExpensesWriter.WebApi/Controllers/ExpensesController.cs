@@ -32,14 +32,24 @@ namespace ExpensesWriter.WebApi.Controllers
             //return db.Expenses;
         }
 
-        // GET: api/Expenses
-        [Route("api/Curmonthexpenses")]
-        public IQueryable<Expense> GetCurmonthexpenses()
+        // GET: api/CurMonthExpenses
+        [Route("api/CurMonthExpenses")]
+        public IQueryable<Expense> GetCurMonthExpenses()
         {
             string userId = User.Identity.GetUserId();
             return db.Expenses.Where((user => user.UserId == userId && user.CreationDateTime.Month == DateTime.Today.Month));
 
         }
+
+        // GET: api/PreviousMonthExpenses
+        [Route("api/PreviousMonthExpenses")]
+        public IQueryable<Expense> GetPreviousMonthExpenses()
+        {
+            string userId = User.Identity.GetUserId();
+            return db.Expenses.Where((user => user.UserId == userId && user.CreationDateTime.Month == DateTime.Today.Month - 1));
+
+        }
+
 
         [Route("api/ExpensesForCurrentUser")]
         public IQueryable<Expense> GetExpensesForCurrentUser()

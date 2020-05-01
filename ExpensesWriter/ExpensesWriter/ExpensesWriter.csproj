@@ -11,26 +11,32 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AppCenter" Version="2.1.1" />
-    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="2.1.1" />
-    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="2.1.1" />
-    <PackageReference Include="Microsoft.AppCenter.Push" Version="2.1.1" />
-    <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
+    <PackageReference Include="Microsoft.AppCenter" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AppCenter.Push" Version="3.0.0" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
     <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
-    <PackageReference Include="Xamarin.Forms" Version="4.0.0.425677" />  
-    <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991640" />  
+    <PackageReference Include="Xamarin.Essentials" Version="1.4.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Views\ExpenseEditPage.xaml.cs">
       <DependentUpon>ExpenseEditPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\ExpensesPage.xaml.cs">
-      <DependentUpon>ExpensesPage.xaml</DependentUpon>
+    <Compile Update="Views\AllExpensesPage.xaml.cs">
+      <DependentUpon>AllExpensesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MonthResultsPage.xaml.cs">
+      <DependentUpon>MonthResultsPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\NewExpensePage.xaml.cs">
       <DependentUpon>NewExpensePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PreviousMonthResultsPage.xaml.cs">
+      <DependentUpon>PreviousMonthResultsPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -41,7 +47,13 @@
     <EmbeddedResource Update="Views\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\MonthResults.xaml">
+    <EmbeddedResource Update="Views\MonthResultsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PreviousMonthExpensesPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PreviousMonthResultsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\RegisterPage.xaml">

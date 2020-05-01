@@ -18,10 +18,21 @@ namespace ExpensesWriter.Services
         {
             var expenses = await DataStore.GetCurrentMonthItemsAsync(true);
 
+            return await GetCategorizedMonthResults(expenses);
+        }
 
+        public async Task<ObservableCollection<CategoryExpense>> GetPreviousMonthResults()
+        {
+            var expenses = await DataStore.GetPreviousMonthItemsAsync(true);
+
+            return await GetCategorizedMonthResults(expenses);
+        }
+
+        protected async Task<ObservableCollection<CategoryExpense>> GetCategorizedMonthResults(IEnumerable<Expense> expenses)
+        {
             var categories = await CategoriesDataStore.GetItemsAsync(true);
 
-            List<String> categoryStrings = categories.Select(category => category.Name).ToList();
+            List<string> categoryStrings = categories.Select(category => category.Name).ToList();
 
             ObservableCollection<CategoryExpense> categoryExpenses = new ObservableCollection<CategoryExpense>();
 

@@ -8,6 +8,8 @@ namespace ExpensesWriter.Models
     {
         ExpenseWriter,
         MonthResults,
+        PreviousMonthResults,
+        PreviousMonthExpenses,
         AllExpenses,
         About,
         Logout

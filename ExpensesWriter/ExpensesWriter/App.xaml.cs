@@ -44,25 +44,16 @@ namespace ExpensesWriter
 
         public void SetMainPage()
         {
-            if (!string.IsNullOrEmpty(Settings.AccessToken))
-            {
-                if (IsAccessTokenNotExpired())
-                {
-                    MainPage = new MainPage();
-                    return;
-                }
-            }
-
 
             if (!string.IsNullOrEmpty(Settings.Username) && !string.IsNullOrEmpty(Settings.Password))
             {
-                if (IsAccessTokenNotExpired())
+                if (IsAccessTokenValid())
                 {
-                    MainPage = new NavigationPage(new LoginPage());
+                    MainPage = new MainPage();
                 }
                 else
                 {
-
+                    MainPage = new NavigationPage(new LoginPage());
                 }
             }
             else
@@ -71,11 +62,11 @@ namespace ExpensesWriter
             }
         }
 
-        private bool IsAccessTokenNotExpired()
+        private bool IsAccessTokenValid()
         {
             var tokenExpirationDate = Settings.AccessTokenExpirationDate;
 
-            if (tokenExpirationDate > DateTime.Now)
+            if (tokenExpirationDate > DateTime.UtcNow)
                 return true;
             return false;
         }

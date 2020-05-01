@@ -53,7 +53,7 @@ namespace ExpensesWriter.Helpers
         {
             get
             {
-                return AppSettings.GetValueOrDefault("AccessTokenExpirationDate", DateTime.UtcNow);
+                return AppSettings.GetValueOrDefault("AccessTokenExpirationDate", DateTime.MinValue);
             }
             set
             {
