@@ -21,11 +21,11 @@
                 ItemsSource="{Binding Expenses}"
                 VerticalOptions="FillAndExpand"
                 HasUnevenRows="true"
-                RefreshCommand="{Binding LoadExpensesCommand}"
+                RefreshCommand="{Binding LoadPreviousMonthExpensesCommand}"
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                 CachingStrategy="RecycleElement"
-                ItemSelected="OnExpenseSelected" >
+                >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

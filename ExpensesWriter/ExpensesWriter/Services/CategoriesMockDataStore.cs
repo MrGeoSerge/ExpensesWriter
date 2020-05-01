@@ -75,5 +75,10 @@ namespace ExpensesWriter.Services
         {
             throw new NotImplementedException();
         }
+
+        public Task<IEnumerable<Category>> GetPreviousMonthItemsAsync(bool forceRefresh = false)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

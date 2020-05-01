@@ -20,7 +20,7 @@ namespace ExpensesWriter.ViewModels
 
             try
             {
-                CategoryExpenses = await (new MonthResultsService().GetCurrentMonthResults());
+                CategoryExpenses = await (new MonthResultsService().GetPreviousMonthResults());
                 TotalMoney = CategoryExpenses.Sum(expense => expense.Money);
             }
             catch (Exception ex)
