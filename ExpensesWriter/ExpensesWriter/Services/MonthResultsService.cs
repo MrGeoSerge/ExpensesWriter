@@ -21,6 +21,20 @@ namespace ExpensesWriter.Services
             return await GetCategorizedMonthResults(expenses);
         }
 
+        public async Task<ObservableCollection<CategoryExpense>> GetFamilyCurrentMonthResults()
+        {
+            var expenses = await DataStore.GetFamilyCurrentMonthItemsAsync(true);
+
+            return await GetCategorizedMonthResults(expenses);
+        }
+
+        public async Task<ObservableCollection<CategoryExpense>> GetFamilyPreviousMonthResults()
+        {
+            var expenses = await DataStore.GetFamilyPreviousMonthItemsAsync(true);
+
+            return await GetCategorizedMonthResults(expenses);
+        }
+
         public async Task<ObservableCollection<CategoryExpense>> GetPreviousMonthResults()
         {
             var expenses = await DataStore.GetPreviousMonthItemsAsync(true);

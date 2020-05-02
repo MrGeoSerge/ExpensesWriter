@@ -46,6 +46,18 @@ namespace ExpensesWriter.Views
                     case (int)MenuItemType.PreviousMonthExpenses:
                         MenuPages.Add(id, new NavigationPage(new PreviousMonthExpensesPage()));
                         break;
+                    case (int)MenuItemType.FamilyCurrentMonthExpenses:
+                        MenuPages.Add(id, new NavigationPage(new FamilyCurrentMonthExpensesPage()));
+                        break;
+                    case (int)MenuItemType.FamilyPreviousMonthExpenses:
+                        MenuPages.Add(id, new NavigationPage(new FamilyPreviousMonthExpensesPage()));
+                        break;
+                    case (int)MenuItemType.FamilyCurrentMonthResults:
+                        MenuPages.Add(id, new NavigationPage(new FamilyCurrentMonthResultsPage()));
+                        break;
+                    case (int)MenuItemType.FamilyPreviousMonthResults:
+                        MenuPages.Add(id, new NavigationPage(new FamilyPreviousMonthResultsPage()));
+                        break;
                     case (int)MenuItemType.AllExpenses:
                         MenuPages.Add(id, new NavigationPage(new AllExpensesPage()));
                         break;

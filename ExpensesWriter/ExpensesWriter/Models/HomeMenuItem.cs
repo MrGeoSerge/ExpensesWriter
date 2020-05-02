@@ -10,6 +10,10 @@ namespace ExpensesWriter.Models
         MonthResults,
         PreviousMonthResults,
         PreviousMonthExpenses,
+        FamilyCurrentMonthExpenses,
+        FamilyPreviousMonthExpenses,
+        FamilyCurrentMonthResults,
+        FamilyPreviousMonthResults,
         AllExpenses,
         About,
         Logout

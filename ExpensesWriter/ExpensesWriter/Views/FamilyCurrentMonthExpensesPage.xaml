@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ExpensesWriter.Views.PreviousMonthExpensesPage">
+             x:Class="ExpensesWriter.Views.FamilyCurrentMonthExpensesPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Send" Command="{Binding EmailExpensesCommand}"/>
     </ContentPage.ToolbarItems>
@@ -21,7 +21,7 @@
                 ItemsSource="{Binding Expenses}"
                 VerticalOptions="FillAndExpand"
                 HasUnevenRows="true"
-                RefreshCommand="{Binding LoadFamilyPreviousMonthExpensesCommand}"
+                RefreshCommand="{Binding LoadFamilyCurrentMonthExpensesCommand}"
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                 CachingStrategy="RecycleElement"

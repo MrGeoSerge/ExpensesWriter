@@ -83,6 +83,51 @@ namespace ExpensesWriter.Services
             }
         }
 
+        public async Task<IEnumerable<Expense>> GetFamilyCurrentMonthItemsAsync(bool forceRefresh = false)
+        {
+            try
+            {
+                if (forceRefresh && IsConnected)
+                {
+                    var json = await client.GetStringAsync($"api/FamilyCurrentMonthExpenses");
+                    expenses = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Expense>>(json));
+                }
+
+                return expenses;
+            }
+            catch (Exception ex)
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    Application.Current.MainPage.DisplayAlert("GetFamilyCurrentMonthItemsAsyncError", ex.ToString(), "Got it");
+                });
+                return null;
+            }
+        }
+
+        public async Task<IEnumerable<Expense>> GetFamilyPreviousMonthItemsAsync(bool forceRefresh = false)
+        {
+            try
+            {
+                if (forceRefresh && IsConnected)
+                {
+                    var json = await client.GetStringAsync($"api/FamilyPreviousMonthExpenses");
+                    expenses = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Expense>>(json));
+                }
+
+                return expenses;
+            }
+            catch (Exception ex)
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    Application.Current.MainPage.DisplayAlert("GetCurrentMonthItemsAsyncError", ex.ToString(), "Got it");
+                });
+                return null;
+            }
+        }
+
+
 
         public async Task<Expense> GetItemAsync(string id)
         {
