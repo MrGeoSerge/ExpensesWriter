@@ -50,7 +50,7 @@ namespace ExpensesWriter.ViewModels
             LoadMonthResultsCommand.Execute(null);
         }
 
-        protected virtual async Task ExecuteLoadMonthResultsCommand()
+        protected async Task ExecuteLoadMonthResultsCommand()
         {
             if (IsBusy)
                 return;
@@ -59,12 +59,13 @@ namespace ExpensesWriter.ViewModels
 
             try
             {
-                CategoryExpenses = await (new MonthResultsService().GetCurrentMonthResults());
+                CategoryExpenses = await GetCategoryExpenses();
                 TotalMoney = CategoryExpenses.Sum(expense => expense.Money);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+                throw;
             }
             finally
             {
@@ -72,6 +73,11 @@ namespace ExpensesWriter.ViewModels
             }
 
 
+        }
+
+        protected virtual async Task<ObservableCollection<CategoryExpense>> GetCategoryExpenses()
+        {
+            return await new MonthResultsService().GetCurrentMonthResults();
         }
     }
 }
