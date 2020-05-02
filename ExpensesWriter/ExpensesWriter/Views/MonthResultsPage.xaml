@@ -3,48 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:contentViews="clr-namespace:ExpensesWriter.Views.ContentViews"
              mc:Ignorable="d"
              Title="{Binding Title}"
              x:Class="ExpensesWriter.Views.MonthResultsPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Total"/>
-                <Label Text="{Binding TotalMoney}"/>
-            </StackLayout>
-            <ListView x:Name="MonthResultsListView"
-                ItemsSource="{Binding CategoryExpenses}"
-                VerticalOptions="FillAndExpand"
-                HasUnevenRows="true"
-                RefreshCommand="{Binding LoadMonthResultsCommand}"
-                IsPullToRefreshEnabled="true"
-                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-                CachingStrategy="RecycleElement"
-                >
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid Padding="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="3*"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Label Text="{Binding Category}" 
-                                d:Text="{Binding .}"
-                                LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListExpenseTextStyle}" 
-                                FontSize="16" />
-                                <Label Grid.Column="1"
-                                Text="{Binding Money}" 
-                                d:Text="Expense descripton"
-                                LineBreakMode="NoWrap"
-                                Style="{DynamicResource ListExpenseDetailTextStyle}"
-                                FontSize="13" />
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
-    </ContentPage.Content>
+    <contentViews:MonthResultsView/>
 </ContentPage>
