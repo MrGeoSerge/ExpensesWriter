@@ -21,18 +21,6 @@ namespace ExpensesWriter.Views
         }
 
 
-        async void OnExpenseSelected(object sender, SelectedItemChangedEventArgs args)
-        {
-            var expense = args.SelectedItem as Expense;
-            if (expense == null)
-                return;
-
-            await Navigation.PushAsync(new ExpenseEditPage(new ExpenseEditViewModel(expense)));
-
-            // Manually deselect expense.
-            ExpensesListView.SelectedItem = null;
-        }
-
         async void AddExpense_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new NavigationPage(new NewExpensePage()));
@@ -42,11 +30,7 @@ namespace ExpensesWriter.Views
         {
             base.OnAppearing();
 
-            //if (viewModel.Expenses.Count == 0)
-            //viewModel.LoadCurrentMonthExpensesCommand.Execute(null);
-
             expenseQntEntry.Focus();
-
         }
 
         private void ExpenseQntEntry_TextChanged(object sender, TextChangedEventArgs e)

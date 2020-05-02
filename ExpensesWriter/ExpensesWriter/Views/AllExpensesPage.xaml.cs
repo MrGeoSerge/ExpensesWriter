@@ -23,28 +23,10 @@ namespace ExpensesWriter.Views
             BindingContext = viewModel = new ExpensesViewModel();
         }
 
-        async void OnExpenseSelected(object sender, SelectedItemChangedEventArgs args)
-        {
-            var expense = args.SelectedItem as Expense;
-            if (expense == null)
-                return;
-
-            await Navigation.PushAsync(new ExpenseEditPage(new ExpenseEditViewModel(expense)));
-
-            // Manually deselect expense.
-            ExpensesListView.SelectedItem = null;
-        }
-
         async void AddExpense_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new NavigationPage(new NewExpensePage()));
         }
-
-        //protected override void OnAppearing()
-        //{
-        //    base.OnAppearing();
-        //    viewModel.LoadExpensesCommand.Execute(null);
-        //}
 
 
     }
