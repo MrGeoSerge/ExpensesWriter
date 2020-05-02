@@ -8,12 +8,12 @@ namespace ExpensesWriter.Models
     {
         ExpenseWriter,
         MonthResults,
-        PreviousMonthResults,
-        PreviousMonthExpenses,
+        LastMonthResults,
+        LastMonthExpenses,
         FamilyCurrentMonthExpenses,
-        FamilyPreviousMonthExpenses,
+        FamilyLastMonthExpenses,
         FamilyCurrentMonthResults,
-        FamilyPreviousMonthResults,
+        FamilyLastMonthResults,
         AllExpenses,
         About,
         Logout

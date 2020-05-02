@@ -76,7 +76,7 @@ namespace ExpensesWriter.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Category>> GetPreviousMonthItemsAsync(bool forceRefresh = false)
+        public Task<IEnumerable<Category>> GetLastMonthItemsAsync(bool forceRefresh = false)
         {
             throw new NotImplementedException();
         }
@@ -86,7 +86,7 @@ namespace ExpensesWriter.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Category>> GetFamilyPreviousMonthItemsAsync(bool forceRefresh = false)
+        public Task<IEnumerable<Category>> GetFamilyLastMonthItemsAsync(bool forceRefresh = false)
         {
             throw new NotImplementedException();
         }

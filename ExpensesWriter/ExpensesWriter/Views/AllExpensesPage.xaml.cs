@@ -40,11 +40,11 @@ namespace ExpensesWriter.Views
             await Navigation.PushModalAsync(new NavigationPage(new NewExpensePage()));
         }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            viewModel.LoadExpensesCommand.Execute(null);
-        }
+        //protected override void OnAppearing()
+        //{
+        //    base.OnAppearing();
+        //    viewModel.LoadExpensesCommand.Execute(null);
+        //}
 
 
     }

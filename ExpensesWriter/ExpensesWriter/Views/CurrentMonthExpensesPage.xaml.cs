@@ -43,7 +43,7 @@ namespace ExpensesWriter.Views
             base.OnAppearing();
 
             //if (viewModel.Expenses.Count == 0)
-            viewModel.LoadCurrentMonthExpensesCommand.Execute(null);
+            //viewModel.LoadCurrentMonthExpensesCommand.Execute(null);
 
             expenseQntEntry.Focus();
 

@@ -32,20 +32,26 @@
     <Compile Update="Views\FamilyCurrentMonthExpensesPage.xaml.cs">
       <DependentUpon>FamilyCurrentMonthExpensesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\FamilyLastMonthExpensesPage.xaml.cs">
+      <DependentUpon>FamilyLastMonthExpensesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\MonthResultsPage.xaml.cs">
       <DependentUpon>MonthResultsPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\NewExpensePage.xaml.cs">
       <DependentUpon>NewExpensePage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\FamilyPreviousMonthResultsPage.xaml.cs">
-      <DependentUpon>FamilyPreviousMonthResultsPage.xaml</DependentUpon>
+    <Compile Update="Views\FamilyLastMonthResultsPage.xaml.cs">
+      <DependentUpon>FamilyLastMonthResultsPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\FamilyCurrentMonthResultsPage.xaml.cs">
       <DependentUpon>FamilyCurrentMonthResultsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\PreviousMonthResultsPage.xaml.cs">
-      <DependentUpon>PreviousMonthResultsPage.xaml</DependentUpon>
+    <Compile Update="Views\LastMonthExpensesPage.xaml.cs">
+      <DependentUpon>LastMonthExpensesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\LastMonthResultsPage.xaml.cs">
+      <DependentUpon>LastMonthResultsPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -53,7 +59,7 @@
     <EmbeddedResource Update="Views\CurrentMonthExpensesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\FamilyPreviousMonthExpensesPage.xaml">
+    <EmbeddedResource Update="Views\FamilyLastMonthExpensesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\LoginPage.xaml">
@@ -62,10 +68,10 @@
     <EmbeddedResource Update="Views\MonthResultsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\PreviousMonthExpensesPage.xaml">
+    <EmbeddedResource Update="Views\LastMonthExpensesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\PreviousMonthResultsPage.xaml">
+    <EmbeddedResource Update="Views\LastMonthResultsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\RegisterPage.xaml">

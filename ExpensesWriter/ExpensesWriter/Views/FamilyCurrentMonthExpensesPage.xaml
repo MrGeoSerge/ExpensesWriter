@@ -21,7 +21,7 @@
                 ItemsSource="{Binding Expenses}"
                 VerticalOptions="FillAndExpand"
                 HasUnevenRows="true"
-                RefreshCommand="{Binding LoadFamilyCurrentMonthExpensesCommand}"
+                RefreshCommand="{Binding LoadExpensesCommand}"
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                 CachingStrategy="RecycleElement"

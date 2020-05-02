@@ -40,23 +40,23 @@ namespace ExpensesWriter.Views
                     case (int)MenuItemType.MonthResults:
                         MenuPages.Add(id, new NavigationPage(new MonthResultsPage()));
                         break;
-                    case (int)MenuItemType.PreviousMonthResults:
-                        MenuPages.Add(id, new NavigationPage(new PreviousMonthResultsPage()));
+                    case (int)MenuItemType.LastMonthResults:
+                        MenuPages.Add(id, new NavigationPage(new LastMonthResultsPage()));
                         break;
-                    case (int)MenuItemType.PreviousMonthExpenses:
-                        MenuPages.Add(id, new NavigationPage(new PreviousMonthExpensesPage()));
+                    case (int)MenuItemType.LastMonthExpenses:
+                        MenuPages.Add(id, new NavigationPage(new LastMonthExpensesPage()));
                         break;
                     case (int)MenuItemType.FamilyCurrentMonthExpenses:
                         MenuPages.Add(id, new NavigationPage(new FamilyCurrentMonthExpensesPage()));
                         break;
-                    case (int)MenuItemType.FamilyPreviousMonthExpenses:
-                        MenuPages.Add(id, new NavigationPage(new FamilyPreviousMonthExpensesPage()));
+                    case (int)MenuItemType.FamilyLastMonthExpenses:
+                        MenuPages.Add(id, new NavigationPage(new FamilyLastMonthExpensesPage()));
                         break;
                     case (int)MenuItemType.FamilyCurrentMonthResults:
                         MenuPages.Add(id, new NavigationPage(new FamilyCurrentMonthResultsPage()));
                         break;
-                    case (int)MenuItemType.FamilyPreviousMonthResults:
-                        MenuPages.Add(id, new NavigationPage(new FamilyPreviousMonthResultsPage()));
+                    case (int)MenuItemType.FamilyLastMonthResults:
+                        MenuPages.Add(id, new NavigationPage(new FamilyLastMonthResultsPage()));
                         break;
                     case (int)MenuItemType.AllExpenses:
                         MenuPages.Add(id, new NavigationPage(new AllExpensesPage()));

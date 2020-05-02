@@ -61,13 +61,13 @@ namespace ExpensesWriter.Services
             }
         }
 
-        public async Task<IEnumerable<Expense>> GetPreviousMonthItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Expense>> GetLastMonthItemsAsync(bool forceRefresh = false)
         {
             try
             {
                 if (forceRefresh && IsConnected)
                 {
-                    var json = await client.GetStringAsync($"api/PreviousMonthExpenses");
+                    var json = await client.GetStringAsync($"api/LastMonthExpenses");
                     expenses = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Expense>>(json));
                 }
 
@@ -105,13 +105,13 @@ namespace ExpensesWriter.Services
             }
         }
 
-        public async Task<IEnumerable<Expense>> GetFamilyPreviousMonthItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Expense>> GetFamilyLastMonthItemsAsync(bool forceRefresh = false)
         {
             try
             {
                 if (forceRefresh && IsConnected)
                 {
-                    var json = await client.GetStringAsync($"api/FamilyPreviousMonthExpenses");
+                    var json = await client.GetStringAsync($"api/FamilyLastMonthExpenses");
                     expenses = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Expense>>(json));
                 }
 

@@ -40,7 +40,7 @@
                 ItemsSource="{Binding Expenses}"
                 VerticalOptions="FillAndExpand"
                 HasUnevenRows="true"
-                RefreshCommand="{Binding LoadCurrentMonthExpensesCommand}"
+                RefreshCommand="{Binding LoadExpensesCommand}"
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                 CachingStrategy="RecycleElement"

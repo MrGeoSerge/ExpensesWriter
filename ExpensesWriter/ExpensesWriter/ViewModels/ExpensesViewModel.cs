@@ -9,6 +9,8 @@ using ExpensesWriter.Models;
 using ExpensesWriter.Views;
 using Xamarin.Essentials;
 using ExpensesWriter.Services;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace ExpensesWriter.ViewModels
 {
@@ -63,9 +65,11 @@ namespace ExpensesWriter.ViewModels
                 Expenses.Insert(0, newExpense);
                 await DataStore.AddItemAsync(newExpense);
             });
+
+            LoadExpensesCommand.Execute(null);
         }
 
-        private async Task ExecuteLoadExpensesCommand()
+        protected async Task ExecuteLoadExpensesCommand()
         {
             if (IsBusy)
                 return;
@@ -75,7 +79,7 @@ namespace ExpensesWriter.ViewModels
             try
             {
                 Expenses.Clear();
-                var expenses = await DataStore.GetItemsAsync(true);
+                var expenses = await GetExpenses();
                 var sortedExpenses = expenses.Cast<Expense>().OrderByDescending((x) => x.CreationDateTime).Select(x => x);
                 foreach(var expense in sortedExpenses)
                 {
@@ -93,11 +97,19 @@ namespace ExpensesWriter.ViewModels
                 IsBusy = false;
             }
         }
+
+        protected virtual async Task<IEnumerable<Expense>> GetExpenses()
+        {
+            return await DataStore.GetItemsAsync(true);
+        }
+
         private async Task ExecuteEmailExpensesCommand()
         {
             var emailService = new EmailExpensesService();
             await emailService.SendExpenses(Expenses);
         }
+
+
 
     }
 }

@@ -41,9 +41,9 @@ namespace ExpensesWriter.WebApi.Controllers
 
         }
 
-        // GET: api/PreviousMonthExpenses
-        [Route("api/PreviousMonthExpenses")]
-        public IQueryable<Expense> GetPreviousMonthExpenses()
+        // GET: api/LastMonthExpenses
+        [Route("api/LastMonthExpenses")]
+        public IQueryable<Expense> GetLastMonthExpenses()
         {
             string userId = User.Identity.GetUserId();
             return db.Expenses.Where((user => user.UserId == userId && user.CreationDateTime.Month == DateTime.Today.Month - 1));
@@ -58,9 +58,9 @@ namespace ExpensesWriter.WebApi.Controllers
             return db.Expenses.Where(user => user.CreationDateTime.Month == DateTime.Today.Month);
         }
 
-        // GET: api/FamilyPreviousMonthExpenses
-        [Route("api/FamilyPreviousMonthExpenses")]
-        public IQueryable<Expense> GetFamilyPreviousMonthExpenses()
+        // GET: api/FamilyLastMonthExpenses
+        [Route("api/FamilyLastMonthExpenses")]
+        public IQueryable<Expense> GetFamilyLastMonthExpenses()
         {
             //string userId = User.Identity.GetUserId();
             return db.Expenses.Where(user => user.CreationDateTime.Month == DateTime.Today.Month - 1);

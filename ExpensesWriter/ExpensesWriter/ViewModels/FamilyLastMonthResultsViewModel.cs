@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ExpensesWriter.ViewModels
 {
-    public class FamilyPreviousMonthResultsViewModel : MonthResultsViewModel
+    public class FamilyLastMonthResultsViewModel : MonthResultsViewModel
     {
 
         protected override async Task ExecuteLoadMonthResultsCommand()
@@ -20,7 +20,7 @@ namespace ExpensesWriter.ViewModels
 
             try
             {
-                CategoryExpenses = await (new MonthResultsService().GetFamilyPreviousMonthResults());
+                CategoryExpenses = await (new MonthResultsService().GetFamilyLastMonthResults());
                 TotalMoney = CategoryExpenses.Sum(expense => expense.Money);
             }
             catch (Exception ex)
