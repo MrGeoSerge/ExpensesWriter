@@ -17,16 +17,16 @@ namespace ExpensesWriter.ViewModels
     public class ExpensesViewModel : BaseExpenseViewModel
     {
 
-        public ObservableCollection<Expense> expenses1;
+        public ObservableCollection<Expense> expenses;
         public ObservableCollection<Expense> Expenses
         {
             get
             {
-                return expenses1;
+                return expenses;
             }
             set
             {
-                expenses1 = value;
+                expenses = value;
                 OnPropertyChanged();
             }
         }

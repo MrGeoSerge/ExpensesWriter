@@ -12,6 +12,10 @@ namespace ExpensesWriter.ViewModels
 {
     public class LastMonthResultsViewModel : MonthResultsViewModel
     {
+        public LastMonthResultsViewModel()
+        {
+            Title = "Last Month Results";
+        }
         protected override async Task<ObservableCollection<CategoryExpense>> GetCategoryExpenses()
         {
             return await new MonthResultsService().GetLastMonthResults();

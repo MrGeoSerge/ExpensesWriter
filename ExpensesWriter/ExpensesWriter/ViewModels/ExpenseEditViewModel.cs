@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using ExpensesWriter.Models;
 using ExpensesWriter.Services;
@@ -30,5 +32,6 @@ namespace ExpensesWriter.ViewModels
             Title = expense?.Name;
             Expense = expense;
         }
+
     }
 }

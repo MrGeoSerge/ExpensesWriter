@@ -14,13 +14,11 @@ namespace ExpensesWriter.Views
     [DesignTimeVisible(false)]
     public partial class AllExpensesPage : ContentPage
     {
-        ExpensesViewModel viewModel;
-
         public AllExpensesPage()
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new ExpensesViewModel();
+            BindingContext = new AllExpensesViewModel();
         }
 
         async void AddExpense_Clicked(object sender, EventArgs e)

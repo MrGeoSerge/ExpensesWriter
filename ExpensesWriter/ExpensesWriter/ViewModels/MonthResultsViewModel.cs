@@ -11,7 +11,7 @@ using Xamarin.Forms;
 
 namespace ExpensesWriter.ViewModels
 {
-    public class MonthResultsViewModel : BaseExpenseViewModel
+    public class MonthResultsViewModel : BaseViewModel
     {
         private ObservableCollection<CategoryExpense> categoryExpenses;
         public ObservableCollection<CategoryExpense> CategoryExpenses
@@ -46,6 +46,7 @@ namespace ExpensesWriter.ViewModels
 
         public MonthResultsViewModel()
         {
+            Title = "Current Month Results";
             LoadMonthResultsCommand = new Command(async () => await ExecuteLoadMonthResultsCommand());
             LoadMonthResultsCommand.Execute(null);
         }

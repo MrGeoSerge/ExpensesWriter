@@ -35,8 +35,8 @@
     <Compile Update="Views\FamilyLastMonthExpensesPage.xaml.cs">
       <DependentUpon>FamilyLastMonthExpensesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\MonthResultsPage.xaml.cs">
-      <DependentUpon>MonthResultsPage.xaml</DependentUpon>
+    <Compile Update="Views\CurrentMonthResultsPage.xaml.cs">
+      <DependentUpon>CurrentMonthResultsPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\NewExpensePage.xaml.cs">
       <DependentUpon>NewExpensePage.xaml</DependentUpon>
@@ -68,7 +68,7 @@
     <EmbeddedResource Update="Views\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\MonthResultsPage.xaml">
+    <EmbeddedResource Update="Views\CurrentMonthResultsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\LastMonthExpensesPage.xaml">
@@ -81,6 +81,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ContentViews\ExpensesView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\SettingsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

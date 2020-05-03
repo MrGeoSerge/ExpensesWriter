@@ -12,6 +12,7 @@ namespace ExpensesWriter.ViewModels
     {
         public FamilyLastMonthExpensesViewModel()
         {
+            Title = "Family Last Month Expenses";
         }
 
         protected override async Task<IEnumerable<Expense>> GetExpenses()

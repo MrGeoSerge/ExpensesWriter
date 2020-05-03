@@ -12,6 +12,7 @@ namespace ExpensesWriter.ViewModels
     {
         public FamilyCurrentMonthExpensesViewModel()
         {
+            Title = "Family Current Month Expenses";
         }
 
 

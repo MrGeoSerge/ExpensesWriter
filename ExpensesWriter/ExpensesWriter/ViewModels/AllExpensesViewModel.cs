@@ -8,19 +8,17 @@ using Xamarin.Forms;
 
 namespace ExpensesWriter.ViewModels
 {
-    public class LastMonthExpensesViewModel : ExpensesViewModel
+    public class AllExpensesViewModel : ExpensesViewModel
     {
-
-        public LastMonthExpensesViewModel()
+        public AllExpensesViewModel()
         {
-            Title = "Last Month Expenses";
+            Title = "All Expenses";
         }
 
         protected override async Task<IEnumerable<Expense>> GetExpenses()
         {
-            return await DataStore.GetLastMonthItemsAsync(true);
+            return await DataStore.GetItemsAsync(true);
         }
-
 
     }
 }

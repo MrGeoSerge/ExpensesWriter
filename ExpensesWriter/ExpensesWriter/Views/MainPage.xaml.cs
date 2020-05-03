@@ -38,7 +38,7 @@ namespace ExpensesWriter.Views
                         MenuPages.Add(id, new NavigationPage(new CurrentMonthExpensesPage()));
                         break;
                     case (int)MenuItemType.MonthResults:
-                        MenuPages.Add(id, new NavigationPage(new MonthResultsPage()));
+                        MenuPages.Add(id, new NavigationPage(new CurrentMonthResultsPage()));
                         break;
                     case (int)MenuItemType.LastMonthResults:
                         MenuPages.Add(id, new NavigationPage(new LastMonthResultsPage()));
@@ -60,6 +60,9 @@ namespace ExpensesWriter.Views
                         break;
                     case (int)MenuItemType.AllExpenses:
                         MenuPages.Add(id, new NavigationPage(new AllExpensesPage()));
+                        break;
+                    case (int)MenuItemType.Settings:
+                        MenuPages.Add(id, new NavigationPage(new SettingsPage()));
                         break;
                     case (int)MenuItemType.About:
                         MenuPages.Add(id, new NavigationPage(new AboutPage()));
