@@ -36,7 +36,7 @@ namespace ExpensesWriter
             else
                 DependencyService.Register<AzureDataStore>();
 
-            DependencyService.Register<CategoriesMockDataStore>();
+            //DependencyService.Register<CategoriesMockDataStore>();
 
             SetMainPage();
             //MainPage = new MainPage();

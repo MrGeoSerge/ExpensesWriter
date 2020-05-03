@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ExpensesWriter.Services
 {
-    public class CategoriesDataStore : IDataStore<Category>
+    public class CategoriesDataStore// : IDataStore<Category>
     {
         IEnumerable<Category> expenses;
         readonly SQLiteAsyncConnection database;
@@ -27,7 +27,7 @@ namespace ExpensesWriter.Services
         }
 
 
-        public async Task<Category> GetItemAsync(string id)
+        public async Task<Category> GetItemAsync(int id)
         {
             return await database.Table<Category>()
                 .FirstOrDefaultAsync(s => s.Id == id);

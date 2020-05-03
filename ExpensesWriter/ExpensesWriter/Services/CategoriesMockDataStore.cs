@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace ExpensesWriter.Services
 {
-    public class CategoriesMockDataStore : IDataStore<Category>
+    public class CategoriesMockDataStore// : IDataStore<Category>
     {
         List<Category> categories;
 
@@ -15,24 +15,25 @@ namespace ExpensesWriter.Services
         {
             categories = new List<Category>
             {
-                new Category { Id = Guid.NewGuid().ToString(), Name ="default" },
-                new Category { Id = Guid.NewGuid().ToString(), Name ="food home" },//
-                new Category { Id = Guid.NewGuid().ToString(), Name ="food work" },//
-                new Category { Id = Guid.NewGuid().ToString(), Name ="bills" },//
-                new Category { Id = Guid.NewGuid().ToString(), Name ="car" },//
-                new Category { Id = Guid.NewGuid().ToString(), Name ="entertainment" },//
-                new Category { Id = Guid.NewGuid().ToString(), Name ="parents" },
-                new Category { Id = Guid.NewGuid().ToString(), Name ="work" },
-                new Category { Id = Guid.NewGuid().ToString(), Name ="education" },
-                new Category { Id = Guid.NewGuid().ToString(), Name ="cats" },
-                new Category { Id = Guid.NewGuid().ToString(), Name ="house equipment" },
-                new Category { Id = Guid.NewGuid().ToString(), Name ="health" },
-                new Category { Id = Guid.NewGuid().ToString(), Name ="clothes" },
-                new Category { Id = Guid.NewGuid().ToString(), Name ="travels" },
-                new Category { Id = Guid.NewGuid().ToString(), Name ="gifts" },//
-                new Category { Id = Guid.NewGuid().ToString(), Name ="country house" },
-                new Category { Id = Guid.NewGuid().ToString(), Name ="other" },
-                new Category { Id = Guid.NewGuid().ToString(), Name ="currency put off" }
+                //new Category { Id = Guid.NewGuid().ToString(), Name ="default" },
+                new Category { Id = 1, Name ="default" },
+                new Category { Id = 2, Name ="food home" },//
+                new Category { Id = 3, Name ="food work" },//
+                new Category { Id = 4, Name ="bills" },//
+                new Category { Id = 5, Name ="car" },//
+                new Category { Id = 6, Name ="entertainment" },//
+                new Category { Id = 7, Name ="parents" },
+                new Category { Id = 8, Name ="work" },
+                new Category { Id = 9, Name ="education" },
+                new Category { Id = 10, Name ="cats" },
+                new Category { Id = 11, Name ="house equipment" },
+                new Category { Id = 12, Name ="health" },
+                new Category { Id = 13, Name ="clothes" },
+                new Category { Id = 14, Name ="travels" },
+                new Category { Id = 15, Name ="gifts" },//
+                new Category { Id = 16, Name ="country house" },
+                new Category { Id = 17, Name ="other" },
+                new Category { Id = 18, Name ="currency put off" }
             };
 
         }
@@ -53,7 +54,7 @@ namespace ExpensesWriter.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteItemsAsync(string id)
+        public async Task<bool> DeleteItemsAsync(int id)
         {
             var oldExpense = categories.Where((Category arg) => arg.Id == id).FirstOrDefault();
             categories.Remove(oldExpense);
@@ -61,7 +62,7 @@ namespace ExpensesWriter.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<Category> GetItemAsync(string id)
+        public async Task<Category> GetItemAsync(int id)
         {
             return await Task.FromResult(categories.FirstOrDefault(s => s.Id == id));
         }
