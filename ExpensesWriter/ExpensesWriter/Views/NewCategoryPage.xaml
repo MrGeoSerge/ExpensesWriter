@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModel="clr-namespace:ExpensesWriter.ViewModels"
+             mc:Ignorable="d"
+             x:Class="ExpensesWriter.Views.NewCategoryPage"
+             BindingContext="{Binding viewModel:CategoryEditViewModel}">
+    <ContentPage.BindingContext>
+        <viewModel:CategoryEditViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
+        <ToolbarItem Text="Save" Command="{Binding SaveCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Spacing="20" Padding="15">
+            <Label Text="Name" FontSize="Medium" />
+            <Entry Text="{Binding Category.Name}" FontSize="Small" />
+            <Label Text="Description" FontSize="Medium" />
+            <Editor Text="{Binding Category.Description}" FontSize="Small" Margin="0" />
+            <Label Text="Color" FontSize="Medium" />
+            <Editor Text="{Binding Category.Color}" FontSize="Small" BackgroundColor="" Margin="0" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

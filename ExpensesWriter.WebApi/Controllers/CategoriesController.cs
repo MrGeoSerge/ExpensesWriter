@@ -21,8 +21,9 @@ namespace ExpensesWriter.WebApi.Controllers
         // GET: api/Categories
         public IQueryable<Category> GetCategories()
         {
-            string userId = User.Identity.GetUserId();
-            return db.Categories.Where(user => user.UserId == userId);
+            //string userId = User.Identity.GetUserId();
+            //return db.Categories.Where(user => user.UserId == userId);
+            return db.Categories;
         }
 
 

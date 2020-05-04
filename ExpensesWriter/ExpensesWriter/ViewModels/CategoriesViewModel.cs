@@ -1,4 +1,5 @@
 ﻿using ExpensesWriter.Models;
+using ExpensesWriter.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -33,6 +34,7 @@ namespace ExpensesWriter.ViewModels
             Title = "Expenses Categories";
             Categories = new ObservableCollection<Category>();
             LoadCategoriesCommand = new Command(async () => await ExecuteLoadCategoriesCommand());
+            LoadCategoriesCommand.Execute(null);
         }
 
         private async Task ExecuteLoadCategoriesCommand()
@@ -66,7 +68,8 @@ namespace ExpensesWriter.ViewModels
 
         private async Task<IEnumerable<Category>> GetCategories()
         {
-            return await CategoriesDataStore.GetItemsAsync();
+            return await new CategoriesAzureDataStore().GetItemsAsync(true);
+            //return await CategoriesDataStore.GetItemsAsync();
         }
     }
 }

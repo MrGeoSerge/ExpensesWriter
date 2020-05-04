@@ -19,8 +19,9 @@ namespace ExpensesWriter.Views
             InitializeComponent();
         }
 
-        private void AddCategoryClicked(object sender, EventArgs e)
+        private async void AddCategoryClicked(object sender, EventArgs e)
         {
+            await Navigation.PushModalAsync(new NavigationPage(new NewCategoryPage()));
 
         }
     }
