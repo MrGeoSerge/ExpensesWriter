@@ -38,7 +38,7 @@
                                 Style="{DynamicResource ListExpenseTextStyle}" 
                                 FontSize="16" />
                                 <Label Grid.Column="1"
-                                Text="{Binding Category}" 
+                                Text="{Binding BudgetItem.Name}" 
                                 d:Text="Expense descripton"
                                 LineBreakMode="NoWrap"
                                 Style="{DynamicResource ListExpenseDetailTextStyle}"

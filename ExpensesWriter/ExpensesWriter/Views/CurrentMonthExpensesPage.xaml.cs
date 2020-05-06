@@ -65,6 +65,12 @@ namespace ExpensesWriter.Views
             expense.Money = expenseMoney;
             expense.Name = expenseNameEntry.Text;
 
+
+
+            var budgetItem = viewModel.Categories.Where(x => x.Name == categoryPicker.SelectedItem?.ToString()).FirstOrDefault();
+            expense.BudgetItemId = budgetItem.Id;
+                
+                
             expense.Category = categoryPicker.SelectedItem?.ToString();
             expense.CreationDateTime = DateTime.Now;
             expense.ModificationDateTime = DateTime.Now;

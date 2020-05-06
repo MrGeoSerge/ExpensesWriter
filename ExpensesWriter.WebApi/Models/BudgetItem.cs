@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Web;
 
-namespace ExpensesWriter.Models
+namespace ExpensesWriter.WebApi.Models
 {
-    public class Category
+    public class BudgetItem
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
         public string Description { get; set; }
-
         public string Color { get; set; }
+
+        public string UserId { get; set; }
+
+        //public ICollection<Expense> Expenses { get; set; }
     }
 }

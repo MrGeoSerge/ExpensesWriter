@@ -21,7 +21,7 @@
             <Label Text="Description" FontSize="Medium" />
             <Editor Text="{Binding Category.Description}" FontSize="Small" Margin="0" />
             <Label Text="Color" FontSize="Medium" />
-            <Editor Text="{Binding Category.Color}" FontSize="Small" BackgroundColor="" Margin="0" />
+            <Editor Text="{Binding Category.Color}" FontSize="Small" Margin="0" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

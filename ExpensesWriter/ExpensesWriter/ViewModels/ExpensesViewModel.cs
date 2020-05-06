@@ -69,7 +69,7 @@ namespace ExpensesWriter.ViewModels
             LoadExpensesCommand.Execute(null);
         }
 
-        protected async Task ExecuteLoadExpensesCommand()
+        protected virtual async Task ExecuteLoadExpensesCommand()
         {
             if (IsBusy)
                 return;

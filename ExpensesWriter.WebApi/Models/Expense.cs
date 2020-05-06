@@ -16,11 +16,13 @@ namespace ExpensesWriter.WebApi.Models
         [Required]
         public string Name { get; set; }
 
-        public string Category { get; set; }
+        public string CategoryName { get; set; }
         public DateTime CreationDateTime { get; set; }
         public DateTime ModificationDateTime { get; set; }
 
         public string UserId { get; set; }
 
+        public int? BudgetItemId { get; set; }
+        public virtual BudgetItem BudgetItem { get; set; }
     }
 }

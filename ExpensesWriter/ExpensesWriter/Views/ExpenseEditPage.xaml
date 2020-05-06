@@ -7,7 +7,7 @@
              x:Class="ExpensesWriter.Views.ExpenseEditPage"
              Title="{Binding Title}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Save" Clicked="Save_Clicked"/>
+        <ToolbarItem Text="Save" Command="{Binding SaveCommand}" Clicked="Save_Clicked"/>
     </ContentPage.ToolbarItems>
 
     <StackLayout Spacing="20" Padding="15">
@@ -17,7 +17,7 @@
         <Editor Text="{Binding Expense.Name}" d:Text="Expense description" FontSize="Medium"/>
         <Label Text="Category:" FontSize="Medium" />
         <!--<Editor Text="{Binding Expense.Category}" d:Text="Expense description" FontSize="Medium"/>-->
-        <Picker x:Name="categoryPicker" ItemsSource="{Binding CategoriesString}" SelectedItem="{Binding Expense.Category}"/>
+        <Picker x:Name="categoryPicker" ItemsSource="{Binding CategoriesList}" SelectedItem="{Binding SelectedCategory}"/>
         <Label Text="Created date and time:" FontSize="Medium" />
         <Label Text="{Binding Expense.CreationDateTime}" d:Text="Expense description" FontSize="Medium"/>
         <Label Text="Modified date and time:" FontSize="Medium" />

@@ -14,7 +14,7 @@ namespace ExpensesWriter.ViewModels
     {
         public IDataStore<Expense> DataStore => DependencyService.Get<IDataStore<Expense>>() ?? new MockDataStore();
 
-        public CategoriesMockDataStore CategoriesDataStore => new CategoriesMockDataStore();
+        public CategoriesAzureDataStore CategoriesDataStore => new CategoriesAzureDataStore();
 
         bool isBusy = false;
         public bool IsBusy

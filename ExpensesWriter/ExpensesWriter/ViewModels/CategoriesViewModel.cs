@@ -12,8 +12,8 @@ namespace ExpensesWriter.ViewModels
 {
     public class CategoriesViewModel : BaseViewModel
     {
-        public ObservableCollection<Category> categories;
-        public ObservableCollection<Category> Categories
+        public ObservableCollection<BudgetItem> categories;
+        public ObservableCollection<BudgetItem> Categories
         {
             get
             {
@@ -32,7 +32,7 @@ namespace ExpensesWriter.ViewModels
         public CategoriesViewModel()
         {
             Title = "Expenses Categories";
-            Categories = new ObservableCollection<Category>();
+            Categories = new ObservableCollection<BudgetItem>();
             LoadCategoriesCommand = new Command(async () => await ExecuteLoadCategoriesCommand());
             LoadCategoriesCommand.Execute(null);
         }
@@ -66,7 +66,7 @@ namespace ExpensesWriter.ViewModels
             }
         }
 
-        private async Task<IEnumerable<Category>> GetCategories()
+        private async Task<IEnumerable<BudgetItem>> GetCategories()
         {
             return await new CategoriesAzureDataStore().GetItemsAsync(true);
             //return await CategoriesDataStore.GetItemsAsync();

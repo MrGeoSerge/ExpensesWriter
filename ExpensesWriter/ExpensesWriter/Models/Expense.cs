@@ -12,5 +12,9 @@ namespace ExpensesWriter.Models
         public DateTime ModificationDateTime { get; set; }
 
         public string UserId { get; set; }
+
+        public int? BudgetItemId { get; set; }
+        public BudgetItem BudgetItem { get; set; }
+
     }
 }

@@ -13,23 +13,26 @@ using System.Web.Http.Description;
 
 namespace ExpensesWriter.WebApi.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class CategoriesController : ApiController
     {
-        private CategoriesContext db = new CategoriesContext();
+        private ExpensesContext db = new ExpensesContext();
 
         // GET: api/Categories
-        public IQueryable<Category> GetCategories()
+        [HttpGet, Route("api/categories")]
+        public IQueryable<BudgetItem> GetCategories()
         {
             //string userId = User.Identity.GetUserId();
             //return db.Categories.Where(user => user.UserId == userId);
-            return db.Categories;
+
+            var budgetItems = db.BudgetItems;
+            return budgetItems;
         }
 
 
         // POST: api/Categories
-        [ResponseType(typeof(Category))]
-        public async Task<IHttpActionResult> PostCategory(Category category)
+        [ResponseType(typeof(BudgetItem))]
+        public async Task<IHttpActionResult> PostCategory(BudgetItem budgetItem)
         {
             if (!ModelState.IsValid)
             {
@@ -37,9 +40,9 @@ namespace ExpensesWriter.WebApi.Controllers
             }
 
             string userId = User.Identity.GetUserId();
-            category.UserId = userId;
+            budgetItem.UserId = userId;
 
-            db.Categories.Add(category);
+            db.BudgetItems.Add(budgetItem);
             await db.SaveChangesAsync();
 
             return Ok();
@@ -50,8 +53,8 @@ namespace ExpensesWriter.WebApi.Controllers
 
         // PUT: api/Categories/5
         [ResponseType(typeof(void))]
-        [HttpPut, Route("api/categories/put")]
-        public IHttpActionResult PutCategory(Category category)
+        [HttpPut, Route("api/BudgetItems/put")]
+        public IHttpActionResult PutBudgetItem(BudgetItem budgetItem)
         {
             if (!ModelState.IsValid)
             {
@@ -59,9 +62,9 @@ namespace ExpensesWriter.WebApi.Controllers
             }
 
 
-            db.Entry(category).State = EntityState.Modified;
+            db.Entry(budgetItem).State = EntityState.Modified;
             string userId = User.Identity.GetUserId();
-            category.UserId = userId;
+            budgetItem.UserId = userId;
 
             try
             {
@@ -69,7 +72,7 @@ namespace ExpensesWriter.WebApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CategoryExists(category.Id))
+                if (!BudgetItemExists(budgetItem.Id))
                 {
                     return NotFound();
                 }
@@ -83,9 +86,9 @@ namespace ExpensesWriter.WebApi.Controllers
         }
 
 
-        private bool CategoryExists(int id)
+        private bool BudgetItemExists(int id)
         {
-            return db.Categories.Count(e => e.Id == id) > 0;
+            return db.BudgetItems.Count(e => e.Id == id) > 0;
         }
 
     }

@@ -9,45 +9,45 @@ namespace ExpensesWriter.Services
 {
     public class CategoriesMockDataStore// : IDataStore<Category>
     {
-        List<Category> categories;
+        List<BudgetItem> categories;
 
         public CategoriesMockDataStore()
         {
-            categories = new List<Category>
+            categories = new List<BudgetItem>
             {
                 //new Category { Id = Guid.NewGuid().ToString(), Name ="default" },
-                new Category { Id = 1, Name ="default" },
-                new Category { Id = 2, Name ="food home" },//
-                new Category { Id = 3, Name ="food work" },//
-                new Category { Id = 4, Name ="bills" },//
-                new Category { Id = 5, Name ="car" },//
-                new Category { Id = 6, Name ="entertainment" },//
-                new Category { Id = 7, Name ="parents" },
-                new Category { Id = 8, Name ="work" },
-                new Category { Id = 9, Name ="education" },
-                new Category { Id = 10, Name ="cats" },
-                new Category { Id = 11, Name ="house equipment" },
-                new Category { Id = 12, Name ="health" },
-                new Category { Id = 13, Name ="clothes" },
-                new Category { Id = 14, Name ="travels" },
-                new Category { Id = 15, Name ="gifts" },//
-                new Category { Id = 16, Name ="country house" },
-                new Category { Id = 17, Name ="other" },
-                new Category { Id = 18, Name ="currency put off" }
+                new BudgetItem { Id = 1, Name ="default" },
+                new BudgetItem { Id = 2, Name ="food home" },//
+                new BudgetItem { Id = 3, Name ="food work" },//
+                new BudgetItem { Id = 4, Name ="bills" },//
+                new BudgetItem { Id = 5, Name ="car" },//
+                new BudgetItem { Id = 6, Name ="entertainment" },//
+                new BudgetItem { Id = 7, Name ="parents" },
+                new BudgetItem { Id = 8, Name ="work" },
+                new BudgetItem { Id = 9, Name ="education" },
+                new BudgetItem { Id = 10, Name ="cats" },
+                new BudgetItem { Id = 11, Name ="house equipment" },
+                new BudgetItem { Id = 12, Name ="health" },
+                new BudgetItem { Id = 13, Name ="clothes" },
+                new BudgetItem { Id = 14, Name ="travels" },
+                new BudgetItem { Id = 15, Name ="gifts" },//
+                new BudgetItem { Id = 16, Name ="country house" },
+                new BudgetItem { Id = 17, Name ="other" },
+                new BudgetItem { Id = 18, Name ="currency put off" }
             };
 
         }
 
-        public async Task<bool> AddItemAsync(Category category)
+        public async Task<bool> AddItemAsync(BudgetItem category)
         {
             categories.Add(category);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> UpdateItemAsync(Category category)
+        public async Task<bool> UpdateItemAsync(BudgetItem category)
         {
-            var oldExpense = categories.Where((Category arg) => arg.Id == category.Id).FirstOrDefault();
+            var oldExpense = categories.Where((BudgetItem arg) => arg.Id == category.Id).FirstOrDefault();
             categories.Remove(oldExpense);
             categories.Add(category);
 
@@ -56,38 +56,38 @@ namespace ExpensesWriter.Services
 
         public async Task<bool> DeleteItemsAsync(int id)
         {
-            var oldExpense = categories.Where((Category arg) => arg.Id == id).FirstOrDefault();
+            var oldExpense = categories.Where((BudgetItem arg) => arg.Id == id).FirstOrDefault();
             categories.Remove(oldExpense);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<Category> GetItemAsync(int id)
+        public async Task<BudgetItem> GetItemAsync(int id)
         {
             return await Task.FromResult(categories.FirstOrDefault(s => s.Id == id));
         }
 
-        public async Task<IEnumerable<Category>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<BudgetItem>> GetItemsAsync(bool forceRefresh = false)
         {
             return await Task.FromResult(categories);
         }
 
-        public Task<IEnumerable<Category>> GetCurrentMonthItemsAsync(bool forceRefresh = false)
+        public Task<IEnumerable<BudgetItem>> GetCurrentMonthItemsAsync(bool forceRefresh = false)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Category>> GetLastMonthItemsAsync(bool forceRefresh = false)
+        public Task<IEnumerable<BudgetItem>> GetLastMonthItemsAsync(bool forceRefresh = false)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Category>> GetFamilyCurrentMonthItemsAsync(bool forceRefresh = false)
+        public Task<IEnumerable<BudgetItem>> GetFamilyCurrentMonthItemsAsync(bool forceRefresh = false)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Category>> GetFamilyLastMonthItemsAsync(bool forceRefresh = false)
+        public Task<IEnumerable<BudgetItem>> GetFamilyLastMonthItemsAsync(bool forceRefresh = false)
         {
             throw new NotImplementedException();
         }

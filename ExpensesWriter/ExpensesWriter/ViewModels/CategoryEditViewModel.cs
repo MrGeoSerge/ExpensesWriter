@@ -10,7 +10,7 @@ namespace ExpensesWriter.ViewModels
 {
     public class CategoryEditViewModel : BaseViewModel
     {
-        public Category Category { get; set; }
+        public BudgetItem Category { get; set; }
 
 
 
@@ -27,7 +27,7 @@ namespace ExpensesWriter.ViewModels
                 });
             }
         }
-        public CategoryEditViewModel(Category category = null)
+        public CategoryEditViewModel(BudgetItem category = null)
         {
             Title = category?.Name;
             Category = category;
@@ -35,7 +35,7 @@ namespace ExpensesWriter.ViewModels
 
         public CategoryEditViewModel():this(null)
         {
-            Category = new Category();
+            Category = new BudgetItem();
         }
     }
 }

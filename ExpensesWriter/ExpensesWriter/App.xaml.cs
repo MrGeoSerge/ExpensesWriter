@@ -9,6 +9,8 @@ using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Microsoft.AppCenter.Push;
 using ExpensesWriter.Helpers;
+using System.Collections.ObjectModel;
+using ExpensesWriter.Models;
 
 namespace ExpensesWriter
 {
@@ -24,6 +26,9 @@ namespace ExpensesWriter
         public static bool UseLocalDataStore = false;
 
         public static string AppleDeviceToken = string.Empty;
+
+        public static ObservableCollection<BudgetItem> BudgetItems = new ObservableCollection<BudgetItem>();
+        public static ObservableCollection<string> CategoriesList = new ObservableCollection<string>();
 
         public App()
         {

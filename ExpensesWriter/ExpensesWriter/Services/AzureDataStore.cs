@@ -9,6 +9,7 @@ using ExpensesWriter.Models;
 using System.Net.Http.Headers;
 using ExpensesWriter.Helpers;
 using Xamarin.Forms;
+using System.Diagnostics;
 
 namespace ExpensesWriter.Services
 {
@@ -22,7 +23,7 @@ namespace ExpensesWriter.Services
             client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Settings.AccessToken);
 
-            client.BaseAddress = new Uri($"{App.AzureBackendUrl}/");
+            client.BaseAddress = new Uri($"{App.AzureBackendUrl}");
 
             expenses = new List<Expense>();
         }
@@ -45,7 +46,7 @@ namespace ExpensesWriter.Services
             {
                 if (forceRefresh && IsConnected)
                 {
-                    var json = await client.GetStringAsync($"api/Curmonthexpenses");
+                    var json = await client.GetStringAsync($"api/CurMonthExpenses");
                     expenses = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Expense>>(json));
                 }
 
@@ -154,15 +155,23 @@ namespace ExpensesWriter.Services
 
         public async Task<bool> UpdateItemAsync(Expense expense)
         {
-            if (expense == null || expense.Id == null || !IsConnected)
-                return false;
+            try
+            {
+                if (expense == null || expense.Id == null || !IsConnected)
+                    return false;
 
-            expense.ModificationDateTime = DateTime.UtcNow;
+                expense.ModificationDateTime = DateTime.UtcNow;
 
-            var serializedExpense = JsonConvert.SerializeObject(expense);
-            var response = await client.PutAsync($"api/expenses/put", new StringContent(serializedExpense, Encoding.UTF8, "application/json"));
+                var serializedExpense = JsonConvert.SerializeObject(expense);
+                var response = await client.PutAsync($"api/expenses/put", new StringContent(serializedExpense, Encoding.UTF8, "application/json"));
 
-            return response.IsSuccessStatusCode;
+                return response.IsSuccessStatusCode;
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex);
+                throw;
+            }
         }
 
         public async Task<bool> DeleteItemsAsync(string id)

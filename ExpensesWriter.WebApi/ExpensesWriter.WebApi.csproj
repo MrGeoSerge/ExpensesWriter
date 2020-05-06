@@ -281,8 +281,24 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\DeviceController.cs" />
-    <Compile Include="Models\CategoriesContext.cs" />
-    <Compile Include="Models\Category.cs" />
+    <Compile Include="Migrations\202001091038476_InitialCreate.cs" />
+    <Compile Include="Migrations\202001091038476_InitialCreate.designer.cs">
+      <DependentUpon>202001091038476_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005051037273_BudgetItems_added.cs" />
+    <Compile Include="Migrations\202005051037273_BudgetItems_added.designer.cs">
+      <DependentUpon>202005051037273_BudgetItems_added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005051134435_BudgetItem_Id_added.cs" />
+    <Compile Include="Migrations\202005051134435_BudgetItem_Id_added.designer.cs">
+      <DependentUpon>202005051134435_BudgetItem_Id_added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005051208080_BudgetItem.cs" />
+    <Compile Include="Migrations\202005051208080_BudgetItem.designer.cs">
+      <DependentUpon>202005051208080_BudgetItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\BudgetItem.cs" />
     <Compile Include="Models\DeviceData.cs" />
     <Compile Include="Controllers\ExpensesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -483,6 +499,20 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202001091038476_InitialCreate.resx">
+      <DependentUpon>202001091038476_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005051037273_BudgetItems_added.resx">
+      <DependentUpon>202005051037273_BudgetItems_added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005051134435_BudgetItem_Id_added.resx">
+      <DependentUpon>202005051134435_BudgetItem_Id_added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005051208080_BudgetItem.resx">
+      <DependentUpon>202005051208080_BudgetItem.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

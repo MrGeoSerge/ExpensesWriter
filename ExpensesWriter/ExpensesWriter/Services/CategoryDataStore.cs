@@ -10,7 +10,7 @@ namespace ExpensesWriter.Services
 {
     public class CategoriesDataStore// : IDataStore<Category>
     {
-        IEnumerable<Category> expenses;
+        IEnumerable<BudgetItem> expenses;
         readonly SQLiteAsyncConnection database;
 
         public CategoriesDataStore()
@@ -18,22 +18,22 @@ namespace ExpensesWriter.Services
             string path = Path.Combine(Environment.GetFolderPath(
                 Environment.SpecialFolder.LocalApplicationData), "ExpensesSQLite.db3");
             database = new SQLiteAsyncConnection(path);
-            database.CreateTableAsync<Category>().Wait();
+            database.CreateTableAsync<BudgetItem>().Wait();
         }
 
-        public async Task<IEnumerable<Category>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<BudgetItem>> GetItemsAsync(bool forceRefresh = false)
         {
-            return await database.Table<Category>().ToListAsync();
+            return await database.Table<BudgetItem>().ToListAsync();
         }
 
 
-        public async Task<Category> GetItemAsync(int id)
+        public async Task<BudgetItem> GetItemAsync(int id)
         {
-            return await database.Table<Category>()
+            return await database.Table<BudgetItem>()
                 .FirstOrDefaultAsync(s => s.Id == id);
         }
 
-        public async Task<bool> AddItemAsync(Category category)
+        public async Task<bool> AddItemAsync(BudgetItem category)
         {
             await database.InsertAsync(category);
             return await Task.FromResult(true);
@@ -41,32 +41,32 @@ namespace ExpensesWriter.Services
 
         public async Task<bool> DeleteItemsAsync(string id)
         {
-            await database.DeleteAsync<Category>(id);
+            await database.DeleteAsync<BudgetItem>(id);
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> UpdateItemAsync(Category category)
+        public async Task<bool> UpdateItemAsync(BudgetItem category)
         {
             await database.UpdateAsync(category);
             return await Task.FromResult(true);
         }
 
-        public Task<IEnumerable<Category>> GetCurrentMonthItemsAsync(bool forceRefresh = false)
+        public Task<IEnumerable<BudgetItem>> GetCurrentMonthItemsAsync(bool forceRefresh = false)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Category>> GetLastMonthItemsAsync(bool forceRefresh = false)
+        public Task<IEnumerable<BudgetItem>> GetLastMonthItemsAsync(bool forceRefresh = false)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Category>> GetFamilyCurrentMonthItemsAsync(bool forceRefresh = false)
+        public Task<IEnumerable<BudgetItem>> GetFamilyCurrentMonthItemsAsync(bool forceRefresh = false)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Category>> GetFamilyLastMonthItemsAsync(bool forceRefresh = false)
+        public Task<IEnumerable<BudgetItem>> GetFamilyLastMonthItemsAsync(bool forceRefresh = false)
         {
             throw new NotImplementedException();
         }

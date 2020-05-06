@@ -24,59 +24,63 @@ namespace ExpensesWriter.WebApi.Controllers
         private ExpensesContext db = new ExpensesContext();
 
         // GET: api/Expenses
-        public IQueryable<Expense> GetExpenses()
+        public IEnumerable<Expense> GetExpenses()
         {
             string userId = User.Identity.GetUserId();
-            return db.Expenses.Where(user => user.UserId == userId);
+            return db.Expenses.Where(user => user.UserId == userId).ToList();
 
             //return db.Expenses;
         }
 
         // GET: api/CurMonthExpenses
         [Route("api/CurMonthExpenses")]
-        public IQueryable<Expense> GetCurMonthExpenses()
+        public IEnumerable<Expense> GetCurMonthExpenses()
         {
             string userId = User.Identity.GetUserId();
-            return db.Expenses.Where((user => user.UserId == userId && user.CreationDateTime.Month == DateTime.Today.Month));
+            
 
+            var expenses = db.Expenses.Where(expense => expense.UserId == userId && expense.CreationDateTime.Month == DateTime.Today.Month);
+
+            var list = expenses.ToList();
+            return list;
         }
 
         // GET: api/LastMonthExpenses
         [Route("api/LastMonthExpenses")]
-        public IQueryable<Expense> GetLastMonthExpenses()
+        public IEnumerable<Expense> GetLastMonthExpenses()
         {
             string userId = User.Identity.GetUserId();
-            return db.Expenses.Where((user => user.UserId == userId && user.CreationDateTime.Month == DateTime.Today.Month - 1));
+            return db.Expenses.Where((user => user.UserId == userId && user.CreationDateTime.Month == DateTime.Today.Month - 1)).ToList();
 
         }
 
         // GET: api/FamilyCurrentMonthExpenses
         [Route("api/FamilyCurrentMonthExpenses")]
-        public IQueryable<Expense> GetFamilyCurrentMonthExpenses()
+        public IEnumerable<Expense> GetFamilyCurrentMonthExpenses()
         {
             //string userId = User.Identity.GetUserId();
-            return db.Expenses.Where(user => user.CreationDateTime.Month == DateTime.Today.Month);
+            return db.Expenses.Where(user => user.CreationDateTime.Month == DateTime.Today.Month).ToList();
         }
 
         // GET: api/FamilyLastMonthExpenses
         [Route("api/FamilyLastMonthExpenses")]
-        public IQueryable<Expense> GetFamilyLastMonthExpenses()
+        public IEnumerable<Expense> GetFamilyLastMonthExpenses()
         {
             //string userId = User.Identity.GetUserId();
-            return db.Expenses.Where(user => user.CreationDateTime.Month == DateTime.Today.Month - 1);
+            return db.Expenses.Where(user => user.CreationDateTime.Month == DateTime.Today.Month - 1).ToList();
         }
 
         [Route("api/ExpensesForCurrentUser")]
-        public IQueryable<Expense> GetExpensesForCurrentUser()
+        public IEnumerable<Expense> GetExpensesForCurrentUser()
         {
             string userId = User.Identity.GetUserId();
 
-            return db.Expenses.Where(Expense => Expense.UserId == userId);
+            return db.Expenses.Where(Expense => Expense.UserId == userId).ToList();
         }
 
         // GET: api/Expenses/5
         [ResponseType(typeof(Expense))]
-        public IHttpActionResult GetExpense(int id)
+        public IHttpActionResult GetExpense(string id)
         {
             Expense Expense = db.Expenses.Find(id);
             if (Expense == null)
@@ -180,20 +184,20 @@ namespace ExpensesWriter.WebApi.Controllers
             //        .Error(ex.Message, null, "Push.SendAsync Error");
             //}
 
-            NotificationsSender notificationsSender = new NotificationsSender();
+            //NotificationsSender notificationsSender = new NotificationsSender();
 
-            var user_Id = HttpContext.Current.User.Identity.GetUserId();
-            //var result = await notificationsSender.SendNotification("fcm", $"Expense {expense.Name} on {expense.Money.ToString()} was added", user_Id);
+            //var user_Id = HttpContext.Current.User.Identity.GetUserId();
+            ////var result = await notificationsSender.SendNotification("fcm", $"Expense {expense.Name} on {expense.Money.ToString()} was added", user_Id);
 
-            NotificationService notificationService = new NotificationService();
+            //NotificationService notificationService = new NotificationService();
 
-            var devices = new DevicesContext().Devices.ToList();
+            //var devices = new DevicesContext().Devices.ToList();
 
-            var neededAndroidDevice = devices.Where((x, y) => x.UserId == user_Id && x.Platform == "Android").FirstOrDefault();
-            notificationService.SendAndroidNotification(neededAndroidDevice.DeviceToken, $"Expense {expense.Name} on {expense.Money.ToString()} was added");
+            //var neededAndroidDevice = devices.Where((x, y) => x.UserId == user_Id && x.Platform == "Android").FirstOrDefault();
+            //notificationService.SendAndroidNotification(neededAndroidDevice.DeviceToken, $"Expense {expense.Name} on {expense.Money.ToString()} was added");
 
-            var neededAppleDevice = devices.Where((x, y) => x.UserId == userId && x.Platform == "iOS").FirstOrDefault();
-            notificationService.SendAppleNotification(neededAppleDevice.DeviceToken, $"Expense {expense.Name} on {expense.Money.ToString()} was added");
+            //var neededAppleDevice = devices.Where((x, y) => x.UserId == userId && x.Platform == "iOS").FirstOrDefault();
+            //notificationService.SendAppleNotification(neededAppleDevice.DeviceToken, $"Expense {expense.Name} on {expense.Money.ToString()} was added");
 
             return CreatedAtRoute("DefaultApi", new { id = expense.Id }, expense);
         }

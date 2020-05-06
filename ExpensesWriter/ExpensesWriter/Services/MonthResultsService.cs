@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,47 +19,77 @@ namespace ExpensesWriter.Services
         {
             var expenses = await DataStore.GetCurrentMonthItemsAsync(true);
 
-            return await GetCategorizedMonthResults(expenses);
+            SetDefaultBudgetItemToExpenseWithNullBudgetItem(ref expenses);
+
+            return GetCategorizedMonthResults(expenses);
         }
 
         public async Task<ObservableCollection<CategoryExpense>> GetFamilyCurrentMonthResults()
         {
             var expenses = await DataStore.GetFamilyCurrentMonthItemsAsync(true);
 
-            return await GetCategorizedMonthResults(expenses);
+            SetDefaultBudgetItemToExpenseWithNullBudgetItem(ref expenses);
+
+            return GetCategorizedMonthResults(expenses);
         }
 
         public async Task<ObservableCollection<CategoryExpense>> GetFamilyLastMonthResults()
         {
             var expenses = await DataStore.GetFamilyLastMonthItemsAsync(true);
 
-            return await GetCategorizedMonthResults(expenses);
+            SetDefaultBudgetItemToExpenseWithNullBudgetItem(ref expenses);
+
+            return GetCategorizedMonthResults(expenses);
         }
 
         public async Task<ObservableCollection<CategoryExpense>> GetLastMonthResults()
         {
             var expenses = await DataStore.GetLastMonthItemsAsync(true);
 
-            return await GetCategorizedMonthResults(expenses);
+            SetDefaultBudgetItemToExpenseWithNullBudgetItem(ref expenses);
+
+            return GetCategorizedMonthResults(expenses);
         }
 
-        protected async Task<ObservableCollection<CategoryExpense>> GetCategorizedMonthResults(IEnumerable<Expense> expenses)
+        protected ObservableCollection<CategoryExpense> GetCategorizedMonthResults(IEnumerable<Expense> expenses)
         {
-            var categories = await CategoriesDataStore.GetItemsAsync(true);
 
-            List<string> categoryStrings = categories.Select(category => category.Name).ToList();
+            //var categories = await CategoriesDataStore.GetItemsAsync(true);
+            var categories = App.CategoriesList;
 
-            ObservableCollection<CategoryExpense> categoryExpenses = new ObservableCollection<CategoryExpense>();
+            //List<string> categoryStrings = categories.Select(category => category.Name).ToList();
 
-            foreach(var category in categoryStrings)
+            try
             {
-                var sum = expenses.Where(expense => expense.Category == category).Sum(expense => expense.Money);
+                ObservableCollection<CategoryExpense> categoryExpenses = new ObservableCollection<CategoryExpense>();
 
-                CategoryExpense categoryExpense = new CategoryExpense { Category = category, Money = sum };
-                categoryExpenses.Add(categoryExpense);
+                foreach(var category in categories)
+                {
+
+                    var sum = expenses.Where(expense => expense.BudgetItem.Name == category).Sum(expense => expense.Money);
+
+                    CategoryExpense categoryExpense = new CategoryExpense { Category = category, Money = sum };
+                    categoryExpenses.Add(categoryExpense);
+                }
+                return categoryExpenses;
             }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex);
+                throw;
+            }
+        }
 
-            return categoryExpenses;
+        private void SetDefaultBudgetItemToExpenseWithNullBudgetItem(ref IEnumerable<Expense> expenses)
+        {
+            foreach(var expense in expenses)
+            {
+                if(expense.BudgetItem == null)
+                {
+                    expense.BudgetItem = new BudgetItem { Id = 1, Name = "default" };
+                    expense.BudgetItemId = 1;
+                }
+            }
         }
     }
 }

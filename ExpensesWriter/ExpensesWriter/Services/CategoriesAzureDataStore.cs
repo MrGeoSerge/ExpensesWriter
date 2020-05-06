@@ -15,31 +15,31 @@ namespace ExpensesWriter.Services
     public class CategoriesAzureDataStore
     {
         HttpClient client;
-        IEnumerable<Category> categories;
+        IEnumerable<BudgetItem> categories;
 
         public CategoriesAzureDataStore()
         {
             client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Settings.AccessToken);
+            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Settings.AccessToken);
 
-            client.BaseAddress = new Uri($"{App.AzureBackendUrl}/");
+            client.BaseAddress = new Uri($"{App.AzureBackendUrl}");
 
-            categories = new List<Category>();
+            categories = new List<BudgetItem>();
         }
 
         bool IsConnected => Connectivity.NetworkAccess == NetworkAccess.Internet;
-        public async Task<IEnumerable<Category>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<BudgetItem>> GetItemsAsync(bool forceRefresh = false)
         {
             if (forceRefresh && IsConnected)
             {
-                var json = await client.GetStringAsync($"api/categories");
-                categories = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Category>>(json));
+                var json = await client.GetStringAsync($"api/categories").ConfigureAwait(false);
+                categories = JsonConvert.DeserializeObject<IEnumerable<BudgetItem>>(json);
             }
 
             return categories;
         }
 
-        public async Task<bool> AddItemAsync(Category category)
+        public async Task<bool> AddItemAsync(BudgetItem category)
         {
             if (category == null || !IsConnected)
                 return false;

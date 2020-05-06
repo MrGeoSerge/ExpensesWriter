@@ -17,10 +17,11 @@ namespace ExpensesWriter.WebApi.Models
 
         public ExpensesContext() : base("name=ExpensesWriterDB")
         {
+            //Configuration.ProxyCreationEnabled = false;
         }
 
         public DbSet<Expense> Expenses { get; set; }
 
-
+        public DbSet<BudgetItem> BudgetItems { get; set; }
     }
 }
