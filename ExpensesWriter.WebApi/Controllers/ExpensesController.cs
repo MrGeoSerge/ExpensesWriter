@@ -39,7 +39,7 @@ namespace ExpensesWriter.WebApi.Controllers
             string userId = User.Identity.GetUserId();
             
 
-            var expenses = db.Expenses.Where(expense => expense.UserId == userId && expense.CreationDateTime.Month == DateTime.Today.Month);
+            var expenses = db.Expenses.Where(expense => expense.UserId == userId && expense.CreationDateTime.Year == DateTime.Today.Year && expense.CreationDateTime.Month == DateTime.Today.Month);
 
             var list = expenses.ToList();
             return list;
@@ -50,7 +50,7 @@ namespace ExpensesWriter.WebApi.Controllers
         public IEnumerable<Expense> GetLastMonthExpenses()
         {
             string userId = User.Identity.GetUserId();
-            return db.Expenses.Where((user => user.UserId == userId && user.CreationDateTime.Month == DateTime.Today.Month - 1)).ToList();
+            return db.Expenses.Where((expense => expense.UserId == userId && expense.CreationDateTime.Year == DateTime.Today.Year && expense.CreationDateTime.Month == DateTime.Today.Month - 1)).ToList();
 
         }
 
@@ -59,7 +59,7 @@ namespace ExpensesWriter.WebApi.Controllers
         public IEnumerable<Expense> GetFamilyCurrentMonthExpenses()
         {
             //string userId = User.Identity.GetUserId();
-            return db.Expenses.Where(user => user.CreationDateTime.Month == DateTime.Today.Month).ToList();
+            return db.Expenses.Where(expense => expense.CreationDateTime.Year == DateTime.Today.Year && expense.CreationDateTime.Month == DateTime.Today.Month).ToList();
         }
 
         // GET: api/FamilyLastMonthExpenses
@@ -67,7 +67,7 @@ namespace ExpensesWriter.WebApi.Controllers
         public IEnumerable<Expense> GetFamilyLastMonthExpenses()
         {
             //string userId = User.Identity.GetUserId();
-            return db.Expenses.Where(user => user.CreationDateTime.Month == DateTime.Today.Month - 1).ToList();
+            return db.Expenses.Where(expense => expense.CreationDateTime.Year == DateTime.Today.Year && expense.CreationDateTime.Month == DateTime.Today.Month - 1).ToList();
         }
 
         [Route("api/ExpensesForCurrentUser")]
@@ -75,7 +75,7 @@ namespace ExpensesWriter.WebApi.Controllers
         {
             string userId = User.Identity.GetUserId();
 
-            return db.Expenses.Where(Expense => Expense.UserId == userId).ToList();
+            return db.Expenses.Where(expense => expense.UserId == userId).ToList();
         }
 
         // GET: api/Expenses/5

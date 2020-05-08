@@ -279,6 +279,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BudgetPlanningController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\DeviceController.cs" />
     <Compile Include="Migrations\202001091038476_InitialCreate.cs" />
@@ -297,8 +298,13 @@
     <Compile Include="Migrations\202005051208080_BudgetItem.designer.cs">
       <DependentUpon>202005051208080_BudgetItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005071755489_BudgetPlannin.cs" />
+    <Compile Include="Migrations\202005071755489_BudgetPlannin.designer.cs">
+      <DependentUpon>202005071755489_BudgetPlannin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BudgetItem.cs" />
+    <Compile Include="Models\BudgetPlanningItem.cs" />
     <Compile Include="Models\DeviceData.cs" />
     <Compile Include="Controllers\ExpensesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -512,6 +518,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005051208080_BudgetItem.resx">
       <DependentUpon>202005051208080_BudgetItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005071755489_BudgetPlannin.resx">
+      <DependentUpon>202005071755489_BudgetPlannin.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

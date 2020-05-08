@@ -23,5 +23,6 @@ namespace ExpensesWriter.WebApi.Models
         public DbSet<Expense> Expenses { get; set; }
 
         public DbSet<BudgetItem> BudgetItems { get; set; }
+        public DbSet<BudgetPlanningItem> BudgetPlanningItems { get; set; }
     }
 }
