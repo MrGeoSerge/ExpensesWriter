@@ -3,14 +3,57 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converter="clr-namespace:ExpensesWriter.Converters"
              mc:Ignorable="d"
              x:Class="ExpensesWriter.Views.ContentViews.MonthResultsView">
-  <ContentView.Content>
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converter:PercentToColorConverter x:Key="perToColor"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
         <StackLayout>
             <StackLayout Orientation="Horizontal">
-                <Label Text="Total"/>
+                <Label Text="Total Planned"/>
+                <Label Text="{Binding TotalPlannedMoney}"/>
+                <Label Text="Total Fact"/>
                 <Label Text="{Binding TotalMoney}"/>
+                <Label Text="Percent"/>
+                <Label Text="{Binding PercentOfExecution}"/>
             </StackLayout>
+
+            <Grid Padding="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Label Text="Category" 
+                        d:Text="{Binding .}"
+                        LineBreakMode="NoWrap" 
+                        Style="{DynamicResource ListExpenseTextStyle}" 
+                        FontSize="16" />
+                <Label Grid.Column="1"
+                        Text="Plan" 
+                        d:Text="Planned Money"
+                        LineBreakMode="NoWrap"
+                        Style="{DynamicResource ListExpenseDetailTextStyle}"
+                        FontSize="13" HorizontalTextAlignment="End"/>
+                <Label Grid.Column="2"
+                        Text="Fact" 
+                        d:Text="Expense descripton"
+                        LineBreakMode="NoWrap"
+                        Style="{DynamicResource ListExpenseDetailTextStyle}"
+                        FontSize="13" HorizontalTextAlignment="End"/>
+                <Label Grid.Column="3"
+                        Text="Percent" 
+                        d:Text="Expense descripton"
+                        LineBreakMode="NoWrap"
+                        Style="{DynamicResource ListExpenseDetailTextStyle}"
+                        FontSize="13" HorizontalTextAlignment="End"/>
+            </Grid>
+
             <ListView x:Name="MonthResultsListView"
                 ItemsSource="{Binding CategoryExpenses}"
                 VerticalOptions="FillAndExpand"
@@ -23,22 +66,36 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid Padding="10">
+                            <Grid Padding="10" BackgroundColor="{Binding PercentOfExecution, Converter={StaticResource perToColor}}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="3*"/>
                                     <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Text="{Binding Category}" 
+                                <Label Text="{Binding Category}"
                                 d:Text="{Binding .}"
                                 LineBreakMode="NoWrap" 
                                 Style="{DynamicResource ListExpenseTextStyle}" 
-                                FontSize="16" />
+                                FontSize="16"/>
                                 <Label Grid.Column="1"
+                                Text="{Binding PlannedMoney}" 
+                                d:Text="Planned Money"
+                                LineBreakMode="NoWrap"
+                                Style="{DynamicResource ListExpenseDetailTextStyle}"
+                                FontSize="13"  HorizontalTextAlignment="End"/>
+                                <Label Grid.Column="2"
                                 Text="{Binding Money}" 
                                 d:Text="Expense descripton"
                                 LineBreakMode="NoWrap"
                                 Style="{DynamicResource ListExpenseDetailTextStyle}"
-                                FontSize="13" />
+                                FontSize="13"  HorizontalTextAlignment="End"/>
+                                <Label Grid.Column="3"
+                                Text="{Binding PercentOfExecution}" 
+                                d:Text="Expense descripton"
+                                LineBreakMode="NoWrap"
+                                Style="{DynamicResource ListExpenseDetailTextStyle}"
+                                FontSize="13"  HorizontalTextAlignment="End"/>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

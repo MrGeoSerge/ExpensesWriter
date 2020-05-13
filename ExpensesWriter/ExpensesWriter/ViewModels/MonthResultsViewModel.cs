@@ -41,6 +41,35 @@ namespace ExpensesWriter.ViewModels
             }
         }
 
+        private double totalPlannedMoney;
+        public double TotalPlannedMoney
+        {
+            get
+            {
+                return totalPlannedMoney;
+            }
+            set
+            {
+                totalPlannedMoney = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private double percentOfExecution;
+        public double PercentOfExecution
+        {
+            get
+            {
+                return percentOfExecution;
+            }
+            set
+            {
+                percentOfExecution = value;
+                OnPropertyChanged();
+            }
+        }
+
+
 
         public Command LoadMonthResultsCommand { get; set; }
 
@@ -62,6 +91,8 @@ namespace ExpensesWriter.ViewModels
             {
                 CategoryExpenses = await GetCategoryExpenses();
                 TotalMoney = CategoryExpenses.Sum(expense => expense.Money);
+                TotalPlannedMoney = CategoryExpenses.Sum(expense => expense.PlannedMoney);
+                PercentOfExecution = (int)(TotalMoney / TotalPlannedMoney * 100);
             }
             catch (Exception ex)
             {

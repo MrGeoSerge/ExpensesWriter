@@ -21,7 +21,23 @@ namespace ExpensesWriter.Services
 
             SetDefaultBudgetItemToExpenseWithNullBudgetItem(ref expenses);
 
-            return GetCategorizedMonthResults(expenses);
+
+            var categories = GetCategorizedMonthResults(expenses);
+
+            await ApplyBudgetPlanning(categories);
+
+            return categories;
+        }
+
+        private async Task ApplyBudgetPlanning(IEnumerable<CategoryExpense> categories)
+        {
+            var planningItems = await new BudgetPlanningItemsAzureDataStore().GetCurrentMonthItemsAsync(true);
+
+            foreach(var category in categories)
+            {
+                category.PlannedMoney = planningItems.Where(x => x.BudgetItem.Name == category.Category).Select(x => x.Money).FirstOrDefault();
+                category.PercentOfExecution = (int)(category.Money / category.PlannedMoney * 100);
+            }
         }
 
         public async Task<ObservableCollection<CategoryExpense>> GetFamilyCurrentMonthResults()

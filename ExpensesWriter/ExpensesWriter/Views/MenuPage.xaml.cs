@@ -22,6 +22,7 @@ namespace ExpensesWriter.Views
             {
                 new HomeMenuItem { Id = MenuItemType.ExpenseWriter, Title = "Expense Writer" },
                 new HomeMenuItem { Id = MenuItemType.MonthResults, Title = "Month Results" },
+                new HomeMenuItem { Id = MenuItemType.MonthPlanning, Title = "Month Planning" },
                 new HomeMenuItem { Id = MenuItemType.LastMonthExpenses, Title = "Last Month Expenses" },
                 new HomeMenuItem { Id = MenuItemType.LastMonthResults, Title = "Last Month Results"},
                 new HomeMenuItem { Id = MenuItemType.FamilyCurrentMonthExpenses, Title = "Family Current Month Expenses" },

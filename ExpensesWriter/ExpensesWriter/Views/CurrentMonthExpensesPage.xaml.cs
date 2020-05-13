@@ -71,7 +71,7 @@ namespace ExpensesWriter.Views
             expense.BudgetItemId = budgetItem.Id;
                 
                 
-            expense.Category = categoryPicker.SelectedItem?.ToString();
+            //expense.Category = categoryPicker.SelectedItem?.ToString();
             expense.CreationDateTime = DateTime.Now;
             expense.ModificationDateTime = DateTime.Now;
             expense.Id = Guid.NewGuid().ToString();

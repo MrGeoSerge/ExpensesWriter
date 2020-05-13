@@ -10,6 +10,7 @@ using System.Net.Http.Headers;
 using ExpensesWriter.Helpers;
 using Xamarin.Forms;
 using System.Diagnostics;
+using ExpensesWriter.Views;
 
 namespace ExpensesWriter.Services
 {
@@ -52,14 +53,32 @@ namespace ExpensesWriter.Services
 
                 return expenses;
             }
+            catch(HttpRequestException ex)
+            {
+                if (ex.Message.Contains("401"))
+                {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        Application.Current.MainPage.DisplayAlert("Authorization Error", "Authorization failed. Please login into application", "Got it");
+                        Application.Current.MainPage = new NavigationPage(new LoginPage());
+                    });
+                }
+                else
+                {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        Application.Current.MainPage.DisplayAlert("GetCurrentMonthItemsAsyncError", ex.ToString(), "Got it");
+                    });
+                }
+            }
             catch(Exception ex)
             {
                 Device.BeginInvokeOnMainThread(() =>
                 {
                     Application.Current.MainPage.DisplayAlert("GetCurrentMonthItemsAsyncError", ex.ToString(), "Got it");
                 });
-                return null;
             }
+                return null;
         }
 
         public async Task<IEnumerable<Expense>> GetLastMonthItemsAsync(bool forceRefresh = false)

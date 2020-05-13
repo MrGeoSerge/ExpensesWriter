@@ -34,14 +34,28 @@ namespace ExpensesWriter.WebApi.Controllers
         }
 
         [HttpPut, Route("api/UpdatePlanningItem")]
-        public void UpdatePlanningItemExpense(BudgetPlanningItem budgetPlanningItem)
+        public async Task UpdatePlanningItemExpense(BudgetPlanningItem budgetPlanningItem)
+        {
+            await UpdateItemAsync(budgetPlanningItem);
+        }
+
+        [HttpPut, Route("api/UpdateMonthPlanningItems")]
+        public async Task UpdateMonthPlanningItemsAsync(List<BudgetPlanningItem> budgetPlanningItems)
+        {
+            foreach(var item in budgetPlanningItems)
+            {
+                await UpdateItemAsync(item);
+            }
+        }
+
+        private async Task UpdateItemAsync(BudgetPlanningItem budgetPlanningItem)
         {
             var item = db.BudgetPlanningItems.Find(budgetPlanningItem.Id);
 
             if(item != null)
             {
                 db.BudgetPlanningItems.AddOrUpdate(budgetPlanningItem);
-                db.SaveChangesAsync();
+                await db.SaveChangesAsync();
             }
         }
 

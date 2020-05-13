@@ -20,7 +20,7 @@ namespace ExpensesWriter.Services
         public CategoriesAzureDataStore()
         {
             client = new HttpClient();
-            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Settings.AccessToken);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Settings.AccessToken);
 
             client.BaseAddress = new Uri($"{App.AzureBackendUrl}");
 

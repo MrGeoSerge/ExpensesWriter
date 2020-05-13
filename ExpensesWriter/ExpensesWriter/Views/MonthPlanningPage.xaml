@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModel="clr-namespace:ExpensesWriter.ViewModels"
+             mc:Ignorable="d"
+             Title="{Binding Title}"
+             x:Class="ExpensesWriter.Views.MonthPlanningPage">
+             <!--BindingContext="{Binding viewModel:MonthPlanningViewModel}"-->
+        <ContentPage.ToolbarItems>
+            <ToolbarItem Text="Save 1" Command="{Binding SaveCommand}"/>
+            <ToolbarItem Text="Update All" Command="{Binding UpdateAllCommand}"/>
+        </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+
+        <StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Total"/>
+                <Label Text="{Binding TotalMoney}"/>
+                <Label Text="Income"/>
+                <Entry Text="{Binding Income}" WidthRequest="80"/>
+                <Label Text="Residue"/>
+                <Label Text="{Binding Residue}"/>
+            </StackLayout>
+        <ListView x:Name="MonthResultsListView"
+                ItemsSource="{Binding BudgetPlanningItems}"
+                VerticalOptions="FillAndExpand"
+                HasUnevenRows="true"
+                RefreshCommand="{Binding LoadMonthPlanningCommand}"
+                IsPullToRefreshEnabled="true"
+                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                CachingStrategy="RecycleElement"
+                SelectedItem="{Binding SelectedPlanningItem, Mode=TwoWay}"
+                >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                                <Label Text="{Binding BudgetItem.Name}" 
+                                d:Text="{Binding .}"
+                                LineBreakMode="NoWrap" 
+                                Style="{DynamicResource ListExpenseTextStyle}" 
+                                FontSize="16" />
+                            <Entry Grid.Column="1"
+                                Text="{Binding Money}" 
+                                d:Text="Expense descripton"
+                                Style="{DynamicResource ListExpenseDetailTextStyle}"
+                                FontSize="13" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        </StackLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </ContentPage.Content>
+</ContentPage>

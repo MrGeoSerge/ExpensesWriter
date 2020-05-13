@@ -59,6 +59,7 @@ namespace ExpensesWriter.ViewModels
                 //CategoriesString = new ObservableCollection<string>();
 
                 Categories.Clear();
+                CategoriesString.Clear();
                 var categories = await CategoriesDataStore.GetItemsAsync(true).ConfigureAwait(true);
                 var x123 = 0;
                 foreach (var category in categories)
@@ -89,7 +90,15 @@ namespace ExpensesWriter.ViewModels
 
         protected override async Task<IEnumerable<Expense>> GetExpenses()
         {
-            return await DataStore.GetCurrentMonthItemsAsync(true);
+            try
+            {
+                return await DataStore.GetCurrentMonthItemsAsync(true);
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex);
+                throw;
+            }
         }
 
     }
