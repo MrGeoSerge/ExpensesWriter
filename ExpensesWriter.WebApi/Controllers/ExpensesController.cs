@@ -204,7 +204,7 @@ namespace ExpensesWriter.WebApi.Controllers
 
         // DELETE: api/Expenses/5
         [ResponseType(typeof(Expense))]
-        public IHttpActionResult DeleteExpense(int id)
+        public IHttpActionResult DeleteExpense(string id)
         {
             Expense expense = db.Expenses.Find(id);
             if (expense == null)

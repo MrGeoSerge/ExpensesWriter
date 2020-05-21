@@ -1,4 +1,5 @@
 ﻿using ExpensesWriter.Models;
+using ExpensesWriter.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -47,6 +48,8 @@ namespace ExpensesWriter.ViewModels
 
             try
             {
+                LoadCategories();
+
                 Expenses.Clear();
                 var expenses = await GetExpenses();
                 var sortedExpenses = expenses.Cast<Expense>().OrderByDescending((x) => x.CreationDateTime).Select(x => x);
@@ -55,23 +58,6 @@ namespace ExpensesWriter.ViewModels
                     Expenses.Add(expense);
                 }
                 
-                //Categories = new ObservableCollection<BudgetItem>();
-                //CategoriesString = new ObservableCollection<string>();
-
-                Categories.Clear();
-                CategoriesString.Clear();
-                var categories = await CategoriesDataStore.GetItemsAsync(true).ConfigureAwait(true);
-                var x123 = 0;
-                foreach (var category in categories)
-                {
-                    Categories.Add(category);
-                    CategoriesString.Add(category.Name);
-                }
-                App.CategoriesList = CategoriesString;
-                App.BudgetItems = Categories;
-                CategoryDefaultString = CategoriesString[0];
-
-
             }
             catch (Exception ex)
             {
@@ -84,6 +70,21 @@ namespace ExpensesWriter.ViewModels
             }
         }
 
+        private async Task LoadCategories()
+        {
+            Categories.Clear();
+            CategoriesString.Clear();
+            var categoryService = new CategoryService();
+            var categories = await categoryService.GetCategoriesAsync();
+            foreach (var category in categories)
+            {
+                Categories.Add(category);
+                CategoriesString.Add(category.Name);
+            }
+            App.CategoriesList = CategoriesString;
+            App.BudgetItems = Categories;
+            CategoryDefaultString = CategoriesString[0];
+        }
 
 
 

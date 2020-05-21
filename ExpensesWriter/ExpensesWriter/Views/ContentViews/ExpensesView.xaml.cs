@@ -1,4 +1,5 @@
 ﻿using ExpensesWriter.Models;
+using ExpensesWriter.Services;
 using ExpensesWriter.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -31,5 +32,26 @@ namespace ExpensesWriter.Views.ContentViews
             ExpensesListView.SelectedItem = null;
         }
 
+        private async void OnDelete(object sender, EventArgs e)
+        {
+            var expense = ((MenuItem)sender).CommandParameter as Expense;
+            RemoveFromListView(expense);
+            await RemoveFromRemoteStorage(expense);
+        }
+
+        private async Task RemoveFromRemoteStorage(Expense expense)
+        {
+            var result = await new AzureDataStore().DeleteItemsAsync(expense.Id);
+            if (!result)
+                await Application.Current.MainPage.DisplayAlert("Ups", "Item was not deleted. Check your Internet connection please", "Got it");
+        }
+
+        private void RemoveFromListView(Expense expense)
+        {
+            var page = Parent.Parent as CurrentMonthExpensesPage;
+            var viewModel = page.BindingContext as CurrentMonthExpensesViewModel;
+            var expenseList = viewModel.Expenses;
+            expenseList.Remove(expense);
+        }
     }
 }

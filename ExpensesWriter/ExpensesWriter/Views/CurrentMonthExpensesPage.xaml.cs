@@ -7,13 +7,14 @@ using ExpensesWriter.Models;
 using ExpensesWriter.ViewModels;
 using ExpensesWriter.Helpers;
 using Xamarin.Forms.Xaml;
+using ExpensesWriter.Services;
 
 namespace ExpensesWriter.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CurrentMonthExpensesPage : ContentPage
     {
-        CurrentMonthExpensesViewModel viewModel;
+        public CurrentMonthExpensesViewModel viewModel;
         public CurrentMonthExpensesPage()
         {
             InitializeComponent();
@@ -69,14 +70,12 @@ namespace ExpensesWriter.Views
 
             var budgetItem = viewModel.Categories.Where(x => x.Name == categoryPicker.SelectedItem?.ToString()).FirstOrDefault();
             expense.BudgetItemId = budgetItem.Id;
-                
-                
-            //expense.Category = categoryPicker.SelectedItem?.ToString();
+            expense.BudgetItem = budgetItem;
             expense.CreationDateTime = DateTime.Now;
             expense.ModificationDateTime = DateTime.Now;
             expense.Id = Guid.NewGuid().ToString();
 
-            MessagingCenter.Send(this, "AddExpense3", expense);
+            viewModel.AddExpenseCommand.Execute(expense);
 
             expenseQntEntry.Text = "";
             expenseNameEntry.Text = "";
@@ -86,6 +85,19 @@ namespace ExpensesWriter.Views
         private void CategoryPicker_SelectedIndexChanged(object sender, EventArgs e)
         {
             var picker = (Picker)sender;
+
+        }
+
+
+        private async void OnDelete(object sender, EventArgs e)
+        {
+            var mi = ((MenuItem)sender);
+
+            var expense = mi.CommandParameter as Expense;
+            var result = await new AzureDataStore().DeleteItemsAsync(expense.Id);
+
+            if (!result)
+                await Application.Current.MainPage.DisplayAlert("Ups", "Item was not deleted. Check your Internet connection please", "Got it");
 
         }
 

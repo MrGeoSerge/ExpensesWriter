@@ -16,5 +16,22 @@ namespace ExpensesWriter.Models
         public int? BudgetItemId { get; set; }
         public BudgetItem BudgetItem { get; set; }
 
+
+        public Expense()
+        {
+        }
+
+        public Expense(Expense expense)
+        {
+            Id = expense.Id;
+            Money = expense.Money;
+            Name = expense.Name;
+            Category = expense.Category;
+            CreationDateTime = expense.CreationDateTime;
+            ModificationDateTime = expense.ModificationDateTime;
+            UserId = expense.UserId;
+            BudgetItemId = expense.BudgetItemId;
+            BudgetItem = expense.BudgetItem;
+        }
     }
 }
