@@ -1,26 +1,10 @@
-﻿using System;
+﻿using ExpensesWriter.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace ExpensesWriter.Models
 {
-    public enum MenuItemType
-    {
-        ExpenseWriter,
-        MonthResults,
-        MonthPlanning,
-        LastMonthResults,
-        LastMonthExpenses,
-        FamilyCurrentMonthExpenses,
-        FamilyCurrentMonthResults,
-        FamilyLastMonthExpenses,
-        FamilyLastMonthResults,
-        AllExpenses,
-        About,
-        Logout,
-        Settings,
-        NextMonthPlanning
-    }
     public class HomeMenuItem
     {
         public MenuItemType Id { get; set; }

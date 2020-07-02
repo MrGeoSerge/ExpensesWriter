@@ -10,6 +10,7 @@ using System.Windows.Input;
 using ExpensesWriter.Helpers;
 using System.Diagnostics;
 using ExpensesWriter.Services;
+using ExpensesWriter.Enums;
 
 namespace ExpensesWriter.Views
 {

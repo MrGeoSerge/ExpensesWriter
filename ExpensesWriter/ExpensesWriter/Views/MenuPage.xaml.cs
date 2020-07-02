@@ -1,4 +1,5 @@
-﻿using ExpensesWriter.Models;
+﻿using ExpensesWriter.Enums;
+using ExpensesWriter.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
