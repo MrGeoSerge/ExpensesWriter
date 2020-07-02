@@ -25,27 +25,13 @@ namespace ExpensesWriter.Repositories.Local
 
         public async Task<IEnumerable<Expense>> GetItemsAsync(bool forceRefresh = false)
         {
-            return await database.Table<Expense>().ToListAsync();
+            var items = await database.Table<Expense>().ToListAsync();
+            var items2 = await database.GetAllWithChildrenAsync<Expense>();
+            return items2;
         }
 
         public async Task AddItemsAsync(IEnumerable<Expense> expenses)
         {
-            //try
-            //{
-            //    foreach(var expense in expenses)
-            //    {
-            //        await database.In
-            //    }
-
-
-
-
-            //}
-            //catch(Exception ex)
-            //{
-            //    Debug.WriteLine(ex);
-            //}
-
             await database.InsertAllWithChildrenAsync(expenses);
         }
 

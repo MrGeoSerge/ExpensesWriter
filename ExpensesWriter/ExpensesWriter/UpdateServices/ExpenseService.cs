@@ -65,7 +65,6 @@ namespace ExpensesWriter.UpdateServices
             //find all expenses updated between last local update and now
             var expenses = await externalStorage.GetModifiedItemsAsync(lastModifiedLocalStorageDT);
 
-            //var result = 
                 await localStorage.AddItemsAsync(expenses);
 
             //if(result != expenses.Count())

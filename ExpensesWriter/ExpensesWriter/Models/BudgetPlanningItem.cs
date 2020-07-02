@@ -1,11 +1,15 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace ExpensesWriter.Models
 {
+
+    [Table("BudgetPlanningItem")]
     public class BudgetPlanningItem
     {
+        [PrimaryKey]
         public int Id { get; set; }
         public int BudgetItemId { get; set; }
         public virtual BudgetItem BudgetItem { get; set; }

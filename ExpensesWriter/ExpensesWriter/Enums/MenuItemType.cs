@@ -9,6 +9,7 @@ namespace ExpensesWriter.Enums
         ExpenseWriter,
         MonthResults,
         MonthPlanning,
+        NextMonthPlanning,
         LastMonthResults,
         LastMonthExpenses,
         FamilyCurrentMonthExpenses,
@@ -17,8 +18,7 @@ namespace ExpensesWriter.Enums
         FamilyLastMonthResults,
         AllExpenses,
         About,
-        Logout,
         Settings,
-        NextMonthPlanning
+        Logout,
     }
 }

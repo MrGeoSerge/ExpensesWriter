@@ -108,10 +108,6 @@ namespace ExpensesWriter.ViewModels
 
         protected virtual async Task<IEnumerable<Expense>> GetExpenses()
         {
-            //var expensesService = new ExpenseService();
-            //var expenses = await expensesService.GetExpensesAsync();
-
-
             return await DataStore.GetItemsAsync(true);
         }
 

@@ -21,9 +21,6 @@ namespace ExpensesWriter.ViewModels
             var expensesService = new ExpenseService();
             var expenses = await expensesService.GetExpensesAsync();
 
-            //Task.Run(() => expensesService.CheckForExternalUpdates());
-            //return await DataStore.GetItemsAsync(true);
-            //IsBusy = false;
             return expenses;
         }
 
