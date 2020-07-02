@@ -18,7 +18,8 @@ namespace ExpensesWriter.Models
         AllExpenses,
         About,
         Logout,
-        Settings
+        Settings,
+        NextMonthPlanning
     }
     public class HomeMenuItem
     {

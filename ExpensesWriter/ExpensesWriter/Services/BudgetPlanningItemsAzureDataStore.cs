@@ -40,6 +40,28 @@ namespace ExpensesWriter.Services
             return items;
         }
 
+        public async Task<IEnumerable<BudgetPlanningItem>> GetLastMonthItemsAsync(bool forceRefresh = false)
+        {
+            if (forceRefresh && IsConnected)
+            {
+                var json = await client.GetStringAsync($"api/LastMonthBudgetPlanningItems").ConfigureAwait(false);
+                items = JsonConvert.DeserializeObject<IEnumerable<BudgetPlanningItem>>(json);
+            }
+
+            return items;
+        }
+
+        public async Task<IEnumerable<BudgetPlanningItem>> GetNextMonthItemsAsync(bool forceRefresh = false)
+        {
+            if (forceRefresh && IsConnected)
+            {
+                var json = await client.GetStringAsync($"api/NextMonthBudgetPlanningItems").ConfigureAwait(false);
+                items = JsonConvert.DeserializeObject<IEnumerable<BudgetPlanningItem>>(json);
+            }
+
+            return items;
+        }
+
         public async Task<bool> UpdateItemAsync(BudgetPlanningItem item)
         {
             if (item == null || !IsConnected)

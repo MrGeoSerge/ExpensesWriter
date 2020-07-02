@@ -10,7 +10,6 @@ namespace ExpensesWriter.Repositories.Local
 {
     public class CategoriesDataStore
     {
-        IEnumerable<BudgetItem> expenses;
         readonly SQLiteAsyncConnection database;
 
         public CategoriesDataStore()

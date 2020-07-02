@@ -48,10 +48,7 @@ namespace ExpensesWriter.Views.ContentViews
 
         private void RemoveFromListView(Expense expense)
         {
-            //var page = Parent.Parent as CurrentMonthExpensesPage;
-            //var viewModel = page.BindingContext as CurrentMonthExpensesViewModel;
             ContentPage page;
-
             page = Parent as ContentPage;
 
             if(page == null)

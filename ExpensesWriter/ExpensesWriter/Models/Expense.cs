@@ -1,9 +1,13 @@
-﻿using System;
+﻿using SQLite;
+using SQLiteNetExtensions.Attributes;
+using System;
 
 namespace ExpensesWriter.Models
 {
+    [Table("Expenses")]
     public class Expense
     {
+        [PrimaryKey]
         public string Id { get; set; }
         public double Money { get; set; }
         public string Name { get; set; }
@@ -13,9 +17,14 @@ namespace ExpensesWriter.Models
 
         public string UserId { get; set; }
 
+        [ForeignKey(typeof(BudgetItem))]
         public int? BudgetItemId { get; set; }
+
+        [OneToOne]
         public BudgetItem BudgetItem { get; set; }
 
+        [Ignore]
+        public bool IsDeleted { get; set; }
 
         public Expense()
         {
@@ -32,6 +41,7 @@ namespace ExpensesWriter.Models
             UserId = expense.UserId;
             BudgetItemId = expense.BudgetItemId;
             BudgetItem = expense.BudgetItem;
+            IsDeleted = expense.IsDeleted;
         }
     }
 }

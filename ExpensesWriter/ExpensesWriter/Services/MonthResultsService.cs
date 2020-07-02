@@ -24,14 +24,25 @@ namespace ExpensesWriter.Services
 
             var categories = GetCategorizedMonthResults(expenses);
 
-            await ApplyBudgetPlanning(categories);
+            await ApplyBudgetPlanningForCurrentMonth(categories);
 
             return categories;
         }
 
-        private async Task ApplyBudgetPlanning(IEnumerable<CategoryExpense> categories)
+        private async Task ApplyBudgetPlanningForCurrentMonth(IEnumerable<CategoryExpense> categories)
         {
             var planningItems = await new BudgetPlanningItemsAzureDataStore().GetCurrentMonthItemsAsync(true);
+
+            foreach(var category in categories)
+            {
+                category.PlannedMoney = planningItems.Where(x => x.BudgetItem.Name == category.Category).Select(x => x.Money).FirstOrDefault();
+                category.PercentOfExecution = (int)(category.Money / category.PlannedMoney * 100);
+            }
+        }
+
+        private async Task ApplyBudgetPlanningForLastMonth(IEnumerable<CategoryExpense> categories)
+        {
+            var planningItems = await new BudgetPlanningItemsAzureDataStore().GetLastMonthItemsAsync(true);
 
             foreach(var category in categories)
             {
@@ -46,7 +57,10 @@ namespace ExpensesWriter.Services
 
             SetDefaultBudgetItemToExpenseWithNullBudgetItem(ref expenses);
 
-            return GetCategorizedMonthResults(expenses);
+            var categories = GetCategorizedMonthResults(expenses);
+
+
+            return categories;
         }
 
         public async Task<ObservableCollection<CategoryExpense>> GetFamilyLastMonthResults()
@@ -55,7 +69,11 @@ namespace ExpensesWriter.Services
 
             SetDefaultBudgetItemToExpenseWithNullBudgetItem(ref expenses);
 
-            return GetCategorizedMonthResults(expenses);
+            var categories = GetCategorizedMonthResults(expenses);
+
+
+            return categories;
+
         }
 
         public async Task<ObservableCollection<CategoryExpense>> GetLastMonthResults()
@@ -64,7 +82,11 @@ namespace ExpensesWriter.Services
 
             SetDefaultBudgetItemToExpenseWithNullBudgetItem(ref expenses);
 
-            return GetCategorizedMonthResults(expenses);
+            var categories = GetCategorizedMonthResults(expenses);
+
+            await ApplyBudgetPlanningForLastMonth(categories);
+
+            return categories;
         }
 
         protected ObservableCollection<CategoryExpense> GetCategorizedMonthResults(IEnumerable<Expense> expenses)

@@ -54,6 +54,33 @@ namespace ExpensesWriter.WebApi.Controllers
 
         }
 
+
+        // GET: api/LastModifiedExpense
+        [Route("api/LastModifiedExpense")]
+        public async Task<Expense> GetLastModifiedExpense()
+        {
+            //string userId = User.Identity.GetUserId();
+            Expense expense = await db.Expenses.OrderByDescending(x => x.ModificationDateTime).FirstOrDefaultAsync();
+            return expense;
+        }
+
+        // GET: api/ModifiedExpenses
+        [Route("api/ModifiedExpenses")]
+        public async Task<IEnumerable<Expense>> GetModifiedExpenses()
+        {
+            if (Request.Headers.Contains("LastModified"))
+            {
+                string modifiedDate = Request.Headers.GetValues("LastModified").First();
+                DateTime lastModified = DateTime.Parse(modifiedDate);
+                var expenses = await db.Expenses.Where(x => x.ModificationDateTime > lastModified).ToListAsync();
+                return expenses;
+            }
+            else
+            {
+                throw new Exception("Date of Last Modified expense was not provided");
+            }
+        }
+
         // GET: api/FamilyCurrentMonthExpenses
         [Route("api/FamilyCurrentMonthExpenses")]
         public IEnumerable<Expense> GetFamilyCurrentMonthExpenses()

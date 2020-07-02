@@ -81,6 +81,69 @@ namespace ExpensesWriter.Services
                 return null;
         }
 
+        public async Task<Expense> GetLastModifiedItemAsync()
+        {
+            try
+            {
+                Expense expense = null;
+                if (IsConnected)
+                {
+                    var json = await client.GetStringAsync($"api/LastModifiedExpense");
+                    expense = await Task.Run(() => JsonConvert.DeserializeObject<Expense>(json));
+                }
+                else
+                {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        Application.Current.MainPage.DisplayAlert("Connection Error", "No Internet Connection", "Got it");
+                    });
+                }
+
+                return expense;
+            }
+            catch (Exception ex)
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    Application.Current.MainPage.DisplayAlert("GetCurrentMonthItemsAsyncError", ex.ToString(), "Got it");
+                });
+                return null;
+            }
+        }
+
+        public async Task<IEnumerable<Expense>> GetModifiedItemsAsync(DateTime modifiedDateTime)
+        {
+            try
+            {
+                if (IsConnected)
+                {
+                    ///TODO: think of date formats in different cultures
+                    string lastModified = modifiedDateTime.ToString();
+                    client.DefaultRequestHeaders.Add("LastModified", lastModified);
+                    var json = await client.GetStringAsync($"api/ModifiedExpenses");
+                    expenses = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Expense>>(json));
+                }
+                else
+                {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        Application.Current.MainPage.DisplayAlert("Connection Error", "No Internet Connection", "Got it");
+                    });
+                }
+
+                return expenses;
+            }
+            catch (Exception ex)
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    Application.Current.MainPage.DisplayAlert("GetCurrentMonthItemsAsyncError", ex.ToString(), "Got it");
+                });
+                return null;
+            }
+        }
+
+
         public async Task<IEnumerable<Expense>> GetLastMonthItemsAsync(bool forceRefresh = false)
         {
             try

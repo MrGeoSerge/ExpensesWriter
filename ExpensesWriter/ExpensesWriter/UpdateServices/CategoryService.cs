@@ -1,12 +1,13 @@
 ﻿using ExpensesWriter.Models;
 using ExpensesWriter.Repositories.Local;
+using ExpensesWriter.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExpensesWriter.Services
+namespace ExpensesWriter.UpdateServices
 {
     public class CategoryService
     {

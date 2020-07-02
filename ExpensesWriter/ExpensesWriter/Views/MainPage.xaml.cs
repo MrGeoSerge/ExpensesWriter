@@ -43,6 +43,9 @@ namespace ExpensesWriter.Views
                     case (int)MenuItemType.MonthPlanning:
                         MenuPages.Add(id, new NavigationPage(new MonthPlanningPage()));
                         break;
+                    case (int)MenuItemType.NextMonthPlanning:
+                        MenuPages.Add(id, new NavigationPage(new NextMonthPlanningPage()));
+                        break;
                     case (int)MenuItemType.LastMonthResults:
                         MenuPages.Add(id, new NavigationPage(new LastMonthResultsPage()));
                         break;

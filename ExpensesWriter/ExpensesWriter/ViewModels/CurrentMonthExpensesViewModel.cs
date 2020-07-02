@@ -1,5 +1,8 @@
 ﻿using ExpensesWriter.Models;
+using ExpensesWriter.Repositories.Local;
 using ExpensesWriter.Services;
+using ExpensesWriter.UpdateServices;
+using ExpensesWriter.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -30,11 +33,19 @@ namespace ExpensesWriter.ViewModels
             } 
         }
 
-
         public CurrentMonthExpensesViewModel()
         {
             Title = "Current Month Expenses";
 
+            MessagingCenter.Subscribe<ExpenseService, ObservableCollection<Expense>>(this, "UpdateExpenses", async (obj, sender) =>
+            {
+                var expenses = await new ExpensesDataStore().GetItemsAsync(true);
+
+                Expenses = new ObservableCollection<Expense>(expenses);
+                //var newExpense = expense as Expense;
+                //Expenses.Add(newExpense);
+                //await DataStore.AddItemAsync(newExpense);
+            });
 
 
         }
@@ -86,13 +97,14 @@ namespace ExpensesWriter.ViewModels
             CategoryDefaultString = CategoriesString[0];
         }
 
-
-
-
         protected override async Task<IEnumerable<Expense>> GetExpenses()
         {
             try
             {
+                //var expensesService = new ExpenseService();
+                //var expenses = await expensesService.GetExpensesAsync();
+
+
                 return await DataStore.GetCurrentMonthItemsAsync(true);
             }
             catch(Exception ex)

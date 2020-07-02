@@ -1,4 +1,5 @@
 ﻿using ExpensesWriter.Models;
+using ExpensesWriter.UpdateServices;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -17,7 +18,13 @@ namespace ExpensesWriter.ViewModels
 
         protected override async Task<IEnumerable<Expense>> GetExpenses()
         {
-            return await DataStore.GetItemsAsync(true);
+            var expensesService = new ExpenseService();
+            var expenses = await expensesService.GetExpensesAsync();
+
+            //Task.Run(() => expensesService.CheckForExternalUpdates());
+            //return await DataStore.GetItemsAsync(true);
+            //IsBusy = false;
+            return expenses;
         }
 
     }

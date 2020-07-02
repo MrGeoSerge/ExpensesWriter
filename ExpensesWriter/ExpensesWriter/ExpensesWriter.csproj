@@ -16,10 +16,18 @@
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="3.0.0" />
     <PackageReference Include="Microsoft.AppCenter.Push" Version="3.0.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
+    <PackageReference Include="SQLiteNetExtensions" Version="2.1.0" />
+    <PackageReference Include="SQLiteNetExtensions.Async" Version="2.1.0" />
     <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
     <PackageReference Include="Xamarin.Forms" Version="4.4.0.991640" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.4.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.ComponentModel.DataAnnotations.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
@@ -37,6 +45,9 @@
     </Compile>
     <Compile Update="Views\CurrentMonthResultsPage.xaml.cs">
       <DependentUpon>CurrentMonthResultsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\NextMonthPlanningPage.xaml.cs">
+      <DependentUpon>NextMonthPlanningPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\NewExpensePage.xaml.cs">
       <DependentUpon>NewExpensePage.xaml</DependentUpon>

@@ -11,13 +11,13 @@ using Xamarin.Essentials;
 using ExpensesWriter.Services;
 using System.Collections;
 using System.Collections.Generic;
+using ExpensesWriter.UpdateServices;
 
 namespace ExpensesWriter.ViewModels
 {
     public class ExpensesViewModel : BaseExpenseViewModel
     {
-
-        public ObservableCollection<Expense> expenses;
+        private ObservableCollection<Expense> expenses;
         public ObservableCollection<Expense> Expenses
         {
             get
@@ -31,12 +31,10 @@ namespace ExpensesWriter.ViewModels
             }
         }
 
-
         public Command LoadExpensesCommand { get; set; }
         public Command EmailExpensesCommand { get; set; }
         public Command AddExpenseCommand { get; set; }
         public Command DeleteExpenseCommand { get; set; }
-
 
         public ExpensesViewModel()
         {
@@ -46,7 +44,6 @@ namespace ExpensesWriter.ViewModels
             LoadExpensesCommand = new Command(async () => await ExecuteLoadExpensesCommand());
             EmailExpensesCommand = new Command(async () => await ExecuteEmailExpensesCommand());
             AddExpenseCommand = new Command(async (expense) => await ExecuteAddExpenseCommand(expense));
-            DeleteExpenseCommand = new Command(async (expense) => await ExecuteDeleteExpenseCommand(expense));
 
             MessagingCenter.Subscribe<NewExpensePage, Expense>(this, "AddExpense", async (obj, expense) =>
             {
@@ -62,28 +59,7 @@ namespace ExpensesWriter.ViewModels
                 await DataStore.AddItemAsync(newExpense);
             });
 
-            //MessagingCenter.Subscribe<CurrentMonthExpensesPage, Expense>(this, "AddExpense3", async (obj, expense) =>
-            //{
-            //    var newExpense = expense as Expense;
-            //    Expenses.Insert(0, newExpense);
-            //    await DataStore.AddItemAsync(newExpense);
-            //});
-
             LoadExpensesCommand.Execute(null);
-        }
-
-        private async Task ExecuteDeleteExpenseCommand(object item)
-        {
-            var expense = item as Expense;
-            if(expense != null)
-            {
-                var result = await new AzureDataStore().DeleteItemsAsync(expense.Id);
-
-                if (!result)
-                    await Application.Current.MainPage.DisplayAlert("Ups", "Item was not deleted. Check your Internet connection please", "Got it");
-
-            }
-            Expenses.Remove(expense);
         }
 
         private async Task ExecuteAddExpenseCommand(object expense)
@@ -104,12 +80,13 @@ namespace ExpensesWriter.ViewModels
             if (IsBusy)
                 return;
 
-            IsBusy = true;
+            Device.BeginInvokeOnMainThread(() =>
+            IsBusy = true);
 
             try
             {
                 Expenses.Clear();
-                var expenses = await GetExpenses();
+                var expenses = await GetExpenses().ConfigureAwait(true);
                 var sortedExpenses = expenses.Cast<Expense>().OrderByDescending((x) => x.CreationDateTime).Select(x => x);
                 foreach(var expense in sortedExpenses)
                 {
@@ -124,12 +101,17 @@ namespace ExpensesWriter.ViewModels
             }
             finally
             {
-                IsBusy = false;
+                Device.BeginInvokeOnMainThread(() =>
+                    IsBusy = false);
             }
         }
 
         protected virtual async Task<IEnumerable<Expense>> GetExpenses()
         {
+            //var expensesService = new ExpenseService();
+            //var expenses = await expensesService.GetExpensesAsync();
+
+
             return await DataStore.GetItemsAsync(true);
         }
 
