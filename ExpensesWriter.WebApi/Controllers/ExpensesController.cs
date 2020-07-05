@@ -59,8 +59,8 @@ namespace ExpensesWriter.WebApi.Controllers
         [Route("api/LastModifiedExpense")]
         public async Task<Expense> GetLastModifiedExpense()
         {
-            //string userId = User.Identity.GetUserId();
-            Expense expense = await db.Expenses.OrderByDescending(x => x.ModificationDateTime).FirstOrDefaultAsync();
+            string userId = User.Identity.GetUserId();
+            Expense expense = await db.Expenses.Where(e => e.UserId == userId).OrderByDescending(x => x.ModificationDateTime).FirstOrDefaultAsync();
             return expense;
         }
 
@@ -70,9 +70,10 @@ namespace ExpensesWriter.WebApi.Controllers
         {
             if (Request.Headers.Contains("LastModified"))
             {
+                string userId = User.Identity.GetUserId();
                 string modifiedDate = Request.Headers.GetValues("LastModified").First();
-                DateTime lastModified = DateTime.Parse(modifiedDate);
-                var expenses = await db.Expenses.Where(x => x.ModificationDateTime > lastModified).ToListAsync();
+                DateTime lastModified = new DateTime(long.Parse(modifiedDate));
+                var expenses = await db.Expenses.Where(x => x.UserId == userId && x.ModificationDateTime > lastModified).ToListAsync();
                 return expenses;
             }
             else

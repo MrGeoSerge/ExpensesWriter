@@ -36,18 +36,6 @@ namespace ExpensesWriter.ViewModels
         public CurrentMonthExpensesViewModel()
         {
             Title = "Current Month Expenses";
-
-            MessagingCenter.Subscribe<ExpenseService, ObservableCollection<Expense>>(this, "UpdateExpenses", async (obj, sender) =>
-            {
-                var expenses = await new ExpensesDataStore().GetItemsAsync(true);
-
-                Expenses = new ObservableCollection<Expense>(expenses);
-                //var newExpense = expense as Expense;
-                //Expenses.Add(newExpense);
-                //await DataStore.AddItemAsync(newExpense);
-            });
-
-
         }
 
         protected override async Task ExecuteLoadExpensesCommand()
@@ -101,10 +89,6 @@ namespace ExpensesWriter.ViewModels
         {
             try
             {
-                //var expensesService = new ExpenseService();
-                //var expenses = await expensesService.GetExpensesAsync();
-
-
                 return await DataStore.GetCurrentMonthItemsAsync(true);
             }
             catch(Exception ex)

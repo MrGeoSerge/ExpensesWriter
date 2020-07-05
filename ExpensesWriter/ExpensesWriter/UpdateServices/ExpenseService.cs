@@ -31,51 +31,63 @@ namespace ExpensesWriter.UpdateServices
             {
                 items = await RenewLocalStorage();
             }
+
             return items;
         }
 
-        public async Task<IEnumerable<Expense>> RenewLocalStorage()
+        public async Task ProcessUpdates()
         {
-                var items = await externalStorage.GetItemsAsync(true);
+            var expenses = await GetExternalUpdates();
 
-                if (items.Count() > 0)
-                {
-                    await localStorage.AddItemsAsync(items);
-                }
+            if(expenses != null)
+            {
+                await UpdateLocalStorageWithExternallyChangedItems(expenses);
+                await UpdateExpensesInView();
+            }
+        }
+
+        private async Task<IEnumerable<Expense>> RenewLocalStorage()
+        {
+            var items = await externalStorage.GetItemsAsync(true);
+
+            if (items.Count() > 0)
+            {
+                await localStorage.AddItemsAsync(items);
+            }
             return items;
         }
 
-        public async Task CheckForExternalUpdates()
+        private async Task<IEnumerable<Expense>> GetExternalUpdates()
         {
             Expense lastModifiedLocalStorageExpense = await localStorage.GetLastModifiedItemAsync();
             DateTime lastModifiedLocalStorageDT = lastModifiedLocalStorageExpense.ModificationDateTime;
-
 
             Expense lastModifiedExternalStorageExpense = await externalStorage.GetLastModifiedItemAsync();
             DateTime lastModifiedExternalStorageDT = lastModifiedExternalStorageExpense.ModificationDateTime;
 
             if(lastModifiedExternalStorageDT > lastModifiedLocalStorageDT)
             {
-                await UpdateLocalStorageWithExternallyChangedItems(lastModifiedLocalStorageDT);
+                var expenses = await externalStorage.GetModifiedItemsAsync(lastModifiedLocalStorageDT);
+                return expenses;
+            }
+            else
+            {
+                return null;
             }
         }
 
-        private async Task UpdateLocalStorageWithExternallyChangedItems(DateTime lastModifiedLocalStorageDT)
+        private async Task UpdateLocalStorageWithExternallyChangedItems(IEnumerable<Expense> expenses)
         {
-            //find all expenses updated between last local update and now
-            var expenses = await externalStorage.GetModifiedItemsAsync(lastModifiedLocalStorageDT);
-
                 await localStorage.AddItemsAsync(expenses);
+        }
 
-            //if(result != expenses.Count())
-            //{
+        private async Task UpdateExpensesInView()
+        {
+            var expenses = await localStorage.GetItemsAsync();
+            var sortedExpenses = expenses.Cast<Expense>().OrderByDescending((x) => x.CreationDateTime).Select(x => x);
+            var expensesCollection = new ObservableCollection<Expense>(sortedExpenses);
 
-            //    throw new Exception($"Items were not addedd. Expected to add {expenses.Count()}, but added {result}");
-            //}
-
-            //Notify view that items were changed!!!
-            //Send message!!!
-            MessagingCenter.Send<ExpenseService, ObservableCollection<Expense>>(this, "UpdateExpenses", null);
+            MessagingCenter.Send<ExpenseService, ObservableCollection<Expense>>(this, "UpdateExpenses", expensesCollection);
         }
     }
 }

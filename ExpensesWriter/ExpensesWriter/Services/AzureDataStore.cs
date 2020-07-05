@@ -11,6 +11,7 @@ using ExpensesWriter.Helpers;
 using Xamarin.Forms;
 using System.Diagnostics;
 using ExpensesWriter.Views;
+using System.Globalization;
 
 namespace ExpensesWriter.Services
 {
@@ -118,10 +119,10 @@ namespace ExpensesWriter.Services
                 if (IsConnected)
                 {
                     ///TODO: think of date formats in different cultures
-                    string lastModified = modifiedDateTime.ToString();
+                    string lastModified = modifiedDateTime.Ticks.ToString();
                     client.DefaultRequestHeaders.Add("LastModified", lastModified);
                     var json = await client.GetStringAsync($"api/ModifiedExpenses");
-                    expenses = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Expense>>(json));
+                    expenses = JsonConvert.DeserializeObject<IEnumerable<Expense>>(json);
                 }
                 else
                 {

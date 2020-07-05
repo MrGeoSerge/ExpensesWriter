@@ -25,14 +25,23 @@ namespace ExpensesWriter.Repositories.Local
 
         public async Task<IEnumerable<Expense>> GetItemsAsync(bool forceRefresh = false)
         {
-            var items = await database.Table<Expense>().ToListAsync();
-            var items2 = await database.GetAllWithChildrenAsync<Expense>();
-            return items2;
+            var items = await database.GetAllWithChildrenAsync<Expense>();
+            return items;
         }
 
         public async Task AddItemsAsync(IEnumerable<Expense> expenses)
         {
-            await database.InsertAllWithChildrenAsync(expenses);
+            foreach(var expense in expenses)
+            {
+                if(await GetItemAsync(expense.Id) == null)
+                {
+                    await database.InsertWithChildrenAsync(expense);
+                }
+                else
+                {
+                    await database.UpdateWithChildrenAsync(expense);
+                }
+            }
         }
 
         public async Task<Expense> GetItemAsync(string id)
@@ -41,9 +50,9 @@ namespace ExpensesWriter.Repositories.Local
                 .FirstOrDefaultAsync(s => s.Id == id);
         }
 
-        public async Task<int> AddItemAsync(Expense expense)
+        public async Task AddItemAsync(Expense expense)
         {
-            return await database.InsertAsync(expense);
+            await database.InsertWithChildrenAsync(expense);
         }
 
         public async Task<int> DeleteItemAsync(string id)
@@ -57,9 +66,9 @@ namespace ExpensesWriter.Repositories.Local
             return item;
         }
 
-        public async Task<int> UpdateItemAsync(Expense expense)
+        public async Task UpdateItemAsync(Expense expense)
         {
-            return await database.UpdateAsync(expense);
+            await database.UpdateWithChildrenAsync(expense);
         }
     }
 }
