@@ -109,7 +109,9 @@ namespace ExpensesWriter.ViewModels
 
         protected virtual async Task<ObservableCollection<CategoryExpense>> GetCategoryExpenses()
         {
-            return await new MonthResultsService().GetCurrentMonthResults();
+            var result = await new MonthResultsService().GetCurrentMonthResults();
+
+            return result;
         }
     }
 }

@@ -139,7 +139,7 @@ namespace ExpensesWriter.ViewModels
 
         public FamilyNextMonthPlanningViewModel()
         {
-            Title = "Next Month Planning";
+            Title = "Family Next Month Planning";
             LoadMonthPlanningCommand = new Command(async () => await ExecuteLoadNextMonthPlanningCommand());
             LoadMonthPlanningCommand.Execute(null);
 

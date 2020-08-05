@@ -18,7 +18,9 @@ namespace ExpensesWriter.ViewModels
         }
         protected override async Task<ObservableCollection<CategoryExpense>> GetCategoryExpenses()
         {
-            return await new MonthResultsService().GetFamilyCurrentMonthResults();
+            var result = await new MonthResultsService().GetFamilyCurrentMonthResults();
+
+            return result;
         }
 
     }

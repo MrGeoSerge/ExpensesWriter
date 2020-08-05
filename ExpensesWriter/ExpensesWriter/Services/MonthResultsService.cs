@@ -54,11 +54,9 @@ namespace ExpensesWriter.Services
         public async Task<ObservableCollection<CategoryExpense>> GetFamilyCurrentMonthResults()
         {
             var expenses = await DataStore.GetFamilyCurrentMonthItemsAsync(true);
-
             SetDefaultBudgetItemToExpenseWithNullBudgetItem(ref expenses);
-
             var categories = GetCategorizedMonthResults(expenses);
-
+            await ApplyBudgetPlanningForCurrentMonth(categories);
 
             return categories;
         }
@@ -68,6 +66,7 @@ namespace ExpensesWriter.Services
             var expenses = await DataStore.GetFamilyLastMonthItemsAsync(true);
             SetDefaultBudgetItemToExpenseWithNullBudgetItem(ref expenses);
             var categories = GetCategorizedMonthResults(expenses);
+            await ApplyBudgetPlanningForLastMonth(categories);
             return categories;
         }
 

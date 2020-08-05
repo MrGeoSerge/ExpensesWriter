@@ -44,7 +44,7 @@ namespace ExpensesWriter.WebApi.Controllers
             if(items.Count == 0)
             {
                 await CreateBudgetForCurrentMonth(userId);
-                items = db.BudgetPlanningItems.Where(item => item.PlanningMonth.Year == DateTime.Now.Year && item.PlanningMonth.Month == DateTime.Now.Month).ToList();
+                items = db.BudgetPlanningItems.Where(item => item.PlanningMonth.Year == DateTime.Now.Year && item.PlanningMonth.Month == DateTime.Now.Month - 1).ToList();
             }
 
             return items;
@@ -61,7 +61,7 @@ namespace ExpensesWriter.WebApi.Controllers
             if(items.Count == 0)
             {
                 await CreateBudgetForNextMonth(userId);
-                items = db.BudgetPlanningItems.Where(item => item.PlanningMonth.Year == DateTime.Now.Year && item.PlanningMonth.Month == DateTime.Now.Month).ToList();
+                items = db.BudgetPlanningItems.Where(item => item.PlanningMonth.Year == DateTime.Now.Year && item.PlanningMonth.Month == DateTime.Now.Month + 1).ToList();
             }
 
             return items;
