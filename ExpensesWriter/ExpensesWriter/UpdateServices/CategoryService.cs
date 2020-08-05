@@ -14,7 +14,7 @@ namespace ExpensesWriter.UpdateServices
         public async Task<IEnumerable<BudgetItem>> GetCategoriesAsync()
         {
             //get from local storage if there is some
-            var localStorage = new Repositories.Local.CategoriesDataStore();
+            var localStorage = new Repositories.Local.BudgetItemsDataStore();
             var items = await localStorage.GetItemsAsync();
 
             //update local storage if empty

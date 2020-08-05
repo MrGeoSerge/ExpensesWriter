@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace ExpensesWriter.Repositories.Local
 {
-    public class CategoriesDataStore
+    public class BudgetItemsDataStore
     {
         readonly SQLiteAsyncConnection database;
 
-        public CategoriesDataStore()
+        public BudgetItemsDataStore()
         {
             string path = Path.Combine(Environment.GetFolderPath(
                 Environment.SpecialFolder.LocalApplicationData), "ExpensesSQLite.db3");
