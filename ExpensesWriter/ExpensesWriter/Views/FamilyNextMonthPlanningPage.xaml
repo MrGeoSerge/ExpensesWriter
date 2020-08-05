@@ -6,7 +6,7 @@
              xmlns:viewModel="clr-namespace:ExpensesWriter.ViewModels"
              mc:Ignorable="d"
              Title="{Binding Title}"
-             x:Class="ExpensesWriter.Views.NextMonthPlanningPage">
+             x:Class="ExpensesWriter.Views.FamilyNextMonthPlanningPage">
              <!--BindingContext="{Binding viewModel:MonthPlanningViewModel}"-->
         <ContentPage.ToolbarItems>
             <ToolbarItem Text="Save 1" Command="{Binding SaveCommand}"/>

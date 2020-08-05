@@ -6,6 +6,6 @@
              xmlns:contentViews="clr-namespace:ExpensesWriter.Views.ContentViews"
              mc:Ignorable="d"
              Title="{Binding Title}"
-             x:Class="ExpensesWriter.Views.LastMonthResultsPage">
+             x:Class="ExpensesWriter.Views.PersonalCurrentMonthResultsPage">
     <contentViews:MonthResultsView/>
 </ContentPage>

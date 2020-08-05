@@ -11,11 +11,11 @@ using Xamarin.Forms.Xaml;
 namespace ExpensesWriter.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CurrentMonthResultsPage : ContentPage
+    public partial class PersonalCurrentMonthResultsPage : ContentPage
     {
-        public CurrentMonthResultsPage()
+        public PersonalCurrentMonthResultsPage()
         {
-            BindingContext = new MonthResultsViewModel();
+            BindingContext = new PersonalCurrentMonthResultsViewModel();
             InitializeComponent();
 
         }

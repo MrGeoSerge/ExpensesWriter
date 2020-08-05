@@ -6,19 +6,19 @@ namespace ExpensesWriter.Enums
 {
     public enum MenuItemType
     {
-        ExpenseWriter,
-        MonthResults,
-        MonthPlanning,
-        NextMonthPlanning,
-        LastMonthResults,
-        LastMonthExpenses,
-        FamilyCurrentMonthExpenses,
-        FamilyCurrentMonthResults,
-        FamilyLastMonthExpenses,
-        FamilyLastMonthResults,
-        AllExpenses,
-        About,
-        Settings,
-        Logout,
+        PersonalCurrentMonthExpenses,//
+        FamilyCurrentMonthResults,//+
+        FamilyCurrentMonthPlanning,//+
+        FamilyCurrentMonthExpenses,//
+        FamilyNextMonthPlanning,//+
+        FamilyLastMonthExpenses,//+
+        FamilyLastMonthResults,//+
+        PersonalCurrentMonthResults,//+
+        PersonalLastMonthExpenses,//+
+        PersonalLastMonthResults,//+
+        FamilyAllExpenses,//+
+        About,//
+        Settings,//
+        Logout,//
     }
 }

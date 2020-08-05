@@ -12,7 +12,7 @@ using Xamarin.Forms;
 
 namespace ExpensesWriter.ViewModels
 {
-    public class MonthPlanningViewModel : BaseViewModel
+    public class FamilyCurrentMonthPlanningViewModel : BaseViewModel
     {
         private ObservableCollection<BudgetPlanningItem> budgetPlanningItems;
 
@@ -137,7 +137,7 @@ namespace ExpensesWriter.ViewModels
 
 
 
-        public MonthPlanningViewModel()
+        public FamilyCurrentMonthPlanningViewModel()
         {
             Title = "Current Month Planning";
             LoadMonthPlanningCommand = new Command(async () => await ExecuteLoadMonthPlanningCommand());

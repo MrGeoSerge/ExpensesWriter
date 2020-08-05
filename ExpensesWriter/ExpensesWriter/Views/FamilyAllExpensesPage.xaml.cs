@@ -12,13 +12,13 @@ namespace ExpensesWriter.Views
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
-    public partial class AllExpensesPage : ContentPage
+    public partial class FamilyAllExpensesPage : ContentPage
     {
-        public AllExpensesPage()
+        public FamilyAllExpensesPage()
         {
             InitializeComponent();
 
-            BindingContext = new AllExpensesViewModel();
+            BindingContext = new FamilyAllExpensesViewModel();
         }
 
         async void AddExpense_Clicked(object sender, EventArgs e)

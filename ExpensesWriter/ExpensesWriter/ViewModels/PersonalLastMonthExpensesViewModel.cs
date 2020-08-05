@@ -8,10 +8,10 @@ using Xamarin.Forms;
 
 namespace ExpensesWriter.ViewModels
 {
-    public class LastMonthExpensesViewModel : ExpensesViewModel
+    public class PersonalLastMonthExpensesViewModel : ExpensesViewModel
     {
 
-        public LastMonthExpensesViewModel()
+        public PersonalLastMonthExpensesViewModel()
         {
             Title = "Last Month Expenses";
         }

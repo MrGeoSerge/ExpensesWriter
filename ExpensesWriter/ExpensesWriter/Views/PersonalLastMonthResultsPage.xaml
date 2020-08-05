@@ -3,13 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:contentViews ="clr-namespace:ExpensesWriter.Views.ContentViews"
+             xmlns:contentViews="clr-namespace:ExpensesWriter.Views.ContentViews"
              mc:Ignorable="d"
              Title="{Binding Title}"
-             x:Class="ExpensesWriter.Views.LastMonthExpensesPage">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Send" Command="{Binding EmailExpensesCommand}"/>
-    </ContentPage.ToolbarItems>
-    <contentViews:ExpensesView/>
-
+             x:Class="ExpensesWriter.Views.PersonalLastMonthResultsPage">
+    <contentViews:MonthResultsView/>
 </ContentPage>

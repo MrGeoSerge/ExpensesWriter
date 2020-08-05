@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ExpensesWriter.ViewModels
 {
-    public class FamilyLastMonthResultsViewModel : MonthResultsViewModel
+    public class FamilyLastMonthResultsViewModel : PersonalCurrentMonthResultsViewModel
     {
         public FamilyLastMonthResultsViewModel()
         {

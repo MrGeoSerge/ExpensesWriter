@@ -10,9 +10,9 @@ using Xamarin.Forms;
 
 namespace ExpensesWriter.ViewModels
 {
-    public class AllExpensesViewModel : ExpensesViewModel
+    public class FamilyAllExpensesViewModel : ExpensesViewModel
     {
-        public AllExpensesViewModel()
+        public FamilyAllExpensesViewModel()
         {
             Title = "All Expenses";
             SubscribeForUpdates();

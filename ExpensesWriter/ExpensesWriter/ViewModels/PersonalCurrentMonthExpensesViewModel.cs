@@ -13,7 +13,7 @@ using Xamarin.Forms;
 
 namespace ExpensesWriter.ViewModels
 {
-    public class CurrentMonthExpensesViewModel : ExpensesViewModel
+    public class PersonalCurrentMonthExpensesViewModel : ExpensesViewModel
     {
         public ObservableCollection<BudgetItem> Categories { get; set; } = new ObservableCollection<BudgetItem>();
 
@@ -33,9 +33,9 @@ namespace ExpensesWriter.ViewModels
             } 
         }
 
-        public CurrentMonthExpensesViewModel()
+        public PersonalCurrentMonthExpensesViewModel()
         {
-            Title = "Current Month Expenses";
+            Title = "Personal Current Month Expenses";
         }
 
         protected override async Task ExecuteLoadExpensesCommand()

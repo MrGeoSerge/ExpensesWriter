@@ -31,11 +31,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\FamilyCurrentMonthPlanningPage.xaml.cs">
+      <DependentUpon>FamilyCurrentMonthPlanningPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PersonalCurrentMonthExpensesPage.xaml.cs">
+      <DependentUpon>PersonalCurrentMonthExpensesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\ExpenseEditPage.xaml.cs">
       <DependentUpon>ExpenseEditPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\AllExpensesPage.xaml.cs">
-      <DependentUpon>AllExpensesPage.xaml</DependentUpon>
+    <Compile Update="Views\FamilyAllExpensesPage.xaml.cs">
+      <DependentUpon>FamilyAllExpensesPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\FamilyCurrentMonthExpensesPage.xaml.cs">
       <DependentUpon>FamilyCurrentMonthExpensesPage.xaml</DependentUpon>
@@ -43,11 +49,11 @@
     <Compile Update="Views\FamilyLastMonthExpensesPage.xaml.cs">
       <DependentUpon>FamilyLastMonthExpensesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\CurrentMonthResultsPage.xaml.cs">
-      <DependentUpon>CurrentMonthResultsPage.xaml</DependentUpon>
+    <Compile Update="Views\PersonalCurrentMonthResultsPage.xaml.cs">
+      <DependentUpon>PersonalCurrentMonthResultsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\NextMonthPlanningPage.xaml.cs">
-      <DependentUpon>NextMonthPlanningPage.xaml</DependentUpon>
+    <Compile Update="Views\FamilyNextMonthPlanningPage.xaml.cs">
+      <DependentUpon>FamilyNextMonthPlanningPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\NewExpensePage.xaml.cs">
       <DependentUpon>NewExpensePage.xaml</DependentUpon>
@@ -58,11 +64,11 @@
     <Compile Update="Views\FamilyCurrentMonthResultsPage.xaml.cs">
       <DependentUpon>FamilyCurrentMonthResultsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\LastMonthExpensesPage.xaml.cs">
-      <DependentUpon>LastMonthExpensesPage.xaml</DependentUpon>
+    <Compile Update="Views\PersonalLastMonthExpensesPage.xaml.cs">
+      <DependentUpon>PersonalLastMonthExpensesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\LastMonthResultsPage.xaml.cs">
-      <DependentUpon>LastMonthResultsPage.xaml</DependentUpon>
+    <Compile Update="Views\PersonalLastMonthResultsPage.xaml.cs">
+      <DependentUpon>PersonalLastMonthResultsPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -73,7 +79,7 @@
     <EmbeddedResource Update="Views\ContentViews\MonthResultsView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CurrentMonthExpensesPage.xaml">
+    <EmbeddedResource Update="Views\PersonalCurrentMonthExpensesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\FamilyLastMonthExpensesPage.xaml">
@@ -82,16 +88,16 @@
     <EmbeddedResource Update="Views\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CurrentMonthResultsPage.xaml">
+    <EmbeddedResource Update="Views\PersonalCurrentMonthResultsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\LastMonthExpensesPage.xaml">
+    <EmbeddedResource Update="Views\PersonalLastMonthExpensesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\LastMonthResultsPage.xaml">
+    <EmbeddedResource Update="Views\PersonalLastMonthResultsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\MonthPlanningPage.xaml">
+    <EmbeddedResource Update="Views\FamilyCurrentMonthPlanningPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\NewCategoryPage.xaml">

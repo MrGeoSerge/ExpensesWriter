@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:contentViews ="clr-namespace:ExpensesWriter.Views.ContentViews"
              mc:Ignorable="d"
-             x:Class="ExpensesWriter.Views.CurrentMonthExpensesPage"
+             x:Class="ExpensesWriter.Views.PersonalCurrentMonthExpensesPage"
              Title="{Binding Title}"
              x:Name="BrowseCurrentMonthExpensesPage">
 

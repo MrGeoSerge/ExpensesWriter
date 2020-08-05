@@ -5,10 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:contentViews ="clr-namespace:ExpensesWriter.Views.ContentViews"
              mc:Ignorable="d"
-             x:Class="ExpensesWriter.Views.AllExpensesPage"
              Title="{Binding Title}"
-             x:Name="BrowseExpensesPage">
-
+             x:Class="ExpensesWriter.Views.PersonalLastMonthExpensesPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Send" Command="{Binding EmailExpensesCommand}"/>
     </ContentPage.ToolbarItems>

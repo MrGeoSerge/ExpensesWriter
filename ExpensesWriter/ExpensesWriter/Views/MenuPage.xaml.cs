@@ -21,17 +21,17 @@ namespace ExpensesWriter.Views
 
             menuItems = new List<HomeMenuItem>
             {
-                new HomeMenuItem { Id = MenuItemType.ExpenseWriter, Title = "Expense Writer" },
-                new HomeMenuItem { Id = MenuItemType.MonthResults, Title = "Month Results" },
-                new HomeMenuItem { Id = MenuItemType.MonthPlanning, Title = "Month Planning" },
-                new HomeMenuItem { Id = MenuItemType.NextMonthPlanning, Title = "Next Month Planning" },
-                new HomeMenuItem { Id = MenuItemType.LastMonthExpenses, Title = "Last Month Expenses" },
-                new HomeMenuItem { Id = MenuItemType.LastMonthResults, Title = "Last Month Results"},
-                new HomeMenuItem { Id = MenuItemType.FamilyCurrentMonthExpenses, Title = "Family Current Month Expenses" },
+                new HomeMenuItem { Id = MenuItemType.PersonalCurrentMonthExpenses, Title = "Personal Current Month Expenses" },
                 new HomeMenuItem { Id = MenuItemType.FamilyCurrentMonthResults, Title = "Family Current Month Results" },
+                new HomeMenuItem { Id = MenuItemType.FamilyCurrentMonthPlanning, Title = "Family Current Month Planning" },
+                new HomeMenuItem { Id = MenuItemType.FamilyCurrentMonthExpenses, Title = "Family Current Month Expenses" },
+                new HomeMenuItem { Id = MenuItemType.FamilyNextMonthPlanning, Title = "Family Next Month Planning" },
                 new HomeMenuItem { Id = MenuItemType.FamilyLastMonthExpenses, Title = "Family Last Month Expenses" },
                 new HomeMenuItem { Id = MenuItemType.FamilyLastMonthResults, Title = "Family Last Month Resuls" },
-                new HomeMenuItem { Id = MenuItemType.AllExpenses, Title = "All Expenses" },
+                new HomeMenuItem { Id = MenuItemType.PersonalCurrentMonthResults, Title = "Personal Current Month Results" },
+                new HomeMenuItem { Id = MenuItemType.PersonalLastMonthExpenses, Title = "Personal Last Month Expenses" },
+                new HomeMenuItem { Id = MenuItemType.PersonalLastMonthResults, Title = "Personal Last Month Results"},
+                new HomeMenuItem { Id = MenuItemType.FamilyAllExpenses, Title = "Family All Expenses" },
                 new HomeMenuItem { Id = MenuItemType.Settings, Title = "Settings" },
                 new HomeMenuItem { Id = MenuItemType.About, Title = "About" },
                 new HomeMenuItem { Id = MenuItemType.Logout, Title = "Logout"}

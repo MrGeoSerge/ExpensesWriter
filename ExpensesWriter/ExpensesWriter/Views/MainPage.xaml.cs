@@ -26,7 +26,7 @@ namespace ExpensesWriter.Views
 
             MasterBehavior = MasterBehavior.Popover;
 
-            MenuPages.Add((int)MenuItemType.ExpenseWriter, (NavigationPage)Detail);
+            MenuPages.Add((int)MenuItemType.PersonalCurrentMonthExpenses, (NavigationPage)Detail);
         }
 
         public async Task NavigateFromMenu(int id)
@@ -35,23 +35,23 @@ namespace ExpensesWriter.Views
             {
                 switch (id)
                 {
-                    case (int)MenuItemType.ExpenseWriter:
-                        MenuPages.Add(id, new NavigationPage(new CurrentMonthExpensesPage()));
+                    case (int)MenuItemType.PersonalCurrentMonthExpenses:
+                        MenuPages.Add(id, new NavigationPage(new PersonalCurrentMonthExpensesPage()));
                         break;
-                    case (int)MenuItemType.MonthResults:
-                        MenuPages.Add(id, new NavigationPage(new CurrentMonthResultsPage()));
+                    case (int)MenuItemType.PersonalCurrentMonthResults:
+                        MenuPages.Add(id, new NavigationPage(new PersonalCurrentMonthResultsPage()));
                         break;
-                    case (int)MenuItemType.MonthPlanning:
-                        MenuPages.Add(id, new NavigationPage(new MonthPlanningPage()));
+                    case (int)MenuItemType.FamilyCurrentMonthPlanning:
+                        MenuPages.Add(id, new NavigationPage(new FamilyCurrentMonthPlanningPage()));
                         break;
-                    case (int)MenuItemType.NextMonthPlanning:
-                        MenuPages.Add(id, new NavigationPage(new NextMonthPlanningPage()));
+                    case (int)MenuItemType.FamilyNextMonthPlanning:
+                        MenuPages.Add(id, new NavigationPage(new FamilyNextMonthPlanningPage()));
                         break;
-                    case (int)MenuItemType.LastMonthResults:
-                        MenuPages.Add(id, new NavigationPage(new LastMonthResultsPage()));
+                    case (int)MenuItemType.PersonalLastMonthResults:
+                        MenuPages.Add(id, new NavigationPage(new PersonalLastMonthResultsPage()));
                         break;
-                    case (int)MenuItemType.LastMonthExpenses:
-                        MenuPages.Add(id, new NavigationPage(new LastMonthExpensesPage()));
+                    case (int)MenuItemType.PersonalLastMonthExpenses:
+                        MenuPages.Add(id, new NavigationPage(new PersonalLastMonthExpensesPage()));
                         break;
                     case (int)MenuItemType.FamilyCurrentMonthExpenses:
                         MenuPages.Add(id, new NavigationPage(new FamilyCurrentMonthExpensesPage()));
@@ -65,8 +65,8 @@ namespace ExpensesWriter.Views
                     case (int)MenuItemType.FamilyLastMonthResults:
                         MenuPages.Add(id, new NavigationPage(new FamilyLastMonthResultsPage()));
                         break;
-                    case (int)MenuItemType.AllExpenses:
-                        MenuPages.Add(id, new NavigationPage(new AllExpensesPage()));
+                    case (int)MenuItemType.FamilyAllExpenses:
+                        MenuPages.Add(id, new NavigationPage(new FamilyAllExpensesPage()));
                         break;
                     case (int)MenuItemType.Settings:
                         MenuPages.Add(id, new NavigationPage(new SettingsPage()));

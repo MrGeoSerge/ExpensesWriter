@@ -12,13 +12,13 @@ using ExpensesWriter.Services;
 namespace ExpensesWriter.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CurrentMonthExpensesPage : ContentPage
+    public partial class PersonalCurrentMonthExpensesPage : ContentPage
     {
-        public CurrentMonthExpensesViewModel viewModel;
-        public CurrentMonthExpensesPage()
+        public PersonalCurrentMonthExpensesViewModel viewModel;
+        public PersonalCurrentMonthExpensesPage()
         {
             InitializeComponent();
-            BindingContext = viewModel = new CurrentMonthExpensesViewModel();
+            BindingContext = viewModel = new PersonalCurrentMonthExpensesViewModel();
         }
 
 
