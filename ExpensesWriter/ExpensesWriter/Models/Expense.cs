@@ -23,9 +23,8 @@ namespace ExpensesWriter.Models
         [OneToOne]
         public BudgetItem BudgetItem { get; set; }
 
-        [Ignore]
         public bool IsDeleted { get; set; }
-
+        public bool SentUpdates { get; set; } = true;
         public Expense()
         {
         }

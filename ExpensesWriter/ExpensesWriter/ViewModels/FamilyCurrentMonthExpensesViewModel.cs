@@ -1,4 +1,6 @@
 ﻿using ExpensesWriter.Models;
+using ExpensesWriter.Repositories.Local;
+using ExpensesWriter.UpdateServices;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,7 +20,16 @@ namespace ExpensesWriter.ViewModels
 
         protected override async Task<IEnumerable<Expense>> GetExpenses()
         {
-            return await DataStore.GetFamilyCurrentMonthItemsAsync(true);
+            try
+            {
+                var expenses = await new ExpensesDataStore().GetFamilyCurrentMonthExpenses();
+                return expenses;
+            }
+            catch (Exception ex)
+            {
+                ShowMessage("Family Current Month Expenses Error", ex.Message);
+                return null;
+            }
         }
 
 

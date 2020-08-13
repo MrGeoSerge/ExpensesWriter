@@ -1,10 +1,13 @@
-﻿using ExpensesWriter.Models;
+﻿using ExpensesWriter.Helpers;
+using ExpensesWriter.Models;
+using ExpensesWriter.Services;
 using SQLite;
 using SQLiteNetExtensionsAsync.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,7 +29,8 @@ namespace ExpensesWriter.Repositories.Local
         public async Task<IEnumerable<Expense>> GetItemsAsync(bool forceRefresh = false)
         {
             var items = await database.GetAllWithChildrenAsync<Expense>();
-            return items;
+            var itemsNotDeleted = items.Where(x => x.IsDeleted == false).ToList();
+            return itemsNotDeleted;
         }
 
         public async Task AddItemsAsync(IEnumerable<Expense> expenses)
@@ -70,5 +74,41 @@ namespace ExpensesWriter.Repositories.Local
         {
             await database.UpdateWithChildrenAsync(expense);
         }
+
+        public async Task<IEnumerable<Expense>> GetFamilyAllExpenses()
+        {
+            return await GetItemsAsync();
+        }
+
+        public async Task<IEnumerable<Expense>> GetFamilyCurrentMonthExpenses()
+        {
+            var allExpenses = await GetItemsAsync();
+            var familyCurrentMonthExpenses = allExpenses.Where(x => x.CreationDateTime.Year == DateTime.Today.Year && x.CreationDateTime.Month == DateTime.Today.Month);
+            return familyCurrentMonthExpenses;
+        }
+
+        public async Task<IEnumerable<Expense>> GetFamilyLastMonthExpenses()
+        {
+            var allExpenses = await GetItemsAsync();
+            var familyLastMonthExpenses = allExpenses.Where(x => x.CreationDateTime.Year == DateTime.Today.Year && x.CreationDateTime.Month == DateTime.Today.Month - 1);
+            return familyLastMonthExpenses;
+        }
+
+        public async Task<IEnumerable<Expense>> GetPersonalCurrentMonthExpenses()
+        {
+            var allExpenses = await GetItemsAsync();
+            var userId = await new UserIdService().GetUserIdAsync();
+            var personalCurrentMonthExpenses = allExpenses.Where(x => x.UserId == userId && x.CreationDateTime.Year == DateTime.Today.Year && x.CreationDateTime.Month == DateTime.Today.Month);
+            return personalCurrentMonthExpenses;
+        }
+
+        public async Task<IEnumerable<Expense>> GetPersonalLastMonthExpenses()
+        {
+            var allExpenses = await GetItemsAsync();
+            var userId = await new UserIdService().GetUserIdAsync();
+            var personalLastMonthExpenses = allExpenses.Where(x => x.UserId == userId && x.CreationDateTime.Year == DateTime.Today.Year && x.CreationDateTime.Month == DateTime.Today.Month - 1);
+            return personalLastMonthExpenses;
+        }
+
     }
 }

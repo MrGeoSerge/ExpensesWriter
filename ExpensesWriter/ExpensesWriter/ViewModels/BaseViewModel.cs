@@ -12,7 +12,7 @@ namespace ExpensesWriter.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Expense> DataStore => DependencyService.Get<IDataStore<Expense>>() ?? new MockDataStore();
+        public AzureDataStore AzureDataStore => new AzureDataStore();
 
         public CategoriesAzureDataStore CategoriesDataStore => new CategoriesAzureDataStore();
 
@@ -28,6 +28,14 @@ namespace ExpensesWriter.ViewModels
         {
             get { return title; }
             set { SetProperty(ref title, value); }
+        }
+
+        protected void ShowMessage(string title, string errorMessage)
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                Application.Current.MainPage.DisplayAlert(title, errorMessage, "Got it");
+            });
         }
 
         protected bool SetProperty<T>(ref T backingStore, T value,

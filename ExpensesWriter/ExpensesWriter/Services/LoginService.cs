@@ -94,6 +94,7 @@ namespace ExpensesWriter.Services
 
             [JsonProperty(".expires")]
             public string Expires { get; set; }
+
         }
 
     }

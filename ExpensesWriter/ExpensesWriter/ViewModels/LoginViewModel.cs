@@ -1,6 +1,7 @@
 ﻿using ExpensesWriter.Helpers;
 using ExpensesWriter.Models;
 using ExpensesWriter.Services;
+using ExpensesWriter.UpdateServices;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -69,6 +70,8 @@ namespace ExpensesWriter.ViewModels
                         IsEnabled = true;
                         Message = "Success :)";
 
+                        await new LoadDataService().LoadData();
+
                         var registerDeviceService = new RegisterDeviceService();
                         bool registerDeviceResult = await registerDeviceService.RegisterDeviceAsync();
 
@@ -89,6 +92,7 @@ namespace ExpensesWriter.ViewModels
                 });
             }
         }
+
 
         private void RegisterDevice()
         {

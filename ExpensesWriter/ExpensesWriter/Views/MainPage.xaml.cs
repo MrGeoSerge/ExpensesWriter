@@ -27,6 +27,7 @@ namespace ExpensesWriter.Views
             MasterBehavior = MasterBehavior.Popover;
 
             MenuPages.Add((int)MenuItemType.PersonalCurrentMonthExpenses, (NavigationPage)Detail);
+            //MenuPages.Add((int)MenuItemType.FamilyAllExpenses, (NavigationPage)Detail);
         }
 
         public async Task NavigateFromMenu(int id)

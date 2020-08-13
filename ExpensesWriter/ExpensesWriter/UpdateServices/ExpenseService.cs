@@ -1,4 +1,5 @@
-﻿using ExpensesWriter.Models;
+﻿using ExpensesWriter.Enums;
+using ExpensesWriter.Models;
 using ExpensesWriter.Services;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -15,6 +17,8 @@ namespace ExpensesWriter.UpdateServices
     {
         readonly Repositories.Local.ExpensesDataStore localStorage;
         readonly AzureDataStore externalStorage;
+
+        public UpdateStatusMessage StatusMessage { get; set; } = new UpdateStatusMessage();
 
         public ExpenseService()
         {
@@ -27,6 +31,8 @@ namespace ExpensesWriter.UpdateServices
             //get from local storage if there are some
             var items = await localStorage.GetItemsAsync();
 
+            SetUpdateStatus("Got items from local storage!", Color.Green, UpdateStatus.InProgress);
+
             if (items.Count() == 0)
             {
                 items = await RenewLocalStorage();
@@ -35,24 +41,31 @@ namespace ExpensesWriter.UpdateServices
             return items;
         }
 
+
+
         public async Task ProcessUpdates()
         {
+            SetUpdateStatus("Update in progress", Color.Yellow, UpdateStatus.InProgress);
+
             var expenses = await GetExternalUpdates();
 
             if(expenses != null)
             {
                 await UpdateLocalStorageWithExternallyChangedItems(expenses);
-                await UpdateExpensesInView();
             }
+            SetUpdateStatus("Update completed", Color.Green, UpdateStatus.Completed);
         }
 
         private async Task<IEnumerable<Expense>> RenewLocalStorage()
         {
+            SetUpdateStatus("Renewing local storage", Color.Yellow, UpdateStatus.InProgress);
+
             var items = await externalStorage.GetItemsAsync(true);
 
             if (items.Count() > 0)
             {
                 await localStorage.AddItemsAsync(items);
+                items = await localStorage.GetItemsAsync();
             }
             return items;
         }
@@ -65,7 +78,9 @@ namespace ExpensesWriter.UpdateServices
             Expense lastModifiedExternalStorageExpense = await externalStorage.GetLastModifiedItemAsync();
             DateTime lastModifiedExternalStorageDT = lastModifiedExternalStorageExpense.ModificationDateTime;
 
-            if(lastModifiedExternalStorageDT > lastModifiedLocalStorageDT)
+            SetUpdateStatus($"Last modified: {lastModifiedExternalStorageExpense.ModificationDateTime.ToShortTimeString()}", Color.YellowGreen, UpdateStatus.InProgress);
+
+            if (lastModifiedExternalStorageDT > lastModifiedLocalStorageDT)
             {
                 var expenses = await externalStorage.GetModifiedItemsAsync(lastModifiedLocalStorageDT);
                 return expenses;
@@ -81,13 +96,48 @@ namespace ExpensesWriter.UpdateServices
                 await localStorage.AddItemsAsync(expenses);
         }
 
-        private async Task UpdateExpensesInView()
+        public async Task AddExpenseAsync(Expense expense)
         {
-            var expenses = await localStorage.GetItemsAsync();
-            var sortedExpenses = expenses.Cast<Expense>().OrderByDescending((x) => x.CreationDateTime).Select(x => x);
-            var expensesCollection = new ObservableCollection<Expense>(sortedExpenses);
+            expense.SentUpdates = false;
+            await localStorage.AddItemAsync(expense);
 
-            MessagingCenter.Send<ExpenseService, ObservableCollection<Expense>>(this, "UpdateExpenses", expensesCollection);
+            Expense addExpense = new Expense(expense);
+            addExpense.BudgetItem = null;
+            bool addResult = await externalStorage.AddItemAsync(addExpense);
+
+            if (addResult)
+            {
+                expense.SentUpdates = true;
+                await localStorage.UpdateItemAsync(expense);
+            }
+        }
+
+        public async Task UpdateExpense(Expense expense)
+        {
+            expense.SentUpdates = false;
+            await localStorage.UpdateItemAsync(expense);
+
+            bool updateResult = await externalStorage.UpdateItemAsync(expense);
+            if (updateResult)
+            {
+                expense.SentUpdates = true;
+                await localStorage.UpdateItemAsync(expense);
+            }
+        }
+
+        public async Task DeleteExpense(Expense expense)
+        {
+            expense.IsDeleted = true;
+            await UpdateExpense(expense);
+        }
+
+        private void SetUpdateStatus(string message, Color color, UpdateStatus updateStatus)
+        {
+            StatusMessage.Message = message;
+            StatusMessage.Color = color;
+            StatusMessage.UpdateStatus = updateStatus;
+            MessagingCenter.Send<ExpenseService, UpdateStatusMessage>(this, "UpdateStatusMessage", StatusMessage);
+
         }
     }
 }

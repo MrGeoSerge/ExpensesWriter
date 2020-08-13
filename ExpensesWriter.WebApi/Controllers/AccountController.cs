@@ -28,6 +28,7 @@ namespace ExpensesWriter.WebApi.Controllers
 
         public AccountController()
         {
+            
         }
 
         public AccountController(ApplicationUserManager userManager,

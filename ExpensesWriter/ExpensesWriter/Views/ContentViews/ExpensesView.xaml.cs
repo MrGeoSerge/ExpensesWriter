@@ -1,5 +1,6 @@
 ﻿using ExpensesWriter.Models;
 using ExpensesWriter.Services;
+using ExpensesWriter.UpdateServices;
 using ExpensesWriter.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -36,15 +37,15 @@ namespace ExpensesWriter.Views.ContentViews
         {
             var expense = ((MenuItem)sender).CommandParameter as Expense;
             RemoveFromListView(expense);
-            await RemoveFromRemoteStorage(expense);
+            await new ExpenseService().DeleteExpense(expense);
         }
 
-        private async Task RemoveFromRemoteStorage(Expense expense)
-        {
-            var result = await new AzureDataStore().DeleteItemsAsync(expense.Id);
-            if (!result)
-                await Application.Current.MainPage.DisplayAlert("Ups", "Item was not deleted. Check your Internet connection please", "Got it");
-        }
+        //private async Task RemoveFromRemoteStorage(Expense expense)
+        //{
+        //    var result = await new AzureDataStore().DeleteItemsAsync(expense.Id);
+        //    if (!result)
+        //        await Application.Current.MainPage.DisplayAlert("Ups", "Item was not deleted. Check your Internet connection please", "Got it");
+        //}
 
         private void RemoveFromListView(Expense expense)
         {

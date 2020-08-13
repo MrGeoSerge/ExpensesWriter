@@ -22,8 +22,8 @@ namespace ExpensesWriter
         //public static string AzureBackendUrl =
         //    DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5000" : "http://192.168.88.171:44376";
         public static string AzureBackendUrl = Constants.BaseApiAddress;
-        public static bool UseMockDataStore = false;
-        public static bool UseLocalDataStore = false;
+        //public static bool UseMockDataStore = false;
+        //public static bool UseLocalDataStore = false;
 
         public static string AppleDeviceToken = string.Empty;
 
@@ -34,12 +34,12 @@ namespace ExpensesWriter
         {
             InitializeComponent();
 
-            if (UseMockDataStore)
-                DependencyService.Register<MockDataStore>();
-            else if (UseLocalDataStore)
-                DependencyService.Register<LocalDataStore>();
-            else
-                DependencyService.Register<AzureDataStore>();
+            //if (UseMockDataStore)
+            //    DependencyService.Register<MockDataStore>();
+            //else if (UseLocalDataStore)
+            //    DependencyService.Register<LocalDataStore>();
+            //else
+            //    DependencyService.Register<AzureDataStore>();
 
             //DependencyService.Register<CategoriesMockDataStore>();
 

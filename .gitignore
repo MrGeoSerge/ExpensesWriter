@@ -352,3 +352,4 @@ MigrationBackup/
 *.p12
 /ExpensesWriter.WebApi/webConnectionStrings.config
 /ExpensesWriter/ExpensesWriter/Constants.cs
+/ExpensesWriter.WebApi/Constants.cs

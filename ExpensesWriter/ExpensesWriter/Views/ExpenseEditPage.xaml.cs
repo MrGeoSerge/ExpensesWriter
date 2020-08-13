@@ -31,11 +31,7 @@ namespace ExpensesWriter.Views
 
         private async void Save_Clicked(object sender, EventArgs e)
         {
-            //IDataStore<Expense> DataStore = DependencyService.Get<IDataStore<Expense>>();
-            //await DataStore.UpdateItemAsync(viewModel.Expense);
-
             await Navigation.PopAsync();
-
         }
     }
 }

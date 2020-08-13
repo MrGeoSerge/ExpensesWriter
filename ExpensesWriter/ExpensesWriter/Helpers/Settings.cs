@@ -60,5 +60,18 @@ namespace ExpensesWriter.Helpers
                 AppSettings.AddOrUpdateValue("AccessTokenExpirationDate", value);
             }
         }
+
+        public static string UserId
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault("UserId", "");
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue("UserId", value);
+            }
+        }
+
     }
 }

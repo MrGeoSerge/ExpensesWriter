@@ -24,5 +24,7 @@ namespace ExpensesWriter.WebApi.Models
 
         public DbSet<BudgetItem> BudgetItems { get; set; }
         public DbSet<BudgetPlanningItem> BudgetPlanningItems { get; set; }
+
+        //TODO: Create FamilyDB Set and family creation logic and UI
     }
 }

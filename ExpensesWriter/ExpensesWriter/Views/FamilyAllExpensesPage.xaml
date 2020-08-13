@@ -12,6 +12,6 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Send" Command="{Binding EmailExpensesCommand}"/>
     </ContentPage.ToolbarItems>
-    <contentViews:ExpensesView/>
-
+    <contentViews:ExpensesView>
+    </contentViews:ExpensesView>
 </ContentPage>

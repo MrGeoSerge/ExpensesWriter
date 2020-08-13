@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using ExpensesWriter.Models;
 using ExpensesWriter.Services;
+using ExpensesWriter.UpdateServices;
 using Xamarin.Forms;
 
 namespace ExpensesWriter.ViewModels
 {
-    public class ExpenseEditViewModel : BaseExpenseViewModel
+    public class ExpenseEditViewModel : BaseViewModel
     {
         private Expense expense;
         public Expense Expense {
@@ -62,13 +63,11 @@ namespace ExpensesWriter.ViewModels
                 {
                     try
                     {
-                        IDataStore<Expense> DataStore = DependencyService.Get<IDataStore<Expense>>();
+                        AzureDataStore AzureDataStore = new AzureDataStore();
                         Expense.BudgetItemId = App.BudgetItems.Where(x => x.Name == SelectedCategory).Select(x => x.Id).FirstOrDefault();
                         Expense.BudgetItem = null;
-                        await DataStore.UpdateItemAsync(Expense);
 
-                        //Device.BeginInvokeOnMainThread(async () =>
-                        //    await App.Current.MainPage.Navigation.PopAsync());
+                        await new ExpenseService().UpdateExpense(expense);
                     }
                     catch(Exception ex)
                     {

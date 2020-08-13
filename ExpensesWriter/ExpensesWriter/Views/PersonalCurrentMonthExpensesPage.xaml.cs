@@ -56,7 +56,7 @@ namespace ExpensesWriter.Views
             }
         }
 
-        private void ExpenseNameEntry_Unfocused(object sender, FocusEventArgs e)
+        private async void ExpenseNameEntry_Unfocused(object sender, FocusEventArgs e)
         {
             if (string.IsNullOrEmpty(expenseQntEntry.Text) || string.IsNullOrEmpty(expenseNameEntry.Text))
                 return;
@@ -74,7 +74,7 @@ namespace ExpensesWriter.Views
             expense.CreationDateTime = DateTime.Now;
             expense.ModificationDateTime = DateTime.Now;
             expense.Id = Guid.NewGuid().ToString();
-
+            expense.UserId = await new UserIdService().GetUserIdAsync();
             viewModel.AddExpenseCommand.Execute(expense);
 
             expenseQntEntry.Text = "";
@@ -89,17 +89,21 @@ namespace ExpensesWriter.Views
         }
 
 
-        private async void OnDelete(object sender, EventArgs e)
-        {
-            var mi = ((MenuItem)sender);
+        //private async void OnDelete(object sender, EventArgs e)
+        //{
+        //    var mi = ((MenuItem)sender);
 
-            var expense = mi.CommandParameter as Expense;
-            var result = await new AzureDataStore().DeleteItemsAsync(expense.Id);
+        //    var expense = mi.CommandParameter as Expense;
 
-            if (!result)
-                await Application.Current.MainPage.DisplayAlert("Ups", "Item was not deleted. Check your Internet connection please", "Got it");
+        //    expense.IsDeleted = true;
+        //    var result = await new AzureDataStore().UpdateItemAsync(expense);
 
-        }
+        //    //var result = await new AzureDataStore().DeleteItemsAsync(expense.Id);
+
+        //    if (!result)
+        //        await Application.Current.MainPage.DisplayAlert("Ups", "Item was not deleted. Check your Internet connection please", "Got it");
+
+        //}
 
     }
 }

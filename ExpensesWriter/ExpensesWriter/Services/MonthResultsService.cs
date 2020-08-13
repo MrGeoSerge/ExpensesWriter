@@ -12,12 +12,12 @@ namespace ExpensesWriter.Services
 {
     public class MonthResultsService
     {
-        public IDataStore<Expense> DataStore => DependencyService.Get<IDataStore<Expense>>() ?? new MockDataStore();
+        public AzureDataStore AzureDataStore => new AzureDataStore();
         public CategoriesMockDataStore CategoriesDataStore => new CategoriesMockDataStore();
 
         public async Task<ObservableCollection<CategoryExpense>> GetCurrentMonthResults()
         {
-            var expenses = await DataStore.GetFamilyCurrentMonthItemsAsync(true);
+            var expenses = await AzureDataStore.GetFamilyCurrentMonthItemsAsync(true);
 
             SetDefaultBudgetItemToExpenseWithNullBudgetItem(ref expenses);
 
@@ -53,7 +53,7 @@ namespace ExpensesWriter.Services
 
         public async Task<ObservableCollection<CategoryExpense>> GetFamilyCurrentMonthResults()
         {
-            var expenses = await DataStore.GetFamilyCurrentMonthItemsAsync(true);
+            var expenses = await AzureDataStore.GetFamilyCurrentMonthItemsAsync(true);
             SetDefaultBudgetItemToExpenseWithNullBudgetItem(ref expenses);
             var categories = GetCategorizedMonthResults(expenses);
             await ApplyBudgetPlanningForCurrentMonth(categories);
@@ -63,7 +63,7 @@ namespace ExpensesWriter.Services
 
         public async Task<ObservableCollection<CategoryExpense>> GetFamilyLastMonthResults()
         {
-            var expenses = await DataStore.GetFamilyLastMonthItemsAsync(true);
+            var expenses = await AzureDataStore.GetFamilyLastMonthItemsAsync(true);
             SetDefaultBudgetItemToExpenseWithNullBudgetItem(ref expenses);
             var categories = GetCategorizedMonthResults(expenses);
             await ApplyBudgetPlanningForLastMonth(categories);
@@ -72,7 +72,7 @@ namespace ExpensesWriter.Services
 
         public async Task<ObservableCollection<CategoryExpense>> GetLastMonthResults()
         {
-            var expenses = await DataStore.GetLastMonthItemsAsync(true);
+            var expenses = await AzureDataStore.GetLastMonthItemsAsync(true);
             SetDefaultBudgetItemToExpenseWithNullBudgetItem(ref expenses);
             var categories = GetCategorizedMonthResults(expenses);
             await ApplyBudgetPlanningForLastMonth(categories);

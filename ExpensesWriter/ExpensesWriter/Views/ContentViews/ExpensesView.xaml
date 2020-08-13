@@ -7,20 +7,14 @@
              x:Class="ExpensesWriter.Views.ContentViews.ExpensesView">
   <ContentView.Content>
         <StackLayout Padding="20">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="55"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-            </Grid>
+            <Label Text="{Binding StatusMessage.Message}" BackgroundColor="{Binding StatusMessage.Color}"/>
             <ListView x:Name="ExpensesListView"
                 ItemsSource="{Binding Expenses}"
                 VerticalOptions="FillAndExpand"
                 HasUnevenRows="true"
-                RefreshCommand="{Binding LoadExpensesCommand}"
+                RefreshCommand="{Binding LoadUpdatesCommand}"
                 IsPullToRefreshEnabled="true"
-                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                IsRefreshing="{Binding IsBusy, Mode=Default}"
                 CachingStrategy="RecycleElement"
                 ItemSelected="OnExpenseSelected" >
                 <ListView.ItemTemplate>
@@ -57,7 +51,6 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
         </StackLayout>
     </ContentView.Content>
 </ContentView>

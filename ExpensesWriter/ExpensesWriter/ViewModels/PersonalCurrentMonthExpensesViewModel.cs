@@ -1,4 +1,5 @@
-﻿using ExpensesWriter.Models;
+﻿using ExpensesWriter.Helpers;
+using ExpensesWriter.Models;
 using ExpensesWriter.Repositories.Local;
 using ExpensesWriter.Services;
 using ExpensesWriter.UpdateServices;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -44,10 +46,9 @@ namespace ExpensesWriter.ViewModels
                 return;
 
             IsBusy = true;
-
             try
             {
-                LoadCategories();
+                await LoadCategories();
 
                 Expenses.Clear();
                 var expenses = await GetExpenses();
@@ -89,12 +90,13 @@ namespace ExpensesWriter.ViewModels
         {
             try
             {
-                return await DataStore.GetCurrentMonthItemsAsync(true);
+                var expenses = await new ExpensesDataStore().GetPersonalCurrentMonthExpenses();
+                return expenses;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                Debug.WriteLine(ex);
-                throw;
+                ShowMessage("Personal Current Month Expenses Error", ex.Message);
+                return null;
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using ExpensesWriter.Models;
+using ExpensesWriter.Repositories.Local;
 using ExpensesWriter.UpdateServices;
 using System;
 using System.Collections.Generic;
@@ -12,29 +13,25 @@ namespace ExpensesWriter.ViewModels
 {
     public class FamilyAllExpensesViewModel : ExpensesViewModel
     {
+
         public FamilyAllExpensesViewModel()
         {
-            Title = "All Expenses";
-            SubscribeForUpdates();
+            Title = "Family All Expenses";
         }
 
         protected override async Task<IEnumerable<Expense>> GetExpenses()
         {
-            var expensesService = new ExpenseService();
-            var expenses = await expensesService.GetExpensesAsync();
-
-            Task.Run(() => expensesService.ProcessUpdates());
-
-            return expenses;
-        }
-
-        private void SubscribeForUpdates()
-        {
-            MessagingCenter.Subscribe<ExpenseService, ObservableCollection<Expense>>(this, "UpdateExpenses", (obj, args) =>
+            try
             {
-                var expenses = args as IEnumerable<Expense>;
-                Expenses = new ObservableCollection<Expense>(expenses);
-            });
+                var expenses = await new ExpensesDataStore().GetFamilyAllExpenses();
+                return expenses;
+            }
+            catch (Exception ex)
+            {
+                ShowMessage("Family All Expenses Error", ex.Message);
+                return null;
+            }
         }
+
     }
 }

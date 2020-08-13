@@ -24,5 +24,7 @@ namespace ExpensesWriter.WebApi.Models
 
         public int? BudgetItemId { get; set; }
         public virtual BudgetItem BudgetItem { get; set; }
+        public bool IsDeleted { get; set; } = false;
+
     }
 }

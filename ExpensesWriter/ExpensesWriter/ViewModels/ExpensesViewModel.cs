@@ -12,10 +12,11 @@ using ExpensesWriter.Services;
 using System.Collections;
 using System.Collections.Generic;
 using ExpensesWriter.UpdateServices;
+using System.Threading;
 
 namespace ExpensesWriter.ViewModels
 {
-    public class ExpensesViewModel : BaseExpenseViewModel
+    public abstract class ExpensesViewModel : BaseViewModel
     {
         private ObservableCollection<Expense> expenses;
         public ObservableCollection<Expense> Expenses
@@ -31,7 +32,25 @@ namespace ExpensesWriter.ViewModels
             }
         }
 
+        private UpdateStatusMessage statusMessage;
+        public UpdateStatusMessage StatusMessage
+        {
+            get
+            {
+                return statusMessage;
+            }
+            set
+            {
+                statusMessage = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+
+
         public Command LoadExpensesCommand { get; set; }
+        public Command LoadUpdatesCommand { get; set; }
         public Command EmailExpensesCommand { get; set; }
         public Command AddExpenseCommand { get; set; }
         public Command DeleteExpenseCommand { get; set; }
@@ -44,22 +63,12 @@ namespace ExpensesWriter.ViewModels
             LoadExpensesCommand = new Command(async () => await ExecuteLoadExpensesCommand());
             EmailExpensesCommand = new Command(async () => await ExecuteEmailExpensesCommand());
             AddExpenseCommand = new Command(async (expense) => await ExecuteAddExpenseCommand(expense));
+            LoadUpdatesCommand = new Command(async () => await ExecuteLoadUpdatesCommand());
 
-            MessagingCenter.Subscribe<NewExpensePage, Expense>(this, "AddExpense", async (obj, expense) =>
-            {
-                var newExpense = expense as Expense;
-                Expenses.Add(newExpense);
-                await DataStore.AddItemAsync(newExpense);
-            });
-
-            MessagingCenter.Subscribe<FamilyAllExpensesPage, Expense>(this, "AddExpense2", async (obj, expense) =>
-            {
-                var newExpense = expense as Expense;
-                Expenses.Insert(0, newExpense);
-                await DataStore.AddItemAsync(newExpense);
-            });
+            SubscribeForEvents();
 
             LoadExpensesCommand.Execute(null);
+            //LoadUpdatesCommand.Execute(null);
         }
 
         private async Task ExecuteAddExpenseCommand(object expense)
@@ -69,9 +78,10 @@ namespace ExpensesWriter.ViewModels
             {
                 Expenses.Insert(0, newExpense);
 
-                Expense addExpense = new Expense(newExpense);
-                addExpense.BudgetItem = null;
-                await DataStore.AddItemAsync(addExpense);
+                await new ExpenseService().AddExpenseAsync(newExpense);
+                //Expense addExpense = new Expense(newExpense);
+                //addExpense.BudgetItem = null;
+                //await AzureDataStore.AddItemAsync(addExpense);
             }
         }
 
@@ -80,35 +90,28 @@ namespace ExpensesWriter.ViewModels
             if (IsBusy)
                 return;
 
-            Device.BeginInvokeOnMainThread(() =>
-            IsBusy = true);
+            Device.BeginInvokeOnMainThread(() => IsBusy = true);
 
             try
             {
-                Expenses.Clear();
-                var expenses = await GetExpenses().ConfigureAwait(true);
-                var sortedExpenses = expenses.Cast<Expense>().OrderByDescending((x) => x.CreationDateTime).Select(x => x);
-                foreach(var expense in sortedExpenses)
-                {
-                    Expenses.Add(expense);
-                }
-
+                await UpdateExpensesInView();
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
-                throw;
+                ShowMessage("Expenses View Model Error", ex.Message);
             }
             finally
             {
-                Device.BeginInvokeOnMainThread(() =>
-                    IsBusy = false);
+                Device.BeginInvokeOnMainThread(() => IsBusy = false);
             }
         }
 
-        protected virtual async Task<IEnumerable<Expense>> GetExpenses()
+        protected abstract Task<IEnumerable<Expense>> GetExpenses();
+
+        protected void CheckIsBusy()
         {
-            return await DataStore.GetItemsAsync(true);
+            Thread.Sleep(2000);
+            ShowMessage("Is Busy", $"IsBusy = {IsBusy}");
         }
 
         private async Task ExecuteEmailExpensesCommand()
@@ -117,6 +120,58 @@ namespace ExpensesWriter.ViewModels
             await emailService.SendExpenses(Expenses);
         }
 
+        private async Task UpdateExpensesInView()
+        {
+            Expenses.Clear();
+            var expenses = await GetExpenses();
+            var sortedExpenses = expenses.Cast<Expense>().OrderByDescending((x) => x.CreationDateTime).Select(x => x);
+            foreach (var expense in sortedExpenses)
+            {
+                Expenses.Add(expense);
+            }
+            //Expenses = new ObservableCollection<Expense>(sortedExpenses);
+
+        }
+
+        private async Task ExecuteLoadUpdatesCommand()
+        {
+            await new ExpenseService().ProcessUpdates();
+            await UpdateExpensesInView();
+            IsBusy = false;
+        }
+
+        private void SubscribeForEvents()
+        {
+            MessagingCenter.Subscribe<NewExpensePage, Expense>(this, "AddExpense", async (obj, expense) =>
+            {
+                var newExpense = expense as Expense;
+                Expenses.Add(newExpense);
+                await AzureDataStore.AddItemAsync(newExpense);
+            });
+
+            MessagingCenter.Subscribe<FamilyAllExpensesPage, Expense>(this, "AddExpense2", async (obj, expense) =>
+            {
+                var newExpense = expense as Expense;
+                Expenses.Insert(0, newExpense);
+                await AzureDataStore.AddItemAsync(newExpense);
+            });
+
+
+            MessagingCenter.Subscribe<ExpenseService, UpdateStatusMessage>(this, "UpdateStatusMessage", (obj, args) =>
+            {
+                UpdateStatusMessage updateStatusMessage = args as UpdateStatusMessage;
+                if (updateStatusMessage != null)
+                {
+                    if(updateStatusMessage.UpdateStatus == Enums.UpdateStatus.Completed)
+                    {
+                        
+                    }
+                    StatusMessage = updateStatusMessage;
+                }
+            });
+
+
+        }
 
 
     }

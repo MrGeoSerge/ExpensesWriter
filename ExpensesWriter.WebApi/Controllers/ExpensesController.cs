@@ -27,9 +27,10 @@ namespace ExpensesWriter.WebApi.Controllers
         public IEnumerable<Expense> GetExpenses()
         {
             string userId = User.Identity.GetUserId();
-            return db.Expenses.Where(user => user.UserId == userId).ToList();
+            //return db.Expenses.Where(user => user.UserId == userId).ToList();
+            var result = db.Expenses.ToList();
 
-            //return db.Expenses;
+            return result;
         }
 
         // GET: api/CurMonthExpenses
@@ -239,8 +240,8 @@ namespace ExpensesWriter.WebApi.Controllers
             {
                 return NotFound();
             }
-
-            db.Expenses.Remove(expense);
+            expense.IsDeleted = true;
+            //db.Expenses.Remove(expense);
             db.SaveChanges();
 
             return Ok(expense);
