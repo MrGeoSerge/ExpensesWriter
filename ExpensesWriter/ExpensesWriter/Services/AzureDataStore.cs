@@ -12,6 +12,7 @@ using Xamarin.Forms;
 using System.Diagnostics;
 using ExpensesWriter.Views;
 using System.Globalization;
+using System.Linq;
 
 namespace ExpensesWriter.Services
 {
@@ -243,11 +244,13 @@ namespace ExpensesWriter.Services
                 if (expense == null || expense.Id == null || !IsConnected)
                     return false;
 
-                expense.ModificationDateTime = DateTime.UtcNow;
+                var budgetItem = expense.BudgetItem;
+                expense.BudgetItem = null;
 
                 var serializedExpense = JsonConvert.SerializeObject(expense);
                 var response = await client.PutAsync($"api/expenses/put", new StringContent(serializedExpense, Encoding.UTF8, "application/json"));
 
+                expense.BudgetItem = budgetItem;
                 return response.IsSuccessStatusCode;
             }
             catch(Exception ex)

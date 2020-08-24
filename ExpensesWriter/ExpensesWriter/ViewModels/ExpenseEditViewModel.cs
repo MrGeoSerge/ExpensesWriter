@@ -63,9 +63,9 @@ namespace ExpensesWriter.ViewModels
                 {
                     try
                     {
-                        AzureDataStore AzureDataStore = new AzureDataStore();
-                        Expense.BudgetItemId = App.BudgetItems.Where(x => x.Name == SelectedCategory).Select(x => x.Id).FirstOrDefault();
-                        Expense.BudgetItem = null;
+                        var budgetItem = App.BudgetItems.Where(x => x.Name == SelectedCategory).FirstOrDefault();
+                        Expense.BudgetItemId = budgetItem.Id;
+                        Expense.BudgetItem = budgetItem;
 
                         await new ExpenseService().UpdateExpense(expense);
                     }

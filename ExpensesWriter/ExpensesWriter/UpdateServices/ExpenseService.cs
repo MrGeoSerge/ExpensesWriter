@@ -99,6 +99,7 @@ namespace ExpensesWriter.UpdateServices
         public async Task AddExpenseAsync(Expense expense)
         {
             expense.SentUpdates = false;
+            expense.ModificationDateTime = DateTime.Now;
             await localStorage.AddItemAsync(expense);
 
             Expense addExpense = new Expense(expense);
@@ -115,6 +116,8 @@ namespace ExpensesWriter.UpdateServices
         public async Task UpdateExpense(Expense expense)
         {
             expense.SentUpdates = false;
+            expense.ModificationDateTime = DateTime.Now;
+
             await localStorage.UpdateItemAsync(expense);
 
             bool updateResult = await externalStorage.UpdateItemAsync(expense);
