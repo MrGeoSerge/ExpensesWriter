@@ -21,7 +21,7 @@ namespace ExpensesWriter.UpdateServices
             ///TODO: add update logic
             if(items.Count() == 0)
             {
-                var externalStorage = new CategoriesAzureDataStore();
+                var externalStorage = new BudgetItemsDataService();
                 items = await externalStorage.GetItemsAsync(true);
 
                 if(items.Count() > 0)

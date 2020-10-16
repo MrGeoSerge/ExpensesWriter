@@ -16,14 +16,14 @@ namespace ExpensesWriter.UpdateServices
     public class ExpenseService
     {
         readonly Repositories.Local.ExpensesDataStore localStorage;
-        readonly AzureDataStore externalStorage;
+        readonly ExpensesDataService externalStorage;
 
         public UpdateStatusMessage StatusMessage { get; set; } = new UpdateStatusMessage();
 
         public ExpenseService()
         {
             localStorage = new Repositories.Local.ExpensesDataStore();
-            externalStorage = new AzureDataStore();
+            externalStorage = new ExpensesDataService();
         }
 
         public async Task<IEnumerable<Expense>> GetExpensesAsync()

@@ -12,9 +12,9 @@ namespace ExpensesWriter.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public AzureDataStore AzureDataStore => new AzureDataStore();
+        public ExpensesDataService AzureDataStore => new ExpensesDataService();
 
-        public CategoriesAzureDataStore CategoriesDataStore => new CategoriesAzureDataStore();
+        public BudgetItemsDataService CategoriesDataStore => new BudgetItemsDataService();
 
         bool isBusy = false;
         public bool IsBusy

@@ -16,12 +16,12 @@ using System.Linq;
 
 namespace ExpensesWriter.Services
 {
-    public class AzureDataStore : IDataStore<Expense>
+    public class ExpensesDataService
     {
         HttpClient client;
         IEnumerable<Expense> expenses;
 
-        public AzureDataStore()
+        public ExpensesDataService()
         {
             client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Settings.AccessToken);

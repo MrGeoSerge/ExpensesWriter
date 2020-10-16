@@ -13,12 +13,12 @@ using System.Collections.ObjectModel;
 
 namespace ExpensesWriter.Services
 {
-    public class BudgetPlanningItemsAzureDataStore
+    public class BudgetPlanningItemsDataService
     {
         HttpClient client;
         IEnumerable<BudgetPlanningItem> items;
 
-        public BudgetPlanningItemsAzureDataStore()
+        public BudgetPlanningItemsDataService()
         {
             client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Settings.AccessToken);

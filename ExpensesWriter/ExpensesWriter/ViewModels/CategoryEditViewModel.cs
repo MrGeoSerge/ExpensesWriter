@@ -20,7 +20,7 @@ namespace ExpensesWriter.ViewModels
             {
                 return new Command(async () =>
                 {
-                    await new CategoriesAzureDataStore().AddItemAsync(Category);
+                    await new BudgetItemsDataService().AddItemAsync(Category);
                     
                     Device.BeginInvokeOnMainThread(async () => 
                             await App.Current.MainPage.Navigation.PopModalAsync());

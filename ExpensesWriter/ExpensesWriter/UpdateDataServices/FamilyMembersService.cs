@@ -12,7 +12,7 @@ namespace ExpensesWriter.UpdateServices
     public class FamilyMembersService
     {
         readonly FamilyMembersDataStore localStorage = new FamilyMembersDataStore();
-        readonly FamilyMembersAzureDataStore externalStorage = new FamilyMembersAzureDataStore();
+        readonly FamilyMembersDataService externalStorage = new FamilyMembersDataService();
 
 
 

@@ -101,7 +101,7 @@ namespace ExpensesWriter.ViewModels
                {
                    try
                    {
-                       var dataStore = new BudgetPlanningItemsAzureDataStore();
+                       var dataStore = new BudgetPlanningItemsDataService();
 
                        await dataStore.UpdateItemAsync(SelectedPlanningItem);
                    }
@@ -122,7 +122,7 @@ namespace ExpensesWriter.ViewModels
                {
                    try
                    {
-                       var dataStore = new BudgetPlanningItemsAzureDataStore();
+                       var dataStore = new BudgetPlanningItemsDataService();
 
                        await dataStore.UpdateMonthItemsAsync(BudgetPlanningItems);
                    }
@@ -173,7 +173,7 @@ namespace ExpensesWriter.ViewModels
 
         private async Task<IEnumerable<BudgetPlanningItem>> GetCurrentMonthPlanningItems()
         {
-            return await new BudgetPlanningItemsAzureDataStore().GetCurrentMonthItemsAsync(true);
+            return await new BudgetPlanningItemsDataService().GetCurrentMonthItemsAsync(true);
         }
     }
 }

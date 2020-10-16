@@ -12,12 +12,12 @@ using Xamarin.Forms;
 
 namespace ExpensesWriter.Services
 {
-    public class CategoriesAzureDataStore
+    public class BudgetItemsDataService
     {
         HttpClient client;
         IEnumerable<BudgetItem> categories;
 
-        public CategoriesAzureDataStore()
+        public BudgetItemsDataService()
         {
             client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Settings.AccessToken);

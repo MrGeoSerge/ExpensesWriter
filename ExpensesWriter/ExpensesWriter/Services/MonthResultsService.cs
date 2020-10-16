@@ -12,8 +12,7 @@ namespace ExpensesWriter.Services
 {
     public class MonthResultsService
     {
-        public AzureDataStore AzureDataStore => new AzureDataStore();
-        public CategoriesMockDataStore CategoriesDataStore => new CategoriesMockDataStore();
+        public ExpensesDataService AzureDataStore => new ExpensesDataService();
 
         public async Task<ObservableCollection<CategoryExpense>> GetCurrentMonthResults()
         {
@@ -31,7 +30,7 @@ namespace ExpensesWriter.Services
 
         private async Task ApplyBudgetPlanningForCurrentMonth(IEnumerable<CategoryExpense> categories)
         {
-            var planningItems = await new BudgetPlanningItemsAzureDataStore().GetCurrentMonthItemsAsync(true);
+            var planningItems = await new BudgetPlanningItemsDataService().GetCurrentMonthItemsAsync(true);
 
             foreach(var category in categories)
             {
@@ -42,7 +41,7 @@ namespace ExpensesWriter.Services
 
         private async Task ApplyBudgetPlanningForLastMonth(IEnumerable<CategoryExpense> categories)
         {
-            var planningItems = await new BudgetPlanningItemsAzureDataStore().GetLastMonthItemsAsync(true);
+            var planningItems = await new BudgetPlanningItemsDataService().GetLastMonthItemsAsync(true);
 
             foreach(var category in categories)
             {

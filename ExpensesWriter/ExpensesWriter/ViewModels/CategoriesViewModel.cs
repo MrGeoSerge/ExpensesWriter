@@ -68,7 +68,7 @@ namespace ExpensesWriter.ViewModels
 
         private async Task<IEnumerable<BudgetItem>> GetCategories()
         {
-            return await new CategoriesAzureDataStore().GetItemsAsync(true);
+            return await new BudgetItemsDataService().GetItemsAsync(true);
             //return await CategoriesDataStore.GetItemsAsync();
         }
     }
