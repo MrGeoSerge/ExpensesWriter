@@ -13,12 +13,16 @@
     </ContentView.Resources>
     <ContentView.Content>
         <StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Total Planned"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                <Label Text="Total Planned:"/>
                 <Label Text="{Binding TotalPlannedMoney}"/>
-                <Label Text="Total Fact"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                <Label Text="Total Fact:"/>
                 <Label Text="{Binding TotalMoney}"/>
-                <Label Text="Percent"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                <Label Text="Percent:"/>
                 <Label Text="{Binding PercentOfExecution}"/>
             </StackLayout>
 

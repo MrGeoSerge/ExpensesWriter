@@ -12,12 +12,19 @@ namespace ExpensesWriter.Converters
         {
             var percents = (int)value;
 
-            if (percents < 90)
-                return "LightGreen";
-            else if (percents >= 90 && percents <= 100)
-                return "Yellow";
-            else
-                return "#f5b8a9";
+
+            int hue = 100 - percents;
+            Color color = Color.FromHsv(hue, 50, 85);
+
+            //var colorString = Color.;
+            return color;
+
+            //if (percents < 90)
+            //    return "LightGreen";
+            //else if (percents >= 90 && percents <= 100)
+            //    return "Yellow";
+            //else
+            //    return "#f5b8a9";
 
         }
 

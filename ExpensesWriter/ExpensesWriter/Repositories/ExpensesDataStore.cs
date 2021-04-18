@@ -90,7 +90,12 @@ namespace ExpensesWriter.Repositories.Local
         public async Task<IEnumerable<Expense>> GetFamilyLastMonthExpenses()
         {
             var allExpenses = await GetItemsAsync();
-            var familyLastMonthExpenses = allExpenses.Where(x => x.CreationDateTime.Year == DateTime.Today.Year && x.CreationDateTime.Month == DateTime.Today.Month - 1);
+
+            var lastMonthDate = DateTime.Today.AddMonths(-1);
+            var lastMonthYear = lastMonthDate.Year;
+            var lastMonthMonth = lastMonthDate.Month;
+
+            var familyLastMonthExpenses = allExpenses.Where(x => x.CreationDateTime.Year == lastMonthYear && x.CreationDateTime.Month == lastMonthMonth);
             return familyLastMonthExpenses;
         }
 
@@ -106,7 +111,12 @@ namespace ExpensesWriter.Repositories.Local
         {
             var allExpenses = await GetItemsAsync();
             var userId = await new UserIdService().GetUserIdAsync();
-            var personalLastMonthExpenses = allExpenses.Where(x => x.UserId == userId && x.CreationDateTime.Year == DateTime.Today.Year && x.CreationDateTime.Month == DateTime.Today.Month - 1);
+
+            var lastMonthDate = DateTime.Today.AddMonths(-1);
+            var lastMonthYear = lastMonthDate.Year;
+            var lastMonthMonth = lastMonthDate.Month;
+
+            var personalLastMonthExpenses = allExpenses.Where(x => x.UserId == userId && x.CreationDateTime.Year == lastMonthYear && x.CreationDateTime.Month == lastMonthMonth);
             return personalLastMonthExpenses;
         }
 

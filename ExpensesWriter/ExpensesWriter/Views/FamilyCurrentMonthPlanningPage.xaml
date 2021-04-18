@@ -15,13 +15,19 @@
     <ContentPage.Content>
 
         <StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Total"/>
-                <Label Text="{Binding TotalMoney}"/>
-                <Label Text="Income"/>
-                <Entry Text="{Binding Income}" WidthRequest="80"/>
-                <Label Text="Residue"/>
-                <Label Text="{Binding Residue}"/>
+            <StackLayout Orientation="Vertical">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Total"/>
+                    <Label Text="{Binding TotalMoney}" WidthRequest="150"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Income"/>
+                    <Entry Text="{Binding Income}" WidthRequest="150"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Residue"/>
+                    <Label Text="{Binding Residue}" WidthRequest="150"/>
+                </StackLayout>
             </StackLayout>
         <ListView x:Name="MonthResultsListView"
                 ItemsSource="{Binding BudgetPlanningItems}"

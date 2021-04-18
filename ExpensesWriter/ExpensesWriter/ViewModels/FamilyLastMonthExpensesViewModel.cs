@@ -21,7 +21,7 @@ namespace ExpensesWriter.ViewModels
         {
             try
             {
-                var expenses = await new ExpensesDataStore().GetPersonalCurrentMonthExpenses();
+                var expenses = await new ExpensesDataStore().GetFamilyLastMonthExpenses();
                 return expenses;
             }
             catch (Exception ex)

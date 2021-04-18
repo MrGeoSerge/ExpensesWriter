@@ -22,6 +22,9 @@ namespace ExpensesWriter.WebApi.Controllers
         {
             string userId = User.Identity.GetUserId();
 
+            var year = DateTime.Now.Year;
+            var month = DateTime.Now.Month;
+
             var items = db.BudgetPlanningItems.Where(item => item.PlanningMonth.Year == DateTime.Now.Year && item.PlanningMonth.Month == DateTime.Now.Month).ToList();
 
             if(items.Count == 0)
@@ -39,12 +42,17 @@ namespace ExpensesWriter.WebApi.Controllers
         {
             string userId = User.Identity.GetUserId();
 
-            var items = db.BudgetPlanningItems.Where(item => item.PlanningMonth.Year == DateTime.Now.Year && item.PlanningMonth.Month == DateTime.Now.Month - 1).ToList();
+            var lastMonthDate = DateTime.Today.AddMonths(-1);
+            var lastMonthYear = lastMonthDate.Year;
+            var lastMonthMonth = lastMonthDate.Month;
+
+
+            var items = db.BudgetPlanningItems.Where(item => item.PlanningMonth.Year == lastMonthYear && item.PlanningMonth.Month == lastMonthMonth).ToList();
 
             if(items.Count == 0)
             {
                 await CreateBudgetForCurrentMonth(userId);
-                items = db.BudgetPlanningItems.Where(item => item.PlanningMonth.Year == DateTime.Now.Year && item.PlanningMonth.Month == DateTime.Now.Month - 1).ToList();
+                items = db.BudgetPlanningItems.Where(item => item.PlanningMonth.Year == lastMonthMonth && item.PlanningMonth.Month == lastMonthMonth).ToList();
             }
 
             return items;
@@ -55,6 +63,11 @@ namespace ExpensesWriter.WebApi.Controllers
         public async Task<IEnumerable<BudgetPlanningItem>> GetNextMonthBudgetPlanningItems()
         {
             string userId = User.Identity.GetUserId();
+
+            var nextMonthDate = DateTime.Today.AddMonths(1);
+            var nextMonthYear = nextMonthDate.Year;
+            var nextMonthMonth = nextMonthDate.Month;
+
 
             var items = db.BudgetPlanningItems.Where(item => item.PlanningMonth.Year == DateTime.Now.Year && item.PlanningMonth.Month == DateTime.Now.Month + 1).ToList();
 

@@ -50,8 +50,12 @@ namespace ExpensesWriter.WebApi.Controllers
         [Route("api/LastMonthExpenses")]
         public IEnumerable<Expense> GetLastMonthExpenses()
         {
+            var lastMonthDate = DateTime.Today.AddMonths(-1);
+            var lastMonthYear = lastMonthDate.Year;
+            var lastMonthMonth = lastMonthDate.Month;
+
             string userId = User.Identity.GetUserId();
-            return db.Expenses.Where((expense => expense.UserId == userId && expense.CreationDateTime.Year == DateTime.Today.Year && expense.CreationDateTime.Month == DateTime.Today.Month - 1)).ToList();
+            return db.Expenses.Where(expense => expense.UserId == userId && expense.CreationDateTime.Year == lastMonthYear && expense.CreationDateTime.Month == lastMonthMonth).ToList();
 
         }
 
@@ -95,8 +99,12 @@ namespace ExpensesWriter.WebApi.Controllers
         [Route("api/FamilyLastMonthExpenses")]
         public IEnumerable<Expense> GetFamilyLastMonthExpenses()
         {
+            var lastMonthDate = DateTime.Today.AddMonths(-1);
+            var lastMonthYear = lastMonthDate.Year;
+            var lastMonthMonth = lastMonthDate.Month;
             //string userId = User.Identity.GetUserId();
-            return db.Expenses.Where(expense => expense.CreationDateTime.Year == DateTime.Today.Year && expense.CreationDateTime.Month == DateTime.Today.Month - 1).ToList();
+            var result = db.Expenses.Where(expense => expense.CreationDateTime.Year == lastMonthYear && expense.CreationDateTime.Month == lastMonthMonth).ToList();
+            return result;
         }
 
         [Route("api/ExpensesForCurrentUser")]
@@ -171,7 +179,7 @@ namespace ExpensesWriter.WebApi.Controllers
             expense.UserId = userId;
 
             db.Expenses.Add(expense);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
 
             //// Get the settings for the server project.

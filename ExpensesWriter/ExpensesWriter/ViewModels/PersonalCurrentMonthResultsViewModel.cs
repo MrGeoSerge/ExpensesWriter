@@ -92,7 +92,7 @@ namespace ExpensesWriter.ViewModels
                 CategoryExpenses = await GetCategoryExpenses();
                 TotalMoney = CategoryExpenses.Sum(expense => expense.Money);
                 TotalPlannedMoney = CategoryExpenses.Sum(expense => expense.PlannedMoney);
-                PercentOfExecution = (int)(TotalMoney / TotalPlannedMoney * 100);
+                PercentOfExecution = CalculatePercentOfExecution();
             }
             catch (Exception ex)
             {
@@ -105,6 +105,11 @@ namespace ExpensesWriter.ViewModels
             }
 
 
+        }
+
+        private int CalculatePercentOfExecution()
+        {
+            return (int)(TotalMoney / TotalPlannedMoney * 100);
         }
 
         protected virtual async Task<ObservableCollection<CategoryExpense>> GetCategoryExpenses()

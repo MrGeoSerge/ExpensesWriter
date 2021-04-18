@@ -83,7 +83,7 @@ namespace ExpensesWriter.ViewModels
             }
             App.CategoriesList = CategoriesString;
             App.BudgetItems = Categories;
-            CategoryDefaultString = CategoriesString[0];
+            CategoryDefaultString = CategoriesString.FirstOrDefault();
         }
 
         protected override async Task<IEnumerable<Expense>> GetExpenses()

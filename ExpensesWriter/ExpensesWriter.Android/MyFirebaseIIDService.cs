@@ -9,23 +9,23 @@ using ExpensesWriter.Helpers;
 
 namespace ExpensesWriter.Droid
 {
-    [Service]
-    [IntentFilter(new[] { "com.google.firebase.INSTANCE_ID_EVENT" })]
-    public class MyFirebaseIIDService : FirebaseInstanceIdService
-    {
-        const string TAG = "MyFirebaseIIDService";
-        NotificationHub hub;
+    //[Service]
+    //[IntentFilter(new[] { "com.google.firebase.INSTANCE_ID_EVENT" })]
+    //public class MyFirebaseIIDService : FirebaseInstanceIdService
+    //{
+    //    const string TAG = "MyFirebaseIIDService";
+    //    NotificationHub hub;
 
-        public override void OnTokenRefresh()
-        {
-            var refreshedToken = FirebaseInstanceId.Instance.Token;
-            Log.Debug(TAG, "FCM token: " + refreshedToken);
-        }
-
-
+    //    public override void OnTokenRefresh()
+    //    {
+    //        var refreshedToken = FirebaseInstanceId.Instance.Token;
+    //        Log.Debug(TAG, "FCM token: " + refreshedToken);
+    //    }
 
 
 
 
-    }
+
+
+    //}
 }

@@ -78,12 +78,12 @@ namespace ExpensesWriter
 
         protected override void OnStart()
         {
-            AppCenter.Start("ios=8d01f4c7-7839-4c85-ba20-fa0e5221d57d;" +
-                  "uwp={Your UWP App secret here};" +
-                  "android={Your Android App secret here}",
-                  typeof(Analytics), typeof(Crashes));
+            //AppCenter.Start("ios=8d01f4c7-7839-4c85-ba20-fa0e5221d57d;" +
+            //      "uwp={Your UWP App secret here};" +
+            //      "android={Your Android App secret here}",
+            //      typeof(Analytics), typeof(Crashes));
 
-            AppCenter.Start("8d01f4c7-7839-4c85-ba20-fa0e5221d57d", typeof(Push));
+            //AppCenter.Start("8d01f4c7-7839-4c85-ba20-fa0e5221d57d", typeof(Push));
         }
 
         protected override void OnSleep()

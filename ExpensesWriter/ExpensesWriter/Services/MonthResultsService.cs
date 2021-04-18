@@ -35,8 +35,16 @@ namespace ExpensesWriter.Services
             foreach(var category in categories)
             {
                 category.PlannedMoney = planningItems.Where(x => x.BudgetItem.Name == category.Category).Select(x => x.Money).FirstOrDefault();
-                category.PercentOfExecution = (int)(category.Money / category.PlannedMoney * 100);
+                category.PercentOfExecution = CalculatePercentOfExecution(category);
             }
+        }
+
+        private static int CalculatePercentOfExecution(CategoryExpense category)
+        {
+            if (category.PlannedMoney == 0 && category.Money > 0)
+                return 999;
+
+            return (int)(category.Money / category.PlannedMoney * 100);
         }
 
         private async Task ApplyBudgetPlanningForLastMonth(IEnumerable<CategoryExpense> categories)

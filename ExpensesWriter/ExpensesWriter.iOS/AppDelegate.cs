@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-
+using System.Threading;
+using System.Threading.Tasks;
 using Foundation;
 using UIKit;
 using Xamarin.Forms;
@@ -42,7 +44,7 @@ namespace ExpensesWriter.iOS
             notification.FireDate = NSDate.FromTimeIntervalSinceNow(3600);
             //notification.AlertTitle = "Alert Title"; // required for Apple Watch notifications
             notification.AlertAction = "View Alert";
-            notification.AlertBody = "Your 1 hour alert has fired!";
+            notification.AlertBody = "Сашка, я тебя люблю!";
             UIApplication.SharedApplication.ScheduleLocalNotification(notification);
 
 
@@ -85,5 +87,20 @@ namespace ExpensesWriter.iOS
 
 
         }
+
+        private void OnUnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
+        {
+            Debug.Write(e.Exception.ToString());
+        }
+
+        private void OnCurrentDomainUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            if (e.ExceptionObject is Exception ex)
+            {
+                Debug.Write(ex.ToString());
+            }
+        }
+
+
     }
 }
