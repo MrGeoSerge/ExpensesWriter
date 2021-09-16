@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Foundation;
+using Microsoft.Identity.Client;
 using UIKit;
 using Xamarin.Forms;
 using static System.Net.Mime.MediaTypeNames;
@@ -101,6 +102,10 @@ namespace ExpensesWriter.iOS
             }
         }
 
-
+        public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
+        {
+            AuthenticationContinuationHelper.SetAuthenticationContinuationEventArgs(url);
+            return true;
+        }
     }
 }

@@ -41,6 +41,20 @@ namespace ExpensesWriter.ViewModels
             }
         }
 
+        private double totalLeft;
+        public double TotalLeft
+        {
+            get
+            {
+                return totalLeft;
+            }
+            set
+            {
+                totalLeft = value;
+                OnPropertyChanged();
+            }
+        }
+
         private double totalPlannedMoney;
         public double TotalPlannedMoney
         {
@@ -92,6 +106,7 @@ namespace ExpensesWriter.ViewModels
                 CategoryExpenses = await GetCategoryExpenses();
                 TotalMoney = CategoryExpenses.Sum(expense => expense.Money);
                 TotalPlannedMoney = CategoryExpenses.Sum(expense => expense.PlannedMoney);
+                TotalLeft = TotalPlannedMoney - TotalMoney;
                 PercentOfExecution = CalculatePercentOfExecution();
             }
             catch (Exception ex)

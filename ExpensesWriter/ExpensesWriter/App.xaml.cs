@@ -59,10 +59,12 @@ namespace ExpensesWriter
                 else
                 {
                     MainPage = new NavigationPage(new LoginPage());
+                    //MainPage = new NavigationPage(new SSOLoginPage());
                 }
             }
             else
             {
+                    //MainPage = new NavigationPage(new SSOLoginPage());
                 MainPage = new NavigationPage(new RegisterPage());
             }
         }
