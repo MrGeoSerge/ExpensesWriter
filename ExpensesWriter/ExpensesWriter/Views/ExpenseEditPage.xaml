@@ -19,9 +19,13 @@
         <!--<Editor Text="{Binding Expense.Category}" d:Text="Expense description" FontSize="Medium"/>-->
         <Picker x:Name="categoryPicker" ItemsSource="{Binding CategoriesList}" SelectedItem="{Binding SelectedCategory}"/>
         <Label Text="Created date and time:" FontSize="Medium" />
-        <Label Text="{Binding Expense.CreationDateTime}" d:Text="Expense description" FontSize="Medium"/>
+        <Label Text="{Binding Expense.CreationDateTime}" d:Text="Creation Date Time" FontSize="Medium"/>
         <Label Text="Modified date and time:" FontSize="Medium" />
-        <Label Text="{Binding Expense.ModificationDateTime}" d:Text="Expense description" FontSize="Medium"/>
+        <Label Text="{Binding Expense.ModificationDateTime}" d:Text="Modification Date Time" FontSize="Medium"/>
+        <Label Text="Is sent to server" FontSize="Medium" />
+        <CheckBox IsChecked="{Binding Expense.SentUpdates}"/>
+        <Label Text="Id" FontSize="Medium" />
+        <Label Text="{Binding Expense.Id}" d:Text="Id" FontSize="Medium"/>
     </StackLayout>
     
 </ContentPage>

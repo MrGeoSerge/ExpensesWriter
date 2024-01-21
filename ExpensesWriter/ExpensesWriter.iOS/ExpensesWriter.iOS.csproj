@@ -54,11 +54,11 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>Apple Development: Sergiy Velychko (HXXMHACCGA)</CodesignKey>
+    <CodesignKey>Apple Development: Created via API (GD35K67RT6)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>
     </CodesignEntitlements>
-    <CodesignProvision>VS: com.sergiy.expensesWriter Development</CodesignProvision>
+    <CodesignProvision>EW_Development_2024</CodesignProvision>
     <CodesignExtraArgs />
     <CodesignResourceRules />
     <MtouchLink>None</MtouchLink>
@@ -71,12 +71,12 @@
     <WarningLevel>4</WarningLevel>
     <MtouchArch>ARM64</MtouchArch>
     <ConsolePause>false</ConsolePause>
-    <CodesignKey>iPhone Distribution: Sergiy Velychko (HDS7JN7LL4)</CodesignKey>
+    <CodesignKey>Apple Distribution: Sergiy Velychko (HDS7JN7LL4)</CodesignKey>
     <CodesignEntitlements>
     </CodesignEntitlements>
     <CodesignExtraArgs />
     <CodesignResourceRules />
-    <CodesignProvision>ExpensesWriterDistrib20210418</CodesignProvision>
+    <CodesignProvision>EW_Distribution2023_06</CodesignProvision>
     <BuildIpa>true</BuildIpa>
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchSdkVersion>14.4</MtouchSdkVersion>

@@ -105,7 +105,7 @@ namespace ExpensesWriter.Views
                     await new RegisterDeviceService().UnregisterDeviceAsync();
 
                     Settings.AccessToken = string.Empty;
-                    Settings.AccessTokenExpirationDate = DateTime.Today;
+                    Settings.AccessTokenExpirationDate = DateTime.UtcNow;
                     Debug.WriteLine(Settings.Username);
                     Settings.Username = string.Empty;
                     Debug.WriteLine(Settings.Password);

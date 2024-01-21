@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace ExpensesWriter.Repositories.Local
 {
@@ -37,6 +38,7 @@ namespace ExpensesWriter.Repositories.Local
         {
             foreach(var expense in expenses)
             {
+                expense.SentUpdates = true;
                 if(await GetItemAsync(expense.Id) == null)
                 {
                     await database.InsertWithChildrenAsync(expense);
@@ -103,7 +105,20 @@ namespace ExpensesWriter.Repositories.Local
         {
             var allExpenses = await GetItemsAsync();
             var userId = await new UserIdService().GetUserIdAsync();
+            Debug.WriteLine($"GetPersonalCurrentMonthExpenses for userId {userId}");
             var personalCurrentMonthExpenses = allExpenses.Where(x => x.UserId == userId && x.CreationDateTime.Year == DateTime.Today.Year && x.CreationDateTime.Month == DateTime.Today.Month);
+            return personalCurrentMonthExpenses;
+        }
+
+        public async Task<IEnumerable<Expense>> GetPersonalUnsentCurrentMonthExpenses()
+        {
+            var allExpenses = await GetItemsAsync();
+            var userId = await new UserIdService().GetUserIdAsync();
+            var personalCurrentMonthExpenses = allExpenses
+                .Where(x => x.UserId == userId 
+                && x.CreationDateTime.Year == DateTime.Today.Year 
+                && x.CreationDateTime.Month == DateTime.Today.Month
+                && !x.SentUpdates);
             return personalCurrentMonthExpenses;
         }
 

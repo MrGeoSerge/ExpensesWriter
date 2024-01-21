@@ -47,6 +47,8 @@ namespace ExpensesWriter.UpdateServices
         {
             SetUpdateStatus("Update in progress", Color.Yellow, UpdateStatus.InProgress);
 
+            await ResentNotSentExpenses();
+
             var expenses = await GetExternalUpdates();
 
             if(expenses != null)
@@ -54,6 +56,27 @@ namespace ExpensesWriter.UpdateServices
                 await UpdateLocalStorageWithExternallyChangedItems(expenses);
             }
             SetUpdateStatus("Update completed", Color.Green, UpdateStatus.Completed);
+        }
+
+        private async Task ResentNotSentExpenses()
+        {
+            var expenses = await localStorage.GetPersonalUnsentCurrentMonthExpenses();
+
+            foreach (var expense in expenses)
+            {
+                System.Diagnostics.Debug.WriteLine($"ResentNotSentExpenses expense {expense.Id} {expense.Name}");
+                Expense addExpense = new Expense(expense);
+                addExpense.BudgetItem = null;
+                bool addResult = await externalStorage.AddItemAsync(addExpense);
+                System.Diagnostics.Debug.WriteLine($"ResentNotSentExpenses expense {expense.Id} {expense.Name} addResult: {addResult}");
+
+                if (addResult)
+                {
+                    expense.SentUpdates = true;
+                    await localStorage.UpdateItemAsync(expense);
+                }
+            }
+
         }
 
         private async Task<IEnumerable<Expense>> RenewLocalStorage()
@@ -117,6 +140,7 @@ namespace ExpensesWriter.UpdateServices
         {
             expense.SentUpdates = false;
             expense.ModificationDateTime = DateTime.Now;
+            System.Diagnostics.Debug.WriteLine($"UpdateExpense {expense.Id} {expense.Name}: SentUpdates: {expense.SentUpdates}");
 
             await localStorage.UpdateItemAsync(expense);
 
@@ -125,6 +149,7 @@ namespace ExpensesWriter.UpdateServices
             {
                 expense.SentUpdates = true;
                 await localStorage.UpdateItemAsync(expense);
+                System.Diagnostics.Debug.WriteLine($"UpdateExpense externalStorage.UpdateItemAsync {expense.Id} {expense.Name}: SentUpdates: {expense.SentUpdates}");
             }
         }
 

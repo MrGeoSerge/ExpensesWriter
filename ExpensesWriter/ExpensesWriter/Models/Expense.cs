@@ -24,7 +24,7 @@ namespace ExpensesWriter.Models
         public BudgetItem BudgetItem { get; set; }
 
         public bool IsDeleted { get; set; }
-        public bool SentUpdates { get; set; } = true;
+        public bool SentUpdates { get; set; }
         public Expense()
         {
         }

@@ -248,8 +248,8 @@ namespace ExpensesWriter.Services
                 expense.BudgetItem = null;
 
                 var serializedExpense = JsonConvert.SerializeObject(expense);
-                var response = await client.PutAsync($"api/expenses/put", new StringContent(serializedExpense, Encoding.UTF8, "application/json"));
-
+                var response = await client.PutAsync($"api/expenses", new StringContent(serializedExpense, Encoding.UTF8, "application/json"));
+                Debug.WriteLine($"UpdateItemAsync response: {response}");
                 expense.BudgetItem = budgetItem;
                 return response.IsSuccessStatusCode;
             }

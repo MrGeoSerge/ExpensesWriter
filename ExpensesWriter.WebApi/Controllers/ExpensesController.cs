@@ -130,7 +130,6 @@ namespace ExpensesWriter.WebApi.Controllers
 
         // PUT: api/Expenses/5
         [ResponseType(typeof(void))]
-        [HttpPut, Route("api/expenses/put")]
         public IHttpActionResult PutExpense(Expense expense)
         {
             if (!ModelState.IsValid)
