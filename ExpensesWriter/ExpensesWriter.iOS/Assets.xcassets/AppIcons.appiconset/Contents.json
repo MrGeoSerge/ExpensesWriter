@@ -4,7 +4,7 @@
       "scale": "2x",
       "size": "20x20",
       "idiom": "iphone",
-      "filename": "EW_40x40.png"
+      "filename": "EW_40x402.png"
     },
     {
       "scale": "3x",
@@ -16,7 +16,7 @@
       "scale": "2x",
       "size": "29x29",
       "idiom": "iphone",
-      "filename": "EW_58x58.png"
+      "filename": "EW_58x581.png"
     },
     {
       "scale": "3x",
@@ -28,13 +28,25 @@
       "scale": "2x",
       "size": "40x40",
       "idiom": "iphone",
-      "filename": "EW_80x80.png"
+      "filename": "EW_80x801.png"
     },
     {
       "scale": "3x",
       "size": "40x40",
       "idiom": "iphone",
       "filename": "EW_120x1201.png"
+    },
+    {
+      "scale": "2x",
+      "size": "60x60",
+      "idiom": "iphone",
+      "filename": "EW_120x120.png"
+    },
+    {
+      "scale": "3x",
+      "size": "60x60",
+      "idiom": "iphone",
+      "filename": "EW_180x180.png"
     },
     {
       "scale": "1x",
@@ -58,19 +70,19 @@
       "scale": "2x",
       "size": "29x29",
       "idiom": "ipad",
-      "filename": "EW_58x581.png"
+      "filename": "EW_58x58.png"
     },
     {
       "scale": "1x",
       "size": "40x40",
       "idiom": "ipad",
-      "filename": "EW_40x402.png"
+      "filename": "EW_40x40.png"
     },
     {
       "scale": "2x",
       "size": "40x40",
       "idiom": "ipad",
-      "filename": "EW_80x801.png"
+      "filename": "EW_80x80.png"
     },
     {
       "scale": "1x",
@@ -88,25 +100,13 @@
       "scale": "2x",
       "size": "83.5x83.5",
       "idiom": "ipad",
-      "filename": "EW_167x1671.png"
-    },
-    {
-      "scale": "2x",
-      "size": "60x60",
-      "idiom": "iphone",
-      "filename": "EW_120x120.png"
-    },
-    {
-      "scale": "3x",
-      "size": "60x60",
-      "idiom": "iphone",
-      "filename": "EW_180x180.png"
+      "filename": "EW_167x167.png"
     },
     {
       "scale": "1x",
       "size": "1024x1024",
       "idiom": "ios-marketing",
-      "filename": "expenses1.png"
+      "filename": "EW_1024x1024.png"
     }
   ],
   "properties": {},

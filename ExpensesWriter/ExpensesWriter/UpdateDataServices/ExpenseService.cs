@@ -95,8 +95,16 @@ namespace ExpensesWriter.UpdateServices
 
         private async Task<IEnumerable<Expense>> GetExternalUpdates()
         {
+            DateTime lastModifiedLocalStorageDT;
             Expense lastModifiedLocalStorageExpense = await localStorage.GetLastModifiedItemAsync();
-            DateTime lastModifiedLocalStorageDT = lastModifiedLocalStorageExpense.ModificationDateTime;
+            if(lastModifiedLocalStorageExpense != null)
+            {
+                lastModifiedLocalStorageDT = lastModifiedLocalStorageExpense.ModificationDateTime;
+            }
+            else
+            {
+                lastModifiedLocalStorageDT = DateTime.MinValue;
+            }
 
             Expense lastModifiedExternalStorageExpense = await externalStorage.GetLastModifiedItemAsync();
             DateTime lastModifiedExternalStorageDT = lastModifiedExternalStorageExpense.ModificationDateTime;

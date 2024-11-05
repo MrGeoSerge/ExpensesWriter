@@ -92,7 +92,9 @@ namespace ExpensesWriter.WebApi.Controllers
         public IEnumerable<Expense> GetFamilyCurrentMonthExpenses()
         {
             //string userId = User.Identity.GetUserId();
-            return db.Expenses.Where(expense => expense.CreationDateTime.Year == DateTime.Today.Year && expense.CreationDateTime.Month == DateTime.Today.Month).ToList();
+            return db.Expenses.Where(expense => expense.CreationDateTime.Year == DateTime.Today.Year 
+                                    && expense.CreationDateTime.Month == DateTime.Today.Month
+                                    && !expense.IsDeleted).ToList();
         }
 
         // GET: api/FamilyLastMonthExpenses
